@@ -10,10 +10,10 @@ public class Attractor : MonoBehaviour
 
     [Header("Params")] private bool _active;
     public bool activeOnStart;
+    public float falloffDistanceMultiplier = 1.0f;
 
     public float pullStrength = 1.0f;
     private float _pullStrengthCurrent = 0;
-    public float pullStrengthGain = 1.0f;
     public float radius = 5f;
 
     private List<Attractable> knownAttractables;
@@ -55,7 +55,7 @@ public class Attractor : MonoBehaviour
         {
             Vector3 direction = transform.position - knownAttractable.transform.position;
             var distnace = Vector3.Distance(transform.position, knownAttractable.transform.position);
-            var strengthMult = Mathf.Min(1, 1 / Mathf.Pow(distnace, 2));
+            var strengthMult = Mathf.Min(1f, 1 / Mathf.Pow(distnace, 2) * falloffDistanceMultiplier);
 
             direction.Normalize(); // Normalizing the vector so it has a magnitude of 1
             knownAttractable.rb.AddForce(direction * _pullStrengthCurrent * strengthMult * Time.fixedTime,
@@ -125,14 +125,11 @@ public class Attractor : MonoBehaviour
     {
         myCollider.radius = radius;
 
-        float pullStrengthTarget = 0;
+        _pullStrengthCurrent = 0;
         if (_active)
         {
-            pullStrengthTarget = pullStrength;
+            _pullStrengthCurrent = pullStrength;
         }
-
-        _pullStrengthCurrent =
-            Mathf.MoveTowards(_pullStrengthCurrent, pullStrengthTarget, pullStrengthGain * Time.deltaTime);
     }
 
 #if UNITY_EDITOR
