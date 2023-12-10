@@ -58,7 +58,7 @@ public class Attractor : MonoBehaviour
             var strengthMult = Mathf.Min(1f, 1 / Mathf.Pow(distnace, 2) * falloffDistanceMultiplier);
 
             direction.Normalize(); // Normalizing the vector so it has a magnitude of 1
-            knownAttractable.rb.AddForce(direction * _pullStrengthCurrent * strengthMult * Time.fixedTime,
+            knownAttractable.rb.AddForce(direction * _pullStrengthCurrent * strengthMult * Time.fixedDeltaTime,
                 ForceMode.Impulse);
         }
     }

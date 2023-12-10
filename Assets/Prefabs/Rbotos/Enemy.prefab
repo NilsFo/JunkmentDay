@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7185597027432528687}
   - component: {fileID: 8156998459897898069}
   - component: {fileID: 6600554069236638786}
+  - component: {fileID: 6699157956084649710}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -98,6 +99,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6699157956084649710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6207079495784422046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c2823a328f4c240beeb048322de715, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sawGameObject: {fileID: 1125724330677179526}
+  rotationSpeed: 500
+  rotationSpeedChangeRate: 50
 --- !u!1 &6294574029357636979
 GameObject:
   m_ObjectHideFlags: 0
@@ -201,6 +217,12 @@ PrefabInstance:
 --- !u!4 &348097671480167996 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3fbe34b760634ad49bd353d97e336319,
+    type: 3}
+  m_PrefabInstance: {fileID: 242641882147596759}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1125724330677179526 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 3fbe34b760634ad49bd353d97e336319,
     type: 3}
   m_PrefabInstance: {fileID: 242641882147596759}
   m_PrefabAsset: {fileID: 0}

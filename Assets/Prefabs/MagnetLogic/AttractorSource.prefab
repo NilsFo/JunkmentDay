@@ -47,9 +47,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myCollider: {fileID: 1847910571729647329}
   activeOnStart: 0
-  pullStrength: 1
-  pullStrengthGain: 1
-  radius: 5
+  falloffDistanceMultiplier: 2
+  pullStrength: 800
+  radius: 20
 --- !u!135 &1847910571729647329
 SphereCollider:
   m_ObjectHideFlags: 0
