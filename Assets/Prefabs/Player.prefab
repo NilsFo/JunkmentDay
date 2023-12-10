@@ -396,9 +396,9 @@ MonoBehaviour:
   crouchSpeedModifier: 0.5
   acceleration: 50
   dampening: 30
-  yDampening: 20
+  terminalYVelocity: 55
   gravity: 10
-  jumpSpeed: 10
+  jumpSpeed: 4
   velocity: {x: 0, y: 0, z: 0}
   inputDisabled: 0
   playerHeightStanding: 1.8
