@@ -6,6 +6,7 @@ public class RobotAI : MonoBehaviour
 {
 
     public Attractable myAttractable;
+    public Markable myMarkable;
     
     // Start is called before the first frame update
     void Start()

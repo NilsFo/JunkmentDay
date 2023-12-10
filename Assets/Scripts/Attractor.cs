@@ -53,13 +53,17 @@ public class Attractor : MonoBehaviour
     {
         foreach (Attractable knownAttractable in knownAttractables)
         {
-            Vector3 direction = transform.position - knownAttractable.transform.position;
-            var distnace = Vector3.Distance(transform.position, knownAttractable.transform.position);
-            var strengthMult = Mathf.Min(1f, 1 / Mathf.Pow(distnace, 2) * falloffDistanceMultiplier);
-
-            direction.Normalize(); // Normalizing the vector so it has a magnitude of 1
-            knownAttractable.rb.AddForce(direction * _pullStrengthCurrent * strengthMult * Time.fixedDeltaTime,
-                ForceMode.Impulse);
+            if (knownAttractable.IsAttractable())
+            {
+                var attactchmentPoint = knownAttractable.GetAttachmentPoint(transform.position);
+                Vector3 direction = transform.position - attactchmentPoint;
+                var distnace = Vector3.Distance(transform.position, knownAttractable.transform.position);
+                var strengthMult = Mathf.Min(1f, 1 / Mathf.Pow(distnace, 2) * falloffDistanceMultiplier);
+                
+                direction.Normalize(); // Normalizing the vector so it has a magnitude of 1
+                knownAttractable.rb.AddForce(direction * _pullStrengthCurrent * strengthMult * Time.fixedDeltaTime,
+                    ForceMode.Impulse);
+            }
         }
     }
 
@@ -123,12 +127,21 @@ public class Attractor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // updating radius
         myCollider.radius = radius;
 
+        // updating pullstrength
         _pullStrengthCurrent = 0;
         if (_active)
         {
             _pullStrengthCurrent = pullStrength;
+        }
+
+        // updating attractors based on flechettes
+        foreach (Attractable attractable in knownAttractables)
+        {
+            var position = transform.position;
+            Debug.DrawLine(position, attractable.GetAttachmentPoint(position), Color.blue);
         }
     }
 
