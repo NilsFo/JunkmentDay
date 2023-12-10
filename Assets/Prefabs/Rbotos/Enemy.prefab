@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 8156998459897898069}
   - component: {fileID: 6600554069236638786}
   - component: {fileID: 6699157956084649710}
-  m_Layer: 0
+  - component: {fileID: 4382379025895395621}
+  m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,6 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myAttractable: {fileID: 8799015108862301099}
+  myMarkable: {fileID: 4382379025895395621}
 --- !u!65 &8156998459897898069
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -96,9 +98,9 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &6699157956084649710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,6 +116,26 @@ MonoBehaviour:
   sawGameObject: {fileID: 1125724330677179526}
   rotationSpeed: 500
   rotationSpeedChangeRate: 50
+--- !u!114 &4382379025895395621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6207079495784422046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98a158f82045dab41883b97158459dda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnMarked:
+    m_PersistentCalls:
+      m_Calls: []
+  OnUnmarked:
+    m_PersistentCalls:
+      m_Calls: []
+  marked: 0
+  myFlechettes: []
 --- !u!1 &6294574029357636979
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,7 +145,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6310651910502341018}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: saw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -204,10 +226,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -3477864577585124648, guid: 3fbe34b760634ad49bd353d97e336319,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3fbe34b760634ad49bd353d97e336319,
         type: 3}
       propertyPath: m_Name
       value: robot_saw_weapon
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3fbe34b760634ad49bd353d97e336319,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1396792749669637682, guid: 3fbe34b760634ad49bd353d97e336319,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -289,10 +326,20 @@ PrefabInstance:
       propertyPath: rb
       value: 
       objectReference: {fileID: 6600554069236638786}
+    - target: {fileID: 2511330770219709928, guid: ca7cb7fc32a4c0d4a8dfef84d3360f76,
+        type: 3}
+      propertyPath: myMarkable
+      value: 
+      objectReference: {fileID: 4382379025895395621}
     - target: {fileID: 9071005299456845316, guid: ca7cb7fc32a4c0d4a8dfef84d3360f76,
         type: 3}
       propertyPath: m_Name
       value: Attractable
+      objectReference: {fileID: 0}
+    - target: {fileID: 9071005299456845316, guid: ca7cb7fc32a4c0d4a8dfef84d3360f76,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -375,10 +422,50 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6198068988319008574, guid: 351fd14fbba3f2a4c8ec51f711276aa0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -5976071629391176779, guid: 351fd14fbba3f2a4c8ec51f711276aa0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -3477864577585124648, guid: 351fd14fbba3f2a4c8ec51f711276aa0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -885264430177597064, guid: 351fd14fbba3f2a4c8ec51f711276aa0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 351fd14fbba3f2a4c8ec51f711276aa0,
         type: 3}
       propertyPath: m_Name
       value: robot_saw (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 351fd14fbba3f2a4c8ec51f711276aa0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1396792749669637682, guid: 351fd14fbba3f2a4c8ec51f711276aa0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6574091114309173524, guid: 351fd14fbba3f2a4c8ec51f711276aa0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6773935864695782916, guid: 351fd14fbba3f2a4c8ec51f711276aa0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

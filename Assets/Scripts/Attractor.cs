@@ -123,12 +123,21 @@ public class Attractor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // updating radius
         myCollider.radius = radius;
 
+        // updating pullstrength
         _pullStrengthCurrent = 0;
         if (_active)
         {
             _pullStrengthCurrent = pullStrength;
+        }
+
+        // updating attractors based on flechettes
+        foreach (Attractable attractable in knownAttractables)
+        {
+            var position = transform.position;
+            Debug.DrawLine(position, attractable.GetAttachmentPoint(position), Color.blue);
         }
     }
 
