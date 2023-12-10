@@ -34,13 +34,23 @@ public class Attractable : MonoBehaviour
             return transform.position;
         }
 
-        var closest = myMarkable.ClosestFlechette(source);
+        StickyFlechette closest = myMarkable.ClosestFlechette(source);
         if (closest == null)
         {
             return transform.position;
         }
 
         return closest.transform.position;
+    }
+
+    public bool IsAttractable()
+    {
+        if (myMarkable == null)
+        {
+            return true;
+        }
+
+        return myMarkable.myFlechettes.Count > 0;
     }
 
     public void AddAttractor(Attractor attractor)

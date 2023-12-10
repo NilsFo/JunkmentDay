@@ -53,13 +53,17 @@ public class Attractor : MonoBehaviour
     {
         foreach (Attractable knownAttractable in knownAttractables)
         {
-            Vector3 direction = transform.position - knownAttractable.transform.position;
-            var distnace = Vector3.Distance(transform.position, knownAttractable.transform.position);
-            var strengthMult = Mathf.Min(1f, 1 / Mathf.Pow(distnace, 2) * falloffDistanceMultiplier);
-
-            direction.Normalize(); // Normalizing the vector so it has a magnitude of 1
-            knownAttractable.rb.AddForce(direction * _pullStrengthCurrent * strengthMult * Time.fixedDeltaTime,
-                ForceMode.Impulse);
+            if (knownAttractable.IsAttractable())
+            {
+                var attactchmentPoint = knownAttractable.GetAttachmentPoint(transform.position);
+                Vector3 direction = transform.position - attactchmentPoint;
+                var distnace = Vector3.Distance(transform.position, knownAttractable.transform.position);
+                var strengthMult = Mathf.Min(1f, 1 / Mathf.Pow(distnace, 2) * falloffDistanceMultiplier);
+                
+                direction.Normalize(); // Normalizing the vector so it has a magnitude of 1
+                knownAttractable.rb.AddForce(direction * _pullStrengthCurrent * strengthMult * Time.fixedDeltaTime,
+                    ForceMode.Impulse);
+            }
         }
     }
 
