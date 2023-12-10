@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6600554069236638786}
   - component: {fileID: 6699157956084649710}
   - component: {fileID: 4382379025895395621}
+  - component: {fileID: 9210029708931218696}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
@@ -53,6 +54,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myAttractable: {fileID: 8799015108862301099}
   myMarkable: {fileID: 4382379025895395621}
+  myNavMeshAgent: {fileID: 9210029708931218696}
+  aiState: 0
 --- !u!65 &8156998459897898069
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -136,6 +139,28 @@ MonoBehaviour:
       m_Calls: []
   marked: 0
   myFlechettes: []
+--- !u!195 &9210029708931218696
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6207079495784422046}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &6294574029357636979
 GameObject:
   m_ObjectHideFlags: 0
