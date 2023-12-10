@@ -1,14 +1,27 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PowerGun : MonoBehaviour {
     private PlayerData _playerData;
     private List<Markable> marks;
+    private List<StickyFlechette> _flechettes;
+    private GameState _gameState;
+
+    private void Awake()
+    {
+        _flechettes = new List<StickyFlechette>();
+        _gameState = FindObjectOfType<GameState>();
+
+        _playerData = _gameState.player;
+        marks = new List<Markable>();
+    }
+
     // Start is called before the first frame update
     void Start() {
-        _playerData = FindObjectOfType<PlayerData>();
     }
 
     // Update is called once per frame
@@ -26,6 +39,47 @@ public class PowerGun : MonoBehaviour {
         if (keyboard.rKey.wasPressedThisFrame) {
             ResetMarkers();
         }
+        
+        // cleanup flechettes
+        List<StickyFlechette> deleteListFlechette = new List<StickyFlechette>();
+        foreach (StickyFlechette flechette in _flechettes)
+        {
+            if (flechette.IsDestroyed())
+            {
+                deleteListFlechette.Add(flechette);
+            }
+        }
+        foreach (StickyFlechette flechette in deleteListFlechette)
+        {
+            print("removing a flechette that was deleted");
+            _flechettes.Remove(flechette);
+        }
+        
+        // updating marked state
+        List<Markable> deleteListMarkable=new List<Markable>();
+        foreach (Markable markable in marks)
+        {
+            bool stillMarked = false;
+            foreach (StickyFlechette flechette in _flechettes)
+            {
+                if (flechette.myMark==markable)
+                {
+                    stillMarked = true;
+                }
+            }
+
+            if (!stillMarked)
+            {
+                print("unmarking because no more flechettes: "+markable.gameObject.name);
+                deleteListMarkable.Add(markable);
+            }
+        }
+        
+        foreach (Markable markable in deleteListMarkable)
+        {
+            markable.Unmark();
+            marks.Remove(markable);
+        }
     }
 
     void ShootPowerGun() {
@@ -35,7 +89,8 @@ public class PowerGun : MonoBehaviour {
         if (hit) {
             if (hitInfo.transform.gameObject.layer == LayerMask.NameToLayer("Entities")) {
                 // hit an entity
-                Debug.DrawLine(transform.position, hitInfo.point, Color.red, 1f);
+                var hitPoint = hitInfo.point;
+                Debug.DrawLine(transform.position, hitPoint, Color.red, 1f);
                 var powerable = hitInfo.transform.GetComponent<Powerable>();
                 if (powerable != null) {
                     // hit a powerable
@@ -59,13 +114,28 @@ public class PowerGun : MonoBehaviour {
         if (hit) {
             if (hitInfo.transform.gameObject.layer == LayerMask.NameToLayer("Entities")) {
                 // hit an entity
-                Debug.DrawLine(transform.position, hitInfo.point, Color.green, 1f);
+                var hitPoint = hitInfo.point;
+                Debug.DrawLine(transform.position, hitPoint, Color.green, 1f);
                 var markable = hitInfo.transform.GetComponent<Markable>();
                 if (markable != null) {
                     // hit a markable
                     Debug.Log("Shot marker gun, hit a markable entity", markable.gameObject);
+                    
+                    // Creating sticky flechete
+                    GameObject flechetteObj = Instantiate(_gameState.stickyFlechettePrefab,hitPoint,Quaternion.identity);
+                    flechetteObj.transform.LookAt(_gameState.player.head.transform);
+                    flechetteObj.transform.parent = markable.transform;
+
+                    StickyFlechette flechette = flechetteObj.GetComponent<StickyFlechette>();
+                    flechette.myMark = markable;
+                    _flechettes.Add(flechette);
+                    
                     markable.Mark();
-                    marks.Add(markable);
+
+                    if (!marks.Contains(markable))
+                    {
+                        marks.Add(markable);
+                    }
                 } else {
                     Debug.Log("Shot marker gun, hit a non-markable entity", hitInfo.transform.gameObject);
                 }
@@ -82,5 +152,11 @@ public class PowerGun : MonoBehaviour {
             mark.Unmark();
         }
         marks.Clear();
+        
+        foreach (StickyFlechette flechette in _flechettes)
+        {
+            Destroy(flechette.gameObject);
+        }
+        _flechettes.Clear();
     }
 }

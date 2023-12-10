@@ -10,6 +10,7 @@ public class Attractable : MonoBehaviour
     public Rigidbody rb;
 
     private float _originalGravityScale;
+    public Markable myMarkable;
 
     private void Awake()
     {
@@ -24,7 +25,22 @@ public class Attractable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // rb.useGravity = !HasAttractors;
+    }
+
+    public Vector3 GetAttachmentPoint(Vector3 source)
+    {
+        if (myMarkable == null)
+        {
+            return transform.position;
+        }
+
+        var closest = myMarkable.ClosestFlechette(source);
+        if (closest == null)
+        {
+            return transform.position;
+        }
+
+        return closest.transform.position;
     }
 
     public void AddAttractor(Attractor attractor)

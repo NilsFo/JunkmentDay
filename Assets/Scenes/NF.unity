@@ -741,6 +741,15 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2143027812, guid: 4f40fda77e74d5043a031ce35f071ba2, type: 3}
+      propertyPath: volumeLayer.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9095946871532686806, guid: 4f40fda77e74d5043a031ce35f071ba2,
+        type: 3}
+      propertyPath: m_ClearFlags
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9095946871819127338, guid: 4f40fda77e74d5043a031ce35f071ba2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1409,11 +1418,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
-    - target: {fileID: 6699157956084649710, guid: bafe28bc722503546b2cdf9e7e881709,
-        type: 3}
-      propertyPath: rotationSpeed
-      value: 500
-      objectReference: {fileID: 0}
     - target: {fileID: 7039115972650536572, guid: bafe28bc722503546b2cdf9e7e881709,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1534,28 +1538,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5789353326211747850, guid: ee9eb9ebe8e8c354db90dd090435202b,
         type: 3}
-      propertyPath: radius
-      value: 17.47
-      objectReference: {fileID: 0}
-    - target: {fileID: 5789353326211747850, guid: ee9eb9ebe8e8c354db90dd090435202b,
-        type: 3}
-      propertyPath: pullStrength
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5789353326211747850, guid: ee9eb9ebe8e8c354db90dd090435202b,
-        type: 3}
-      propertyPath: activeOnStart
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5789353326211747850, guid: ee9eb9ebe8e8c354db90dd090435202b,
-        type: 3}
       propertyPath: pullStrengthGain
       value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5789353326211747850, guid: ee9eb9ebe8e8c354db90dd090435202b,
-        type: 3}
-      propertyPath: falloffDistanceMultiplier
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5912125556637972938, guid: ee9eb9ebe8e8c354db90dd090435202b,
         type: 3}
