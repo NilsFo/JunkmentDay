@@ -3,9 +3,19 @@ guid: 351fd14fbba3f2a4c8ec51f711276aa0
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: No Name
+    second: {fileID: 2100000, guid: cdd7c327326ea2047b5bcf9553300a69, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: robot_saw
+    second: {fileID: 2800000, guid: f6f29bb3a7af7304a97c515d3b36e1c5, type: 3}
   materials:
-    materialImportMode: 2
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1

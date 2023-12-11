@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3fbe34b760634ad49bd353d97e336319
+guid: 512d10f0fa1d9aa42891c27b034d6eb9
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,10 +7,10 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: No Name
-    second: {fileID: 2100000, guid: 34320cbb0a9815e48931eceee21e6930, type: 2}
+      name: magnet.png
+    second: {fileID: 2100000, guid: fcd657f1c42800f4195339469ff7676b, type: 2}
   materials:
-    materialImportMode: 1
+    materialImportMode: 2
     materialName: 0
     materialSearch: 1
     materialLocation: 1

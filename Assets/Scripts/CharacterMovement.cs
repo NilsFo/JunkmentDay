@@ -12,7 +12,7 @@ public class CharacterMovement : MonoBehaviour
     public float crouchSpeedModifier = 0.5f;
     public float acceleration = 50f;
     public float dampening = 30f;
-    public float yDampening = 20f;
+    public float terminalYVelocity = 55f;
     public float gravity = 20f;
     public float jumpSpeed = 10f;
 
@@ -54,7 +54,7 @@ public class CharacterMovement : MonoBehaviour
 
         if (!_controller.isGrounded) {
             if (velocity.y > 0) {
-                velocity.y -= yDampening * Time.deltaTime;
+                velocity.y = Mathf.Min(velocity.y, terminalYVelocity);
             }
         }
 
@@ -111,7 +111,7 @@ public class CharacterMovement : MonoBehaviour
                     velocity.y = jumpSpeed;
                     if (z > 0.5 && sprint) {
                         Vector3 sprintJump = new Vector3(x, 0, z).normalized;
-                        sprintJump *= maximumSpeed * sprintSpeedModifier * 2;
+                        sprintJump *= maximumSpeed * sprintSpeedModifier;
                         
                         velocity += transform.rotation * sprintJump;
                     }
@@ -146,7 +146,7 @@ public class CharacterMovement : MonoBehaviour
         else if (sprint && !hasJumped)
             maxSpeed = maximumSpeed * sprintSpeedModifier;
         else if (sprint)
-            maxSpeed = maximumSpeed * sprintSpeedModifier * 2;
+            maxSpeed = maximumSpeed * sprintSpeedModifier;
         else
             maxSpeed = maximumSpeed;
         sprinting = sprint;

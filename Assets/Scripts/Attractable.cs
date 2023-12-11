@@ -65,4 +65,13 @@ public class Attractable : MonoBehaviour
     {
         _attractors.Remove(attractor);
     }
+
+    public bool isMagnetized() {
+        foreach (var attractor in _attractors) {
+            if (attractor.Active) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

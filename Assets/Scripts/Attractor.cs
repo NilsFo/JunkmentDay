@@ -9,6 +9,7 @@ public class Attractor : MonoBehaviour
     private GameState _gameState;
 
     [Header("Params")] private bool _active;
+    public bool Active => _active;
     public bool activeOnStart;
     public float falloffDistanceMultiplier = 1.0f;
 
