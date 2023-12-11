@@ -85,7 +85,7 @@ public class PowerGun : MonoBehaviour {
     void ShootPowerGun() {
         var camTransform = transform;
         Ray r = new Ray(camTransform.position, camTransform.rotation * Vector3.forward);
-        var hit = Physics.Raycast(r, out RaycastHit hitInfo, 10000, LayerMask.GetMask("Default", "Entities"));
+        var hit = Physics.Raycast(r, out RaycastHit hitInfo, 10000, LayerMask.GetMask("Default", "Entities", "World"));
         if (hit) {
             if (hitInfo.transform.gameObject.layer == LayerMask.NameToLayer("Entities")) {
                 // hit an entity

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class DoorAI : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class DoorAI : MonoBehaviour
     public float openedHeight = 4f;
     public Collider myCollider;
     public float transitionSpeed = 2f;
+    public NavMeshObstacle navMeshObstacle;
 
     [Header("Anim")] public AnimationCurve animSpeedCurve;
     private float _stateTimer = 0f;
@@ -47,11 +49,13 @@ public class DoorAI : MonoBehaviour
     {
         _stateTimer = 0;
         _opened = true;
+        navMeshObstacle.enabled = false;
     }
 
     public void Close()
     {
         _stateTimer = 0;
         _opened = false;
+        navMeshObstacle.enabled = true;
     }
 }
