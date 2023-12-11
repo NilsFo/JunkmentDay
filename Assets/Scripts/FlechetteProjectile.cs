@@ -36,7 +36,8 @@ public class FlechetteProjectile : MonoBehaviour
         _cachePosition = transform.position;
     }
 
-    private void OnCollisionEnter(Collision collision) {
+    private void OnCollisionEnter(Collision collision)
+    {
         var other = collision.gameObject;
         var layer = other.layer;
         var contact = collision.GetContact(0);
@@ -44,13 +45,15 @@ public class FlechetteProjectile : MonoBehaviour
 
         if (stickToLayers == (stickToLayers | (1 << layer)))
         {
-            Debug.Log("stick to layer", other);
-            var markable = other.GetComponent<Markable>();
-            if (markable != null)
+            Markable markable = other.GetComponent<Markable>();
+            
+            if (markable == null)
             {
-                // hit a markable
-                Debug.Log("Shot marker gun, hit a markable entity", markable.gameObject);
-
+                CreateClutterReplacement(impactPoint);
+                Destroy(gameObject);
+            }
+            else
+            {
                 // Creating sticky flechete
                 GameObject flechetteObj = Instantiate(_gameState.stickyFlechettePrefab, impactPoint,
                     Quaternion.identity);
@@ -64,17 +67,19 @@ public class FlechetteProjectile : MonoBehaviour
 
                 Destroy(gameObject);
             }
-        } else {
+        }
+        else
+        {
             if (becomeClutterLayers == (becomeClutterLayers | (1 << layer)))
             {
-                Debug.Log("become clutter layer", other.gameObject);
                 CreateClutterReplacement(impactPoint);
                 Destroy(gameObject);
-            } else {
-                Debug.Log("Collided with something i dont know", other.gameObject);
+            }
+            else
+            {
+                Debug.LogError("Collided with something i dont know", other.gameObject);
             }
         }
-
     }
 
     private void CreateClutterReplacement(Vector3 point)
@@ -83,7 +88,7 @@ public class FlechetteProjectile : MonoBehaviour
         var clutter = Instantiate(flechetteClutterPrefab, point, rot);
 
         Rigidbody rb = clutter.GetComponent<Rigidbody>();
-        var direction = _originPoint-clutter.transform.position;
+        var direction = _originPoint - clutter.transform.position;
         direction = direction.normalized;
 
         float force = Random.Range(3f, 5f);

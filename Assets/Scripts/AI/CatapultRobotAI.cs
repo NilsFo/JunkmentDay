@@ -1,17 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 public class CatapultRobotAI : MonoBehaviour
 {
-    
-    public Attractable myAttractable;
-    public Markable myMarkable;
     public NavMeshAgent myNavMeshAgent;
-    public Transform head;
 
-    public float playerDetectionDistance = 50f;
     public float shootDistance = 20f;
     public float fleeDistance = 3f;
 
@@ -20,92 +17,176 @@ public class CatapultRobotAI : MonoBehaviour
     public Transform shootOrigin;
 
     public Rigidbody projectilePrefab;
+    public Rigidbody rb;
 
-    public enum CatapultRobotState {
-        IDLE,
-        ATTACKING,
-        POSITIONING,
-        MAGNETIZED
+    public RobotBase robotBase;
+
+    public RobotBase.RobotAIState RobotAIStateCurrent
+    {
+        get => robotBase.robotAIState;
+        set => robotBase.robotAIState = value;
     }
-    public CatapultRobotState aiState;
-    
+
+    private RobotBase.RobotAIState _robotAIStateLastKnown = RobotBase.RobotAIState.UNKNOWN;
+
     private GameState _gameState;
 
-    void Awake() {
+    void Awake()
+    {
         _gameState = FindObjectOfType<GameState>();
         InvokeRepeating(nameof(NavigationUpdate), 0f, 0.5f);
+    }
+
+    private void Start()
+    {
+        _robotAIStateLastKnown = RobotBase.RobotAIState.UNKNOWN;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (_shootTimer > 0) {
-            _shootTimer -= Time.deltaTime;
-            if (_shootTimer <= 0) {
-                _shootTimer = 0;
+        if (_robotAIStateLastKnown != RobotAIStateCurrent)
+        {
+            OnAIStateChanged(_robotAIStateLastKnown, RobotAIStateCurrent);
+            _robotAIStateLastKnown = RobotAIStateCurrent;
+        }
+
+        if (RobotAIStateCurrent == RobotBase.RobotAIState.ATTACKING
+            || RobotAIStateCurrent == RobotBase.RobotAIState.POSITIONING)
+        {
+            if (_shootTimer > 0)
+            {
+                _shootTimer -= Time.deltaTime;
+                if (_shootTimer <= 0)
+                {
+                    _shootTimer = 0;
+                }
             }
         }
-        if (aiState == CatapultRobotState.ATTACKING) {
+
+        if (RobotAIStateCurrent == RobotBase.RobotAIState.ATTACKING)
+        {
             // Turn towards player
             var delta = RotateTowards(_gameState.player.transform.position);
-            if (Mathf.Abs(delta) < 0.01f && _shootTimer <= 0) {
+            if (Mathf.Abs(delta) < 0.01f && _shootTimer <= 0)
+            {
                 // Shoot
                 _shootTimer = shootPeriod;
                 ShootCatapult();
             }
         }
-        
-        if (myAttractable.isMagnetized()) {
-            aiState = CatapultRobotState.MAGNETIZED;
+
+        if (RobotAIStateCurrent == RobotBase.RobotAIState.UNKNOWN)
+        {
+            Debug.LogError("Robot has an unknown state!", gameObject);
         }
-        if (aiState == CatapultRobotState.MAGNETIZED) {
-            myNavMeshAgent.enabled = false;
+
+        bool attractableMagnetized = robotBase.myAttractable.IsMagnetized();
+        if (RobotAIStateCurrent == RobotBase.RobotAIState.MAGNETIZED
+            && !attractableMagnetized)
+        {
+            RobotAIStateCurrent = RobotBase.RobotAIState.IDLE;
+        }
+
+        if ((RobotAIStateCurrent == RobotBase.RobotAIState.IDLE
+             || RobotAIStateCurrent == RobotBase.RobotAIState.ATTACKING)
+            && attractableMagnetized)
+        {
+            RobotAIStateCurrent = RobotBase.RobotAIState.MAGNETIZED;
         }
     }
-    
-    
-    private void NavigationUpdate() {
-        if (aiState == CatapultRobotState.IDLE) {
-            if(_gameState.player.GetDistanceToPlayer(head.position) < playerDetectionDistance && PlayerInView())
-                aiState = CatapultRobotState.POSITIONING;
+
+    private void OnAIStateChanged(RobotBase.RobotAIState oldState, RobotBase.RobotAIState newState)
+    {
+        Debug.Log("Robot '" + name + "' new state: " + newState);
+
+        switch (oldState)
+        {
+            case RobotBase.RobotAIState.IDLE:
+                break;
+            case RobotBase.RobotAIState.MAGNETIZED:
+                myNavMeshAgent.enabled = true;
+                rb.isKinematic = true;
+                break;
+            case RobotBase.RobotAIState.ATTACKING:
+                break;
+            case RobotBase.RobotAIState.POSITIONING:
+                break;
+            case RobotBase.RobotAIState.UNKNOWN:
+                break;
+            default:
+                RobotAIStateCurrent = RobotBase.RobotAIState.UNKNOWN;
+                break;
         }
-        if (aiState == CatapultRobotState.POSITIONING) {
+
+        switch (newState)
+        {
+            case RobotBase.RobotAIState.IDLE:
+                break;
+            case RobotBase.RobotAIState.MAGNETIZED:
+                myNavMeshAgent.enabled = false;
+                rb.isKinematic = false;
+                break;
+            case RobotBase.RobotAIState.ATTACKING:
+                break;
+            case RobotBase.RobotAIState.POSITIONING:
+                break;
+            default:
+                RobotAIStateCurrent = RobotBase.RobotAIState.UNKNOWN;
+                break;
+        }
+    }
+
+    private void NavigationUpdate()
+    {
+        if (!myNavMeshAgent.enabled)
+        {
+            return;
+        }
+
+        if (RobotAIStateCurrent == RobotBase.RobotAIState.IDLE)
+        {
+            if (robotBase.PlayerDetected())
+                RobotAIStateCurrent = RobotBase.RobotAIState.POSITIONING;
+        }
+
+        if (RobotAIStateCurrent == RobotBase.RobotAIState.POSITIONING)
+        {
             myNavMeshAgent.SetDestination(_gameState.player.transform.position);
-            var playerDistance = GetDistanceToPlayer();
-            if (playerDistance < shootDistance && PlayerInView()) {
-                aiState = CatapultRobotState.ATTACKING;
+            var playerDistance = robotBase.GetDistanceToPlayer();
+            if (playerDistance < shootDistance && robotBase.PlayerInView())
+            {
+                RobotAIStateCurrent = RobotBase.RobotAIState.ATTACKING;
             }
         }
-        if (aiState == CatapultRobotState.ATTACKING) {
+
+        if (RobotAIStateCurrent == RobotBase.RobotAIState.ATTACKING)
+        {
             // Stop
             myNavMeshAgent.SetDestination(myNavMeshAgent.transform.position);
-            var playerDistance = GetDistanceToPlayer();
-            if (playerDistance > shootDistance + 1) {
-                aiState = CatapultRobotState.POSITIONING;
+            var playerDistance = robotBase.GetDistanceToPlayer();
+            if (playerDistance > shootDistance + 1)
+            {
+                RobotAIStateCurrent = RobotBase.RobotAIState.POSITIONING;
             }
-            else if (!PlayerInView()) {
-                aiState = CatapultRobotState.POSITIONING;
+            else if (!robotBase.PlayerInView())
+            {
+                RobotAIStateCurrent = RobotBase.RobotAIState.POSITIONING;
             }
         }
     }
-    
-    private float GetDistanceToPlayer() {
 
-        return _gameState.player.GetDistanceToPlayer(head.position);
-    }
-    private bool PlayerInView() {
 
-        return _gameState.player.PlayerInView(head.position);
-    }
-
-    public void ShootCatapult() {
+    public void ShootCatapult()
+    {
         var playerPos = _gameState.player.transform.position + Vector3.up;
         var myPos = shootOrigin.position;
-        
-        var b = 30f * Mathf.Deg2Rad;  // Angle of the shot
-        var d = Vector3.ProjectOnPlane(playerPos - myPos, Vector3.up).magnitude;  // Distance to the player on the y plane
-        var y = (playerPos - myPos).y;  // Height difference to the player
-        var g = 9.8f;  // Gravity
+
+        var b = 30f * Mathf.Deg2Rad; // Angle of the shot
+        var d = Vector3.ProjectOnPlane(playerPos - myPos, Vector3.up)
+            .magnitude; // Distance to the player on the y plane
+        var y = (playerPos - myPos).y; // Height difference to the player
+        var g = 9.8f; // Gravity
 
         // Calculate necessary force
         float v = Mathf.Sqrt(-0.5f * g * d * d / (Mathf.Pow(Mathf.Cos(b), 2) * (y - d * Mathf.Tan(b))));
@@ -115,8 +196,9 @@ public class CatapultRobotAI : MonoBehaviour
         v = Mathf.Clamp(v, 5f, 30f);
         projectile.velocity = direction.normalized * v;
     }
-    
-    private float RotateTowards(Vector3 target) {
+
+    private float RotateTowards(Vector3 target)
+    {
         var turnSpeed = myNavMeshAgent.angularSpeed;
         var alpha = turnSpeed * Time.deltaTime;
         var d = target - transform.position;
@@ -127,17 +209,22 @@ public class CatapultRobotAI : MonoBehaviour
         var lookVector = transform.rotation * Vector3.forward;
         var lookDelta = Vector3.Cross(lookVector, d).y;
 
-        if (lookDelta < 0) {
+        if (lookDelta < 0)
+        {
             alpha *= -1;
         }
+
         Quaternion rot;
-        if (Mathf.Abs(lookDelta) <= Mathf.Abs(alpha)) {
+        if (Mathf.Abs(lookDelta) <= Mathf.Abs(alpha))
+        {
             rot = Quaternion.Euler(0, Mathf.Asin(lookDelta), 0);
-        } else {
+        }
+        else
+        {
             rot = Quaternion.Euler(0, alpha, 0);
         }
+
         transform.rotation *= rot;
         return lookDelta;
-
     }
 }

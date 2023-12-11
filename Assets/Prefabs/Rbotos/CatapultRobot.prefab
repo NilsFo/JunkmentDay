@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7039115972650536572}
   - component: {fileID: 6387878957108656325}
+  - component: {fileID: 8832551748606496216}
   - component: {fileID: 8156998459897898069}
   - component: {fileID: 6600554069236638786}
   - component: {fileID: 4382379025895395621}
@@ -83,18 +84,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70286b421dbdbd4459064f51272841b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myAttractable: {fileID: 8799015108862301099}
-  myMarkable: {fileID: 4382379025895395621}
   myNavMeshAgent: {fileID: 9210029708931218696}
-  head: {fileID: 812427213114174878}
-  playerDetectionDistance: 50
   shootDistance: 20
   fleeDistance: 3
   shootPeriod: 3
   shootOrigin: {fileID: 8264048216885620657}
   projectilePrefab: {fileID: 6945999741279707979, guid: d4a62c6d824eb4d4ea7098fa6792a1e4,
     type: 3}
-  aiState: 0
+  rb: {fileID: 6600554069236638786}
+  robotBase: {fileID: 8832551748606496216}
+--- !u!114 &8832551748606496216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6207079495784422046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a58fdbc717e44a68a9a522682b856a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myAttractable: {fileID: 8799015108862301099}
+  myMarkable: {fileID: 4382379025895395621}
+  robotAIState: 1
+  head: {fileID: 812427213114174878}
+  playerDetectionDistance: 50
 --- !u!65 &8156998459897898069
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -139,7 +154,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 1

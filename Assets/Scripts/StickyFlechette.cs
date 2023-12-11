@@ -14,7 +14,8 @@ public class StickyFlechette : MonoBehaviour
         myMark.myFlechettes.Add(this);
     }
 
-    public void DestroyFlechette() {
+    public void DestroyFlechette()
+    {
         myMark.myFlechettes.Remove(this);
         CreateClutterReplacement();
         Destroy(gameObject);
@@ -25,12 +26,11 @@ public class StickyFlechette : MonoBehaviour
         Quaternion rot = transform.rotation;
         var clutter = Instantiate(flechetteClutterPrefab, transform.position, rot);
         Rigidbody rb = clutter.GetComponent<Rigidbody>();
-        
+
         var direction = clutter.transform.position - myMark.transform.position;
         direction = direction.normalized;
-        
+
         float force = Random.Range(5f, 8f);
         rb.AddForce(direction * force, ForceMode.Impulse);
     }
-
 }

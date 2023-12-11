@@ -1,53 +1,132 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Timers;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 public class RobotSawAI : MonoBehaviour
 {
-    public GameObject sawGameObject;
+    [Header("Hookup")] public NavMeshAgent myNavMeshAgent;
+    public RobotBase robotBase;
+    public Rigidbody rb;
 
-    private bool _spinning;
-    public float rotationSpeed;
-    public float rotationSpeedChangeRate = 10;
-    private float _rotationSpeedCurrent;
-
-
-    public void TurnOn()
+    public RobotBase.RobotAIState RobotAIStateCurrent
     {
-        _spinning = true;
+        get => robotBase.robotAIState;
+        set => robotBase.robotAIState = value;
     }
 
-    public void TurnOff()
-    {
-        _spinning = false;
-    }
+    private RobotBase.RobotAIState _robotAIStateLastKnown;
+    public RobotSawBladeRotor sawBladeRotor;
+
+    private GameState _gameState;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        TurnOn();
+        _gameState = FindObjectOfType<GameState>();
+        _robotAIStateLastKnown = robotBase.robotAIState;
+        InvokeRepeating(nameof(NavigationUpdate), 0f, 0.5f);
     }
 
-    private void FixedUpdate()
+    private void Start()
     {
-        Vector3 rotationEuler = sawGameObject.transform.rotation.eulerAngles;
-        rotationEuler.y = rotationEuler.y += _rotationSpeedCurrent * Time.fixedDeltaTime;
-        //sawGameObject.transform.rotation = Quaternion.Euler(rotationEuler);
-        sawGameObject.transform.Rotate(Vector3.up * _rotationSpeedCurrent * Time.fixedDeltaTime, Space.Self);
+        _robotAIStateLastKnown = RobotBase.RobotAIState.UNKNOWN;
     }
 
     // Update is called once per frame
     void Update()
     {
-        float targetRotationSpeed = 0;
-        if (_spinning)
+        if (_robotAIStateLastKnown != RobotAIStateCurrent)
         {
-            targetRotationSpeed = rotationSpeed;
+            OnAIStateChanged(_robotAIStateLastKnown, RobotAIStateCurrent);
+            _robotAIStateLastKnown = RobotAIStateCurrent;
         }
 
-        _rotationSpeedCurrent = Mathf.MoveTowards(_rotationSpeedCurrent, targetRotationSpeed,
-            rotationSpeedChangeRate * Time.deltaTime);
+        bool attractableMagnetized = robotBase.myAttractable.IsMagnetized();
+        if (RobotAIStateCurrent == RobotBase.RobotAIState.MAGNETIZED
+            && !attractableMagnetized)
+        {
+            RobotAIStateCurrent = RobotBase.RobotAIState.IDLE;
+        }
+
+        if ((RobotAIStateCurrent == RobotBase.RobotAIState.IDLE
+             || RobotAIStateCurrent == RobotBase.RobotAIState.ATTACKING)
+            && attractableMagnetized)
+        {
+            RobotAIStateCurrent = RobotBase.RobotAIState.MAGNETIZED;
+        }
+    }
+
+    private void OnAIStateChanged(RobotBase.RobotAIState oldState, RobotBase.RobotAIState newState)
+    {
+        Debug.Log("Robot '" + name + "' new state: " + newState);
+
+        switch (oldState)
+        {
+            case RobotBase.RobotAIState.IDLE:
+                break;
+            case RobotBase.RobotAIState.MAGNETIZED:
+                myNavMeshAgent.enabled = true;
+                rb.isKinematic = true;
+                break;
+            case RobotBase.RobotAIState.ATTACKING:
+                sawBladeRotor.TurnOff();
+                break;
+            case RobotBase.RobotAIState.POSITIONING:
+                RobotAIStateCurrent = RobotBase.RobotAIState.ATTACKING;
+                break;
+            case RobotBase.RobotAIState.UNKNOWN:
+                break;
+            default:
+                RobotAIStateCurrent = RobotBase.RobotAIState.UNKNOWN;
+                break;
+        }
+
+        switch (newState)
+        {
+            case RobotBase.RobotAIState.IDLE:
+                break;
+            case RobotBase.RobotAIState.MAGNETIZED:
+                myNavMeshAgent.enabled = false;
+                rb.isKinematic = false;
+                break;
+            case RobotBase.RobotAIState.ATTACKING:
+                sawBladeRotor.TurnOn();
+                break;
+            case RobotBase.RobotAIState.POSITIONING:
+                RobotAIStateCurrent = RobotBase.RobotAIState.ATTACKING;
+                break;
+            default:
+                RobotAIStateCurrent = RobotBase.RobotAIState.UNKNOWN;
+                break;
+        }
+    }
+
+    private void NavigationUpdate()
+    {
+        if (RobotAIStateCurrent == RobotBase.RobotAIState.MAGNETIZED || !myNavMeshAgent.enabled)
+        {
+            return;
+        }
+
+        if (RobotAIStateCurrent == RobotBase.RobotAIState.IDLE)
+        {
+            if (robotBase.PlayerDetected())
+                RobotAIStateCurrent = RobotBase.RobotAIState.ATTACKING;
+        }
+
+        if (RobotAIStateCurrent == RobotBase.RobotAIState.ATTACKING)
+        {
+            if (robotBase.PlayerInView())
+            {
+                myNavMeshAgent.SetDestination(_gameState.player.transform.position);
+            }
+            else
+            {
+                RobotAIStateCurrent = RobotBase.RobotAIState.IDLE;
+            }
+        }
     }
 }

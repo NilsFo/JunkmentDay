@@ -66,12 +66,21 @@ public class Attractable : MonoBehaviour
         _attractors.Remove(attractor);
     }
 
-    public bool isMagnetized() {
-        foreach (var attractor in _attractors) {
-            if (attractor.Active) {
-                return true;
+    public bool IsMagnetized()
+    {
+        foreach (var attractor in _attractors)
+        {
+            if (attractor.Active)
+            {
+                if (myMarkable == null)
+                {
+                    return true;
+                }
+
+                return myMarkable.marked;
             }
         }
+
         return false;
     }
 }

@@ -5,7 +5,6 @@ using UnityEngine.Events;
 
 public class PlayerData : MonoBehaviour
 {
-
     public GameObject head;
 
     public int maxHealth = 100;
@@ -15,7 +14,9 @@ public class PlayerData : MonoBehaviour
     public float damageBinningTime = 0.5f;
     private int _damageBin;
     private float _damageBinTimer;
-    public int CurrentHealth {
+
+    public int CurrentHealth
+    {
         get => _currentHealth;
         set => SetHealth(value);
     }
@@ -24,7 +25,7 @@ public class PlayerData : MonoBehaviour
 
     public UnityEvent<int> OnHealthChanged;
     public UnityEvent OnPlayerDeath;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,9 +35,11 @@ public class PlayerData : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_damageBinTimer > 0) {
+        if (_damageBinTimer > 0)
+        {
             _damageBinTimer -= Time.deltaTime;
-            if (_damageBinTimer <= 0) {
+            if (_damageBinTimer <= 0)
+            {
                 _damageBinTimer = 0;
                 _damageBin = 0;
             }
@@ -45,48 +48,63 @@ public class PlayerData : MonoBehaviour
 
     // Hurt the player while respecting damage binning
     // Only the maximum Damage value over the last half second is applied if damageBinning = true
-    public void Damage(int damage, bool damageBinning = true) {
-        if (damageBinning) {
-            if (_damageBinTimer > 0) {
-                if (damage > _damageBin) {
+    public void Damage(int damage, bool damageBinning = true)
+    {
+        if (damageBinning)
+        {
+            if (_damageBinTimer > 0)
+            {
+                if (damage > _damageBin)
+                {
                     ModHealth(-(damage - _damageBin));
                     _damageBin = damage;
                 }
-            } else {
+            }
+            else
+            {
                 _damageBinTimer = damageBinningTime;
                 _damageBin = damage;
                 ModHealth(-damage);
             }
-        } else {
+        }
+        else
+        {
             ModHealth(-damage);
         }
     }
 
     // Modify the player's health
     // No damage binning is applied
-    public void ModHealth(int change) {
+    public void ModHealth(int change)
+    {
         SetHealth(_currentHealth + change);
     }
 
-    private void SetHealth(int newHealth) {
+    private void SetHealth(int newHealth)
+    {
         newHealth = Mathf.Clamp(newHealth, 0, maxHealth);
-        if (newHealth != _currentHealth) {
+        if (newHealth != _currentHealth)
+        {
             _currentHealth = newHealth;
             OnHealthChanged.Invoke(_currentHealth);
             Debug.Log("Player health now " + _currentHealth);
-            if (_currentHealth <= 0) {
+            if (_currentHealth <= 0)
+            {
                 Debug.Log("Player is dead");
                 OnPlayerDeath.Invoke();
             }
         }
     }
 
-    public float GetDistanceToPlayer(Vector3 fromPosition) {
+    public float GetDistanceToPlayer(Vector3 fromPosition)
+    {
         return Vector3.Distance(head.transform.position, fromPosition);
     }
 
-    public bool PlayerInView(Vector3 fromPosition) {
-        var hit = Physics.Linecast(head.transform.position, fromPosition, out RaycastHit hitInfo, LayerMask.GetMask("World"));
+    public bool PlayerInView(Vector3 fromPosition)
+    {
+        var hit = Physics.Linecast(head.transform.position, fromPosition, out RaycastHit hitInfo,
+            LayerMask.GetMask("World"));
         return !hit;
     }
 }

@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7039115972650536572}
+  - component: {fileID: 4009555546677464029}
   - component: {fileID: 7185597027432528687}
   - component: {fileID: 8156998459897898069}
   - component: {fileID: 6600554069236638786}
@@ -16,7 +17,7 @@ GameObject:
   - component: {fileID: 4382379025895395621}
   - component: {fileID: 9210029708931218696}
   m_Layer: 6
-  m_Name: Enemy
+  m_Name: RobotSaw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41,6 +42,23 @@ Transform:
   - {fileID: 6310651910502341018}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4009555546677464029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6207079495784422046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a58fdbc717e44a68a9a522682b856a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myAttractable: {fileID: 8799015108862301099}
+  myMarkable: {fileID: 4382379025895395621}
+  robotAIState: 1
+  head: {fileID: 812427213114174878}
+  playerDetectionDistance: 50
 --- !u!114 &7185597027432528687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53,12 +71,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edaa799522d7b3f4eae99971c1dc49f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myAttractable: {fileID: 8799015108862301099}
-  myMarkable: {fileID: 4382379025895395621}
   myNavMeshAgent: {fileID: 9210029708931218696}
-  head: {fileID: 812427213114174878}
-  playerDetectionDistance: 50
-  aiState: 0
+  robotBase: {fileID: 4009555546677464029}
+  rb: {fileID: 6600554069236638786}
+  sawBladeRotor: {fileID: 6699157956084649710}
 --- !u!65 &8156998459897898069
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -103,7 +119,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 1
@@ -120,8 +136,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sawGameObject: {fileID: 6294574029357636979}
-  rotationSpeed: 500
-  rotationSpeedChangeRate: 50
+  rotationSpeed: 600
+  rotationSpeedChangeRate: 250
 --- !u!114 &4382379025895395621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -264,6 +280,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+  once: 0
 --- !u!1 &7537719042713571768
 GameObject:
   m_ObjectHideFlags: 0

@@ -33,7 +33,7 @@ public class CharacterMovement : MonoBehaviour
     public float coyoteTime = 0.1f;
     private float _jumpCoyoteTimer;
 
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,29 +44,45 @@ public class CharacterMovement : MonoBehaviour
 
     private void Update()
     {
-        
         // Coyote Time
         if (_controller.isGrounded)
             _jumpCoyoteTimer = 0;
         _jumpCoyoteTimer += Time.deltaTime;
 
-        float x=0, z=0;
+        float x = 0, z = 0;
 
-        if (!_controller.isGrounded) {
-            if (velocity.y > 0) {
+        if (!_controller.isGrounded)
+        {
+            if (velocity.y > 0)
+            {
                 velocity.y = Mathf.Min(velocity.y, terminalYVelocity);
             }
         }
 
         var keyboard = Keyboard.current;
-        if (keyboard != null) {
-            if (keyboard.aKey.isPressed) { x -= 1; }
-            if (keyboard.dKey.isPressed) { x += 1; }
+        if (keyboard != null)
+        {
+            if (keyboard.aKey.isPressed)
+            {
+                x -= 1;
+            }
 
-            if (keyboard.wKey.isPressed) { z += 1; }
-            if (keyboard.sKey.isPressed) { z -= 1; }
+            if (keyboard.dKey.isPressed)
+            {
+                x += 1;
+            }
 
+            if (keyboard.wKey.isPressed)
+            {
+                z += 1;
+            }
+
+            if (keyboard.sKey.isPressed)
+            {
+                z -= 1;
+            }
         }
+
         // Movement
         acc.x = 0;
         acc.y = 0;
@@ -74,70 +90,90 @@ public class CharacterMovement : MonoBehaviour
         bool hasJumped = false;
         sprinting = false;
         bool sprint = false;
-        if(!inputDisabled && keyboard != null) {
-
+        if (!inputDisabled && keyboard != null)
+        {
             sprint = keyboard.shiftKey.isPressed;
-            if (_controller.isGrounded) {
-
+            if (_controller.isGrounded)
+            {
                 velocity.y = -gravity * 0.5f;
                 DampenXZ();
-                
+
                 acc.x = x;
                 acc.z = z;
-                
+
                 acc.Normalize();
                 acc *= acceleration;
-            } else {
+            }
+            else
+            {
                 // Air control
-                var localVelocity =  transform.worldToLocalMatrix.rotation * velocity;
-                if((localVelocity.x * x + localVelocity.z * z)/(Mathf.Sqrt(localVelocity.x*localVelocity.x+localVelocity.z*localVelocity.z)*Mathf.Sqrt(x*x+z*z)) < -0.5f) {  // dot product
+                var localVelocity = transform.worldToLocalMatrix.rotation * velocity;
+                if ((localVelocity.x * x + localVelocity.z * z) /
+                    (Mathf.Sqrt(localVelocity.x * localVelocity.x + localVelocity.z * localVelocity.z) *
+                     Mathf.Sqrt(x * x + z * z)) < -0.5f)
+                {
+                    // dot product
                     // Stop on backwards
                     DampenXZ();
                 }
+
                 acc.x = x;
                 acc.z = z;
-                
+
                 acc.Normalize();
                 acc *= acceleration * 0.05f;
             }
-            
-            if (keyboard.spaceKey.wasPressedThisFrame && !crouching) {
-                if (_controller.isGrounded || _jumpCoyoteTimer <= coyoteTime) {
+
+            if (keyboard.spaceKey.wasPressedThisFrame && !crouching)
+            {
+                if (_controller.isGrounded || _jumpCoyoteTimer <= coyoteTime)
+                {
                     /*if (!_controller.isGrounded && _jumpCoyoteTimer <= coyoteTime)
                         Debug.Log("Coyote Jump!");
                     else {
                         Debug.Log("Normal Jump");
                     }*/
                     velocity.y = jumpSpeed;
-                    if (z > 0.5 && sprint) {
+                    if (z > 0.5 && sprint)
+                    {
                         Vector3 sprintJump = new Vector3(x, 0, z).normalized;
                         sprintJump *= maximumSpeed * sprintSpeedModifier;
-                        
+
                         velocity += transform.rotation * sprintJump;
                     }
+
                     hasJumped = true;
-                } else {
+                }
+                else
+                {
                     // We are in the air
                 }
             }
-            
+
             // Crouching
-            if (keyboard.leftCtrlKey.wasPressedThisFrame && !crouching) {
+            if (keyboard.leftCtrlKey.wasPressedThisFrame && !crouching)
+            {
                 crouching = true;
                 _controller.height = playerHeightCrouching;
                 _controller.center.Set(0, playerHeightCrouching / 2f, 0);
                 //_camera.transform.localPosition = new Vector3(0,playerHeightCrouching - 0.1f,0);
-            } else if ((keyboard.leftCtrlKey.wasPressedThisFrame || keyboard.spaceKey.wasPressedThisFrame || keyboard.shiftKey.wasPressedThisFrame) && crouching) {
+            }
+            else if ((keyboard.leftCtrlKey.wasPressedThisFrame || keyboard.spaceKey.wasPressedThisFrame ||
+                      keyboard.shiftKey.wasPressedThisFrame) && crouching)
+            {
                 var couldStandUp = StandUp();
             }
         }
-        if (inputDisabled && _controller.isGrounded) {
+
+        if (inputDisabled && _controller.isGrounded)
+        {
             DampenXZ();
         }
+
         // local acceleration to world velocity
         acc = transform.rotation * acc;
         velocity += acc * Time.deltaTime;
-        
+
         // Handle max speed
         float speedSqrd = velocity.x * velocity.x + velocity.z * velocity.z;
         float maxSpeed;
@@ -156,55 +192,67 @@ public class CharacterMovement : MonoBehaviour
             velocity.x *= Mathf.Sqrt(maxSpeedSqrd / speedSqrd);
             velocity.z *= Mathf.Sqrt(maxSpeedSqrd / speedSqrd);
         }
-        
+
         // Apply gravity
         velocity.y -= gravity * Time.deltaTime;
-        
+
         // Move
         var flags = _controller.Move(velocity * Time.deltaTime);
 
-        if ((flags & CollisionFlags.Above) != 0) {
+        if ((flags & CollisionFlags.Above) != 0)
+        {
             // head bump :(
             velocity.y = Mathf.Min(0, velocity.y);
         }
-        
     }
-    private bool StandUp() {
 
+    private bool StandUp()
+    {
         // Raycast to check if we can stand up
-        int terrainLayerMask = LayerMask.GetMask(new String[] {
+        int terrainLayerMask = LayerMask.GetMask(new String[]
+        {
             "Default"
         });
-        bool hit = Physics.CheckCapsule(transform.position + new Vector3(0, playerHeightCrouching, 0), transform.position + new Vector3(0, playerHeightStanding, 0), _controller.radius, terrainLayerMask);
-        if (!hit) {
+        bool hit = Physics.CheckCapsule(transform.position + new Vector3(0, playerHeightCrouching, 0),
+            transform.position + new Vector3(0, playerHeightStanding, 0), _controller.radius, terrainLayerMask);
+        if (!hit)
+        {
             crouching = false;
             _controller.height = playerHeightStanding;
             _controller.center.Set(0, playerHeightStanding / 2f, 0);
             //_camera.transform.localPosition = new Vector3(0, playerHeightStanding - 0.1f, 0);
         }
+
         return !hit;
     }
 
-    private void OnControllerColliderHit(ControllerColliderHit hit) {
-        if ((_controller.collisionFlags & CollisionFlags.Below) == 0) {
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if ((_controller.collisionFlags & CollisionFlags.Below) == 0)
+        {
             var normal = hit.normal;
             velocity = Vector3.ProjectOnPlane(velocity, normal);
         }
     }
 
-    private void DampenXZ() {
+    private void DampenXZ()
+    {
         Vector3 vXY = new Vector3(velocity.x, 0, velocity.z);
         if (vXY.magnitude == 0)
             return;
         Vector3 damp = vXY.normalized;
         damp.Normalize();
         damp *= -dampening * Time.deltaTime;
-        if (damp.magnitude > vXY.magnitude) {
+        if (damp.magnitude > vXY.magnitude)
+        {
             vXY.x = 0;
             vXY.z = 0;
-        } else {
+        }
+        else
+        {
             vXY += damp;
         }
+
         velocity.x = vXY.x;
         velocity.z = vXY.z;
     }

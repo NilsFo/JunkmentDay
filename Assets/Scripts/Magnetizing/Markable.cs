@@ -28,10 +28,10 @@ public class Markable : MonoBehaviour
         }
 
         StickyFlechette closest = myFlechettes[0];
-        float closestDistance = Vector3.Distance(transform.position, closest.transform.position);
+        float closestDistance = Vector3.Distance(position, closest.transform.position);
         foreach (StickyFlechette flechette in myFlechettes)
         {
-            float dist = Vector3.Distance(transform.position, flechette.transform.position);
+            float dist = Vector3.Distance(position, flechette.transform.position);
             if (dist < closestDistance)
             {
                 closestDistance = dist;
