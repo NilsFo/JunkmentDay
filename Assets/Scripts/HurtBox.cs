@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class HurtBox : MonoBehaviour {
     public int damage = 10;
+    public bool once = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,12 +19,15 @@ public class HurtBox : MonoBehaviour {
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (other is CharacterController && other.gameObject.layer == LayerMask.NameToLayer("Player")) {
-            var playerData = other.GetComponent<PlayerData>();
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player")) {
+            var playerData = other.GetComponentInParent<PlayerData>();
             if(playerData == null)
                 return;
             Debug.Log("Hurting the Player for " + damage + " damage", this);
             playerData.Damage(damage);
+            if (once) {
+                Destroy(gameObject);
+            }
         }
     }
 }

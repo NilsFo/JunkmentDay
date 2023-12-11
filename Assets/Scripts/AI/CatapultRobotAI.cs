@@ -12,11 +12,14 @@ public class CatapultRobotAI : MonoBehaviour
     public Transform head;
 
     public float playerDetectionDistance = 50f;
-    public float shootDistance = 15f;
+    public float shootDistance = 20f;
     public float fleeDistance = 3f;
 
     public float shootPeriod = 3f;
     private float _shootTimer;
+    public Transform shootOrigin;
+
+    public Rigidbody projectilePrefab;
 
     public enum CatapultRobotState {
         IDLE,
@@ -56,24 +59,54 @@ public class CatapultRobotAI : MonoBehaviour
     
     private void NavigationUpdate() {
         if (aiState == CatapultRobotState.IDLE) {
-            if(_gameState.player.GetDistanceToPlayer(head.position) < playerDetectionDistance && _gameState.player.PlayerInView(head.position))
+            if(_gameState.player.GetDistanceToPlayer(head.position) < playerDetectionDistance && PlayerInView())
                 aiState = CatapultRobotState.POSITIONING;
         }
         if (aiState == CatapultRobotState.POSITIONING) {
             myNavMeshAgent.SetDestination(_gameState.player.transform.position);
-            var playerDistance = _gameState.player.GetDistanceToPlayer(head.position);
-            if (playerDistance < shootDistance) {
+            var playerDistance = GetDistanceToPlayer();
+            if (playerDistance < shootDistance && PlayerInView()) {
                 aiState = CatapultRobotState.ATTACKING;
             }
         }
         if (aiState == CatapultRobotState.ATTACKING) {
             // Stop
             myNavMeshAgent.SetDestination(myNavMeshAgent.transform.position);
+            var playerDistance = GetDistanceToPlayer();
+            if (playerDistance > shootDistance + 1) {
+                aiState = CatapultRobotState.POSITIONING;
+            }
+            else if (!PlayerInView()) {
+                aiState = CatapultRobotState.POSITIONING;
+            }
         }
+    }
+    
+    private float GetDistanceToPlayer() {
+
+        return _gameState.player.GetDistanceToPlayer(head.position);
+    }
+    private bool PlayerInView() {
+
+        return _gameState.player.PlayerInView(head.position);
     }
 
     public void ShootCatapult() {
+        var playerPos = _gameState.player.transform.position + Vector3.up;
+        var myPos = shootOrigin.position;
         
+        var b = 30f * Mathf.Deg2Rad;  // Angle of the shot
+        var d = Vector3.ProjectOnPlane(playerPos - myPos, Vector3.up).magnitude;  // Distance to the player on the y plane
+        var y = (playerPos - myPos).y;  // Height difference to the player
+        var g = 9.8f;  // Gravity
+
+        // Calculate necessary force
+        float v = Mathf.Sqrt(-0.5f * g * d * d / (Mathf.Pow(Mathf.Cos(b), 2) * (y - d * Mathf.Tan(b))));
+
+        var projectile = Instantiate(projectilePrefab, shootOrigin.position, shootOrigin.rotation);
+        Vector3 direction = Quaternion.AngleAxis(b * Mathf.Rad2Deg, -shootOrigin.right) * shootOrigin.forward;
+        v = Mathf.Clamp(v, 5f, 30f);
+        projectile.velocity = direction.normalized * v;
     }
     
     private float RotateTowards(Vector3 target) {
