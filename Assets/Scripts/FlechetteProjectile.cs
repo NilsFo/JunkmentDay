@@ -36,14 +36,15 @@ public class FlechetteProjectile : MonoBehaviour
         _cachePosition = transform.position;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        var layer = other.gameObject.layer;
-        Vector3 impactPoint = other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
+    private void OnCollisionEnter(Collision collision) {
+        var other = collision.gameObject;
+        var layer = other.layer;
+        var contact = collision.GetContact(0);
+        Vector3 impactPoint = contact.point;
 
         if (stickToLayers == (stickToLayers | (1 << layer)))
         {
-            Debug.Log("stick to layer", other.gameObject);
+            Debug.Log("stick to layer", other);
             var markable = other.GetComponent<Markable>();
             if (markable != null)
             {
@@ -53,7 +54,7 @@ public class FlechetteProjectile : MonoBehaviour
                 // Creating sticky flechete
                 GameObject flechetteObj = Instantiate(_gameState.stickyFlechettePrefab, impactPoint,
                     Quaternion.identity);
-                flechetteObj.transform.rotation = transform.rotation;
+                flechetteObj.transform.rotation = Quaternion.LookRotation(contact.normal, Vector3.up);
                 flechetteObj.transform.parent = markable.transform;
 
                 StickyFlechette flechette = flechetteObj.GetComponent<StickyFlechette>();
@@ -63,14 +64,17 @@ public class FlechetteProjectile : MonoBehaviour
 
                 Destroy(gameObject);
             }
+        } else {
+            if (becomeClutterLayers == (becomeClutterLayers | (1 << layer)))
+            {
+                Debug.Log("become clutter layer", other.gameObject);
+                CreateClutterReplacement(impactPoint);
+                Destroy(gameObject);
+            } else {
+                Debug.Log("Collided with something i dont know", other.gameObject);
+            }
         }
 
-        if (becomeClutterLayers == (becomeClutterLayers | (1 << layer)))
-        {
-            Debug.Log("become clutter layer", other.gameObject);
-            CreateClutterReplacement(impactPoint);
-            Destroy(gameObject);
-        }
     }
 
     private void CreateClutterReplacement(Vector3 point)

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4196573926621638251}
   - component: {fileID: 621032790735290835}
   - component: {fileID: 3506481850120410140}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: FlechetteWeaponProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ MonoBehaviour:
     m_Bits: 64
   becomeClutterLayers:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 1152
 --- !u!54 &4196573926621638251
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -80,9 +80,9 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!136 &621032790735290835
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -98,7 +98,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -178,10 +178,45 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5976071629391176779, guid: 80f76adc80ff326429690882d0be4454,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: -3477864577585124648, guid: 80f76adc80ff326429690882d0be4454,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: -885264430177597064, guid: 80f76adc80ff326429690882d0be4454,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 80f76adc80ff326429690882d0be4454,
         type: 3}
       propertyPath: m_Name
       value: Pfeil
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 80f76adc80ff326429690882d0be4454,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1396792749669637682, guid: 80f76adc80ff326429690882d0be4454,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6574091114309173524, guid: 80f76adc80ff326429690882d0be4454,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6773935864695782916, guid: 80f76adc80ff326429690882d0be4454,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
