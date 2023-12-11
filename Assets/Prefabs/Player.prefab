@@ -380,6 +380,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   head: {fileID: 9095946871532686800}
+  maxHealth: 100
+  damageBinningTime: 0.5
+  OnHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPlayerDeath:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &9095946871819127337
 MonoBehaviour:
   m_ObjectHideFlags: 0
