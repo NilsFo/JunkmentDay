@@ -11,6 +11,10 @@ public class PowerGun : MonoBehaviour {
     private List<StickyFlechette> _flechettes;
     private GameState _gameState;
 
+    [Header("Flechette Gun")] public Transform flechetteProjectileOrigin;
+    public GameObject flechetteProjectilePrefab;
+    public float flechetteProjectileSpeed = 100f;
+
     private void Awake()
     {
         _flechettes = new List<StickyFlechette>();
@@ -31,7 +35,7 @@ public class PowerGun : MonoBehaviour {
         if (mouse == null)
             return;
         if (mouse.leftButton.wasPressedThisFrame) {
-            ShootMarkerGun();
+            ShootFlechetteGun();
         }
         if (mouse.rightButton.wasPressedThisFrame) {
             ShootPowerGun();
@@ -107,6 +111,20 @@ public class PowerGun : MonoBehaviour {
         }
     }
 
+    private void ShootFlechetteGun()
+    {
+        var camTransform = transform;
+        var direction = camTransform.rotation * Vector3.forward;
+
+        GameObject projectile = Instantiate(flechetteProjectilePrefab,
+            flechetteProjectileOrigin.transform.position,Quaternion.identity);
+        projectile.transform.rotation = flechetteProjectileOrigin.transform.rotation;
+        projectile.transform.RotateAround (projectile.transform.position, projectile.transform.up, 180f);
+        Rigidbody rb = projectile.GetComponent<Rigidbody>();
+        rb.AddForce(direction * flechetteProjectileSpeed, ForceMode.Impulse);
+    }
+    
+    [Obsolete]
     void ShootMarkerGun() {
         var camTransform = transform;
         Ray r = new Ray(camTransform.position, camTransform.rotation * Vector3.forward);
@@ -153,10 +171,21 @@ public class PowerGun : MonoBehaviour {
         }
         marks.Clear();
         
-        foreach (StickyFlechette flechette in _flechettes)
-        {
-            Destroy(flechette.gameObject);
+        foreach (StickyFlechette flechette in _flechettes) {
+            flechette.DestroyFlechette();
         }
         _flechettes.Clear();
     }
+
+    public void ReportFlechetteHit(StickyFlechette flechette)
+    {
+        _flechettes.Add(flechette);
+        var markable = flechette.myMark;
+
+        if (!marks.Contains(markable))
+        {
+            marks.Add(markable);
+        }
+    }
+    
 }

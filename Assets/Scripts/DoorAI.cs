@@ -6,8 +6,10 @@ using UnityEngine.AI;
 public class DoorAI : MonoBehaviour
 {
     [Header("Open / Close config")] public GameObject doorObject;
-    public float closedHeight = 0f;
-    public float openedHeight = 4f;
+    public float closedHeightX = 0f;
+    public float closedHeightY = 0f;
+    public float openedHeightY = 4f;
+    public float openedHeightX = 0f;
     public Collider myCollider;
     public float transitionSpeed = 2f;
     public NavMeshObstacle navMeshObstacle;
@@ -16,12 +18,14 @@ public class DoorAI : MonoBehaviour
     private float _stateTimer = 0f;
 
     private bool _opened;
-    private float _heightCurrent;
+    private float _heightCurrentX;
+    private float _heightCurrentY;
 
     // Start is called before the first frame update
     void Start()
     {
-        _heightCurrent = closedHeight;
+        _heightCurrentX = closedHeightX;
+        _heightCurrentY = closedHeightY;
         Close();
     }
 
@@ -31,17 +35,23 @@ public class DoorAI : MonoBehaviour
         _stateTimer += Time.deltaTime;
         float animMult = animSpeedCurve.Evaluate(_stateTimer);
 
-        float heightDesired = closedHeight;
+        float heightDesiredX = closedHeightX;
+        float heightDesiredY = closedHeightY;
         myCollider.enabled = true;
         if (_opened)
         {
-            heightDesired = openedHeight;
+            heightDesiredX = openedHeightX;
+            heightDesiredY = openedHeightY;
             myCollider.enabled = false;
         }
 
-        _heightCurrent = Mathf.MoveTowards(_heightCurrent, heightDesired, Time.deltaTime * transitionSpeed * animMult);
+        _heightCurrentX =
+            Mathf.MoveTowards(_heightCurrentX, heightDesiredX, Time.deltaTime * transitionSpeed * animMult);
+        _heightCurrentY =
+            Mathf.MoveTowards(_heightCurrentY, heightDesiredY, Time.deltaTime * transitionSpeed * animMult);
         Vector3 pos = doorObject.transform.localPosition;
-        pos.y = _heightCurrent;
+        pos.y = _heightCurrentY;
+        pos.x = _heightCurrentX;
         doorObject.transform.localPosition = pos;
     }
 

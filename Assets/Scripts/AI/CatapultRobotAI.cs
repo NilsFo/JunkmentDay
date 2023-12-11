@@ -54,6 +54,13 @@ public class CatapultRobotAI : MonoBehaviour
                 ShootCatapult();
             }
         }
+        
+        if (myAttractable.isMagnetized()) {
+            aiState = CatapultRobotState.MAGNETIZED;
+        }
+        if (aiState == CatapultRobotState.MAGNETIZED) {
+            myNavMeshAgent.enabled = false;
+        }
     }
     
     
