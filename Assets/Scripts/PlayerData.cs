@@ -80,4 +80,13 @@ public class PlayerData : MonoBehaviour
             }
         }
     }
+
+    public float GetDistanceToPlayer(Vector3 fromPosition) {
+        return Vector3.Distance(head.transform.position, fromPosition);
+    }
+
+    public bool PlayerInView(Vector3 fromPosition) {
+        var hit = Physics.Linecast(head.transform.position, fromPosition, out RaycastHit hitInfo, LayerMask.GetMask("World"));
+        return !hit;
+    }
 }

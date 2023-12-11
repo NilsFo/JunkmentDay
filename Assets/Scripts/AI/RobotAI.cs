@@ -10,6 +10,9 @@ public class RobotAI : MonoBehaviour
     public Attractable myAttractable;
     public Markable myMarkable;
     public NavMeshAgent myNavMeshAgent;
+    public Transform head;
+
+    public float playerDetectionDistance = 50f;
 
     public enum RobotState {
         IDLE,
@@ -46,7 +49,8 @@ public class RobotAI : MonoBehaviour
 
     private void NavigationUpdate() {
         if (aiState == RobotState.IDLE) {
-            aiState = RobotState.ATTACKING;
+            if(_gameState.player.GetDistanceToPlayer(head.position) < playerDetectionDistance &&_gameState.player.PlayerInView(head.position))
+                aiState = RobotState.ATTACKING;
         }
         if(aiState == RobotState.ATTACKING)
             myNavMeshAgent.SetDestination(_gameState.player.transform.position);
