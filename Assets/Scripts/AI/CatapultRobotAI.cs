@@ -195,6 +195,7 @@ public class CatapultRobotAI : MonoBehaviour
         Vector3 direction = Quaternion.AngleAxis(b * Mathf.Rad2Deg, -shootOrigin.right) * shootOrigin.forward;
         v = Mathf.Clamp(v, 5f, 30f);
         projectile.velocity = direction.normalized * v;
+        projectile.GetComponent<CatapultShot>().shooter = this;
     }
 
     private float RotateTowards(Vector3 target)

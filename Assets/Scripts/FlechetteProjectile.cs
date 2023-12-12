@@ -67,11 +67,15 @@ public class FlechetteProjectile : MonoBehaviour
 
                 Destroy(gameObject);
             }
+            
+            var powerable = other.GetComponent<Powerable>();
+            if (powerable != null) {
+                powerable.Power();
+            }
         }
         else
         {
-            if (becomeClutterLayers == (becomeClutterLayers | (1 << layer)))
-            {
+            if (becomeClutterLayers == (becomeClutterLayers | (1 << layer))) {
                 CreateClutterReplacement(impactPoint);
                 Destroy(gameObject);
             }
