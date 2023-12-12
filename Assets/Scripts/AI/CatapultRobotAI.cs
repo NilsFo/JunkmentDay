@@ -11,6 +11,7 @@ public class CatapultRobotAI : MonoBehaviour
 
     public float shootDistance = 20f;
     public float fleeDistance = 3f;
+    private float _movementSpeed;
 
     public float shootPeriod = 3f;
     private float _shootTimer;
@@ -39,16 +40,20 @@ public class CatapultRobotAI : MonoBehaviour
 
     private void Start()
     {
+        _movementSpeed = myNavMeshAgent.speed;
         _robotAIStateLastKnown = RobotBase.RobotAIState.UNKNOWN;
     }
 
     // Update is called once per frame
     void Update()
     {
+        myNavMeshAgent.speed = _movementSpeed * (1-robotBase.FlechetteProgress);
+        
         if (_robotAIStateLastKnown != RobotAIStateCurrent)
         {
-            OnAIStateChanged(_robotAIStateLastKnown, RobotAIStateCurrent);
+            var tmpState = _robotAIStateLastKnown;
             _robotAIStateLastKnown = RobotAIStateCurrent;
+            OnAIStateChanged(tmpState, RobotAIStateCurrent);
         }
 
         if (RobotAIStateCurrent == RobotBase.RobotAIState.ATTACKING
@@ -85,34 +90,44 @@ public class CatapultRobotAI : MonoBehaviour
         if (RobotAIStateCurrent == RobotBase.RobotAIState.MAGNETIZED
             && !attractableMagnetized)
         {
-            RobotAIStateCurrent = RobotBase.RobotAIState.IDLE;
+            RobotAIStateCurrent = RobotBase.RobotAIState.RAGDOLL;
         }
-
-        if ((RobotAIStateCurrent == RobotBase.RobotAIState.IDLE
-             || RobotAIStateCurrent == RobotBase.RobotAIState.ATTACKING)
-            && attractableMagnetized)
+        
+        if (RobotAIStateCurrent == RobotBase.RobotAIState.IDLE
+            || RobotAIStateCurrent == RobotBase.RobotAIState.RAGDOLL
+            || RobotAIStateCurrent == RobotBase.RobotAIState.FLECHETTESTUNNED
+            || RobotAIStateCurrent == RobotBase.RobotAIState.POSITIONING
+            || RobotAIStateCurrent == RobotBase.RobotAIState.ATTACKING
+           )
         {
-            RobotAIStateCurrent = RobotBase.RobotAIState.MAGNETIZED;
+            if (attractableMagnetized)
+            {
+                RobotAIStateCurrent = RobotBase.RobotAIState.MAGNETIZED;
+            }
+            else if (robotBase.FlechetteProgressReached && RobotAIStateCurrent != RobotBase.RobotAIState.RAGDOLL)
+            {
+                RobotAIStateCurrent = RobotBase.RobotAIState.FLECHETTESTUNNED;
+            }
         }
     }
 
     private void OnAIStateChanged(RobotBase.RobotAIState oldState, RobotBase.RobotAIState newState)
     {
-        Debug.Log("Robot '" + name + "' new state: " + newState);
-
         switch (oldState)
         {
             case RobotBase.RobotAIState.IDLE:
                 break;
             case RobotBase.RobotAIState.MAGNETIZED:
-                myNavMeshAgent.enabled = true;
-                rb.isKinematic = true;
                 break;
             case RobotBase.RobotAIState.ATTACKING:
                 break;
             case RobotBase.RobotAIState.POSITIONING:
                 break;
             case RobotBase.RobotAIState.UNKNOWN:
+                break;
+            case RobotBase.RobotAIState.FLECHETTESTUNNED:
+                break;
+            case RobotBase.RobotAIState.RAGDOLL:
                 break;
             default:
                 RobotAIStateCurrent = RobotBase.RobotAIState.UNKNOWN;
@@ -122,14 +137,28 @@ public class CatapultRobotAI : MonoBehaviour
         switch (newState)
         {
             case RobotBase.RobotAIState.IDLE:
+                myNavMeshAgent.enabled = true;
+                rb.isKinematic = true;
                 break;
             case RobotBase.RobotAIState.MAGNETIZED:
                 myNavMeshAgent.enabled = false;
                 rb.isKinematic = false;
                 break;
             case RobotBase.RobotAIState.ATTACKING:
+                myNavMeshAgent.enabled = true;
+                rb.isKinematic = true;
                 break;
             case RobotBase.RobotAIState.POSITIONING:
+                myNavMeshAgent.enabled = true;
+                rb.isKinematic = true;
+                break;
+            case RobotBase.RobotAIState.RAGDOLL:
+                myNavMeshAgent.enabled = false;
+                rb.isKinematic = false;
+                break;
+            case RobotBase.RobotAIState.FLECHETTESTUNNED:
+                myNavMeshAgent.enabled = false;
+                rb.isKinematic = true;
                 break;
             default:
                 RobotAIStateCurrent = RobotBase.RobotAIState.UNKNOWN;

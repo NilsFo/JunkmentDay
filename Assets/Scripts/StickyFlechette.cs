@@ -39,6 +39,12 @@ public class StickyFlechette : MonoBehaviour
 
         var direction = clutter.transform.position - myMark.transform.position;
         direction = direction.normalized;
+        
+        rb.AddRelativeTorque(new Vector3(
+            Random.Range(-20f, 20f),
+            Random.Range(-20f, 20f),
+            Random.Range(-20f, 20f)
+        ));
 
         float force = Random.Range(5f, 8f);
         rb.AddForce(direction * force, ForceMode.Impulse);

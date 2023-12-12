@@ -7,6 +7,7 @@ public class Attractor : MonoBehaviour
 {
     [Header("Hookup")] public SphereCollider myCollider;
     private GameState _gameState;
+    public Transform attractorPoint;
 
     [Header("Params")] private bool _active;
     public bool Active => _active;
@@ -15,7 +16,6 @@ public class Attractor : MonoBehaviour
 
     public float pullStrength = 1.0f;
     private float _pullStrengthCurrent = 0;
-    public float radius = 5f;
 
     private List<Attractable> _knownAttractables;
 
@@ -58,7 +58,7 @@ public class Attractor : MonoBehaviour
             {
                 if (knownAttractable.IsAttractable())
                 {
-                    var position = transform.position;
+                    Vector3 position = attractorPoint.position;
                     Vector3 attachmentPoint = knownAttractable.GetAttachmentPoint(position);
                     Vector3 direction = position - attachmentPoint;
                     float distance = Vector3.Distance(position, knownAttractable.transform.position);
@@ -127,9 +127,6 @@ public class Attractor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // updating radius
-        myCollider.radius = radius;
-
         // updating pullstrength
         _pullStrengthCurrent = 0;
         if (_active)
@@ -140,7 +137,7 @@ public class Attractor : MonoBehaviour
         // updating attractors based on flechettes
         foreach (Attractable attractable in _knownAttractables)
         {
-            var position = transform.position;
+            var position = attractorPoint.position;
 
             Color color = Color.red;
             if (attractable.IsAttractable())
@@ -161,8 +158,6 @@ public class Attractor : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, radius);
     }
 
 #endif

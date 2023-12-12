@@ -12,6 +12,7 @@ public class RobotSawBladeRotor : MonoBehaviour
     public float rotationSpeed;
     public float rotationSpeedChangeRate = 10;
     private float _rotationSpeedCurrent;
+    public RobotSawAI robotSawAI;
 
     public void TurnOn()
     {
@@ -34,7 +35,11 @@ public class RobotSawBladeRotor : MonoBehaviour
         Vector3 rotationEuler = sawGameObject.transform.rotation.eulerAngles;
         rotationEuler.y = rotationEuler.y += _rotationSpeedCurrent * Time.fixedDeltaTime;
         //sawGameObject.transform.rotation = Quaternion.Euler(rotationEuler);
-        sawGameObject.transform.Rotate(Vector3.up * _rotationSpeedCurrent * Time.fixedDeltaTime, Space.Self);
+
+        float rotationSpeedAdjusted = _rotationSpeedCurrent;
+        rotationSpeedAdjusted = rotationSpeedAdjusted * (1 - robotSawAI.robotBase.FlechetteProgress) / 2f;
+
+        sawGameObject.transform.Rotate(Vector3.up * rotationSpeedAdjusted * Time.fixedDeltaTime, Space.Self);
     }
 
     // Update is called once per frame
