@@ -72,6 +72,12 @@ public class PowerGun : MonoBehaviour
         List<Markable> deleteListMarkable = new List<Markable>();
         foreach (Markable markable in marks)
         {
+            if (markable.IsDestroyed())
+            {
+                deleteListMarkable.Add(markable);
+                continue;
+            }
+
             bool stillMarked = false;
             foreach (StickyFlechette flechette in _flechettes)
             {
@@ -83,7 +89,7 @@ public class PowerGun : MonoBehaviour
 
             if (!stillMarked)
             {
-                print("unmarking because no more flechettes: " + markable.gameObject.name);
+                Debug.Log("unmarking because no more flechettes: " + markable.gameObject.name);
                 deleteListMarkable.Add(markable);
             }
         }

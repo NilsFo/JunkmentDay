@@ -11,6 +11,7 @@ public class Attractable : MonoBehaviour
 
     private float _originalGravityScale;
     public Markable myMarkable;
+    public RobotBase robotBase;
 
     private void Awake()
     {
@@ -82,5 +83,13 @@ public class Attractable : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void OnRobotDeath()
+    {
+        foreach (Attractor attractor in _attractors)
+        {
+            attractor.RemoveAttractable(this);
+        }
     }
 }

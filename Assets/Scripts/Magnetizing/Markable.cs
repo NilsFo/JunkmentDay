@@ -20,6 +20,14 @@ public class Markable : MonoBehaviour
         _gameState = FindObjectOfType<GameState>();
     }
 
+    public void RemoveAllFlechettes()
+    {
+        foreach (StickyFlechette flechette in myFlechettes)
+        {
+            flechette.DestroyFlechette();
+        }
+    }
+
     public StickyFlechette ClosestFlechette(Vector3 position)
     {
         if (myFlechettes.Count == 0)
