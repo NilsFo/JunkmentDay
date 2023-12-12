@@ -62,11 +62,18 @@ public class Attractor : MonoBehaviour
                     Vector3 attachmentPoint = knownAttractable.GetAttachmentPoint(position);
                     Vector3 direction = position - attachmentPoint;
                     float distance = Vector3.Distance(position, knownAttractable.transform.position);
-                    float strengthMult = Mathf.Min(1f, 1 / Mathf.Pow(distance, 2) * falloffDistanceMultiplier);
+                    float distanceMult = Mathf.Min(1f, 1 / Mathf.Pow(distance, 2) * falloffDistanceMultiplier);
 
                     direction.Normalize(); // Normalizing the vector so it has a magnitude of 1
-                    knownAttractable.rb.AddForce(direction * _pullStrengthCurrent * strengthMult * Time.fixedDeltaTime,
+                    knownAttractable.rb.AddForce(direction * _pullStrengthCurrent * distanceMult * Time.fixedDeltaTime,
                         ForceMode.Impulse);
+
+                    float damage = _gameState.magnetDPS * distanceMult;
+                    RobotBase robotBase = knownAttractable.robotBase;
+                    if (robotBase != null)
+                    {
+                        robotBase.DealDamage(damage*Time.fixedDeltaTime);
+                    }
                 }
             }
         }
@@ -143,6 +150,11 @@ public class Attractor : MonoBehaviour
 
             Debug.DrawLine(position, attractable.GetAttachmentPoint(position), color);
         }
+    }
+
+    public void RemoveAttractable(Attractable attractable)
+    {
+        _knownAttractables.Remove(attractable);
     }
 
 #if UNITY_EDITOR

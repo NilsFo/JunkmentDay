@@ -7,7 +7,11 @@ public class GameState : MonoBehaviour
 {
     private PlayerData _player;
     private PowerGun _powerGun;
+    
+    [Header("Creation templates")]
     public GameObject stickyFlechettePrefab;
+
+    [Header("Gameplay constants")] public float magnetDPS = 35f;
 
     public PlayerData player => _player;
     public PowerGun PowerGun => _powerGun;
