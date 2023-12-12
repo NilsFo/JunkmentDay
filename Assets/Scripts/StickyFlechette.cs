@@ -8,17 +8,27 @@ public class StickyFlechette : MonoBehaviour
 {
     public GameObject flechetteClutterPrefab;
     public Markable myMark;
+    private bool _markedForDeath;
 
     private void Start()
     {
         myMark.myFlechettes.Add(this);
+        _markedForDeath = false;
     }
 
     public void DestroyFlechette()
     {
-        myMark.myFlechettes.Remove(this);
-        CreateClutterReplacement();
-        Destroy(gameObject);
+        _markedForDeath = true;
+    }
+
+    private void LateUpdate()
+    {
+        if (_markedForDeath)
+        {
+            myMark.myFlechettes.Remove(this);
+            CreateClutterReplacement();
+            Destroy(gameObject);
+        }
     }
 
     private void CreateClutterReplacement()

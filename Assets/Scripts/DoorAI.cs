@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -53,6 +54,19 @@ public class DoorAI : MonoBehaviour
         pos.y = _heightCurrentY;
         pos.x = _heightCurrentX;
         doorObject.transform.localPosition = pos;
+    }
+
+    public bool FullyClosed()
+    {
+        float tollerance = 0.1f;
+        return Math.Abs(_heightCurrentX - closedHeightX) < tollerance && Math.Abs(_heightCurrentY - closedHeightY) < tollerance;
+    }
+
+
+    public bool FullyOpened()
+    {
+        float tollerance = 0.1f;
+        return Math.Abs(_heightCurrentX - openedHeightX) < tollerance && Math.Abs(_heightCurrentY - openedHeightY) < tollerance;
     }
 
     public void Open()
