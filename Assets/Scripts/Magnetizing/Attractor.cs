@@ -1,11 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Attractor : MonoBehaviour
 {
-    [Header("Hookup")] public SphereCollider myCollider;
+    [Header("Hookup")] public Collider myCollider;
     private GameState _gameState;
 
     [Header("Params")] private bool _active;
@@ -16,6 +17,7 @@ public class Attractor : MonoBehaviour
     public float pullStrength = 1.0f;
     private float _pullStrengthCurrent = 0;
     public float radius = 5f;
+    public Transform pullCenter;
 
     private List<Attractable> _knownAttractables;
 
@@ -23,6 +25,8 @@ public class Attractor : MonoBehaviour
     {
         _knownAttractables = new List<Attractable>();
         _gameState = FindObjectOfType<GameState>();
+        if (pullCenter == null)
+            pullCenter = transform;
     }
 
     // Start is called before the first frame update
@@ -58,7 +62,7 @@ public class Attractor : MonoBehaviour
             {
                 if (knownAttractable.IsAttractable())
                 {
-                    var position = transform.position;
+                    var position = pullCenter.position;
                     Vector3 attachmentPoint = knownAttractable.GetAttachmentPoint(position);
                     Vector3 direction = position - attachmentPoint;
                     float distance = Vector3.Distance(position, knownAttractable.transform.position);
@@ -128,7 +132,7 @@ public class Attractor : MonoBehaviour
     void Update()
     {
         // updating radius
-        myCollider.radius = radius;
+        //myCollider.radius = radius;
 
         // updating pullstrength
         _pullStrengthCurrent = 0;

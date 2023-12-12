@@ -10,6 +10,8 @@ public class BigMagnet : MonoBehaviour {
     public float railMoveSpeed = 1f;
     public float railPos;
     private float _railLength;
+
+    private float _rotationSpeed = 0.5f; 
     
     // Start is called before the first frame update
     void Start() {
@@ -21,6 +23,11 @@ public class BigMagnet : MonoBehaviour {
     {
         railPos += railMoveSpeed * Time.deltaTime * railMove;
         transform.position = rail.EvaluatePosition(railPos/_railLength);
+
+        var tangent = rail.EvaluateTangent(railPos / _railLength);
+        var tangentVec = new Vector3(tangent.x, 0, tangent.z);
+        var newDirection = Vector3.RotateTowards(transform.forward, tangentVec, _rotationSpeed * Time.deltaTime, 0.0f);
+        transform.rotation = Quaternion.LookRotation(newDirection);
     }
 
     public void MoveForward() {
