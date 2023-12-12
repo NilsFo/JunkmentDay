@@ -20,6 +20,14 @@ public class Markable : MonoBehaviour
         _gameState = FindObjectOfType<GameState>();
     }
 
+    public void RemoveAllFlechettes()
+    {
+        foreach (StickyFlechette flechette in myFlechettes)
+        {
+            flechette.DestroyFlechette();
+        }
+    }
+
     public StickyFlechette ClosestFlechette(Vector3 position)
     {
         if (myFlechettes.Count == 0)
@@ -28,10 +36,10 @@ public class Markable : MonoBehaviour
         }
 
         StickyFlechette closest = myFlechettes[0];
-        float closestDistance = Vector3.Distance(transform.position, closest.transform.position);
+        float closestDistance = Vector3.Distance(position, closest.transform.position);
         foreach (StickyFlechette flechette in myFlechettes)
         {
-            float dist = Vector3.Distance(transform.position, flechette.transform.position);
+            float dist = Vector3.Distance(position, flechette.transform.position);
             if (dist < closestDistance)
             {
                 closestDistance = dist;

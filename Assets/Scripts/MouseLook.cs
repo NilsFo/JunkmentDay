@@ -1,5 +1,4 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
 [AddComponentMenu("Camera/Simple Smooth Mouse Look ")]
@@ -33,12 +32,12 @@ public class MouseLook : MonoBehaviour
 
     void Update()
     {
-        
         if (!mouseLookEnabled)
         {
             Cursor.lockState = CursorLockMode.None;
             return;
         }
+
         // Ensure the cursor is always locked when set
         if (lockCursor)
         {
@@ -70,7 +69,8 @@ public class MouseLook : MonoBehaviour
         if (clampInDegrees.y < 360)
             _mouseAbsolute.y = Mathf.Clamp(_mouseAbsolute.y, -clampInDegrees.y * 0.5f, clampInDegrees.y * 0.5f);
 
-        transform.localRotation = Quaternion.AngleAxis(-_mouseAbsolute.y, targetOrientation * Vector3.right) * targetOrientation;
+        transform.localRotation = Quaternion.AngleAxis(-_mouseAbsolute.y, targetOrientation * Vector3.right) *
+                                  targetOrientation;
 
         // If there's a character body that acts as a parent to the camera
         if (characterBody)

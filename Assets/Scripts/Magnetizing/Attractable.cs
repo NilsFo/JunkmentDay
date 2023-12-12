@@ -11,6 +11,7 @@ public class Attractable : MonoBehaviour
 
     private float _originalGravityScale;
     public Markable myMarkable;
+    public RobotBase robotBase;
 
     private void Awake()
     {
@@ -34,13 +35,24 @@ public class Attractable : MonoBehaviour
             return transform.position;
         }
 
-        var closest = myMarkable.ClosestFlechette(source);
+        StickyFlechette closest = myMarkable.ClosestFlechette(source);
         if (closest == null)
         {
             return transform.position;
         }
 
         return closest.transform.position;
+    }
+
+    public bool IsAttractable()
+    {
+        if (myMarkable == null)
+        {
+            return true;
+        }
+
+        return true;
+        //return myMarkable.myFlechettes.Count > 0;
     }
 
     public void AddAttractor(Attractor attractor)
@@ -54,5 +66,32 @@ public class Attractable : MonoBehaviour
     public void RemoveAttractor(Attractor attractor)
     {
         _attractors.Remove(attractor);
+    }
+
+    public bool IsMagnetized()
+    {
+        foreach (var attractor in _attractors)
+        {
+            if (attractor.Active)
+            {
+                if (myMarkable == null)
+                {
+                    return true;
+                }
+
+                //return myMarkable.marked;
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public void OnRobotDeath()
+    {
+        foreach (Attractor attractor in _attractors)
+        {
+            attractor.RemoveAttractable(this);
+        }
     }
 }
