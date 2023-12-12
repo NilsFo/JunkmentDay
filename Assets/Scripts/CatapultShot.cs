@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CatapultShot : MonoBehaviour
-{
+public class CatapultShot : MonoBehaviour {
+    public CatapultRobotAI shooter;
     public int damage = 10;
 
     private void OnCollisionEnter(Collision other)
