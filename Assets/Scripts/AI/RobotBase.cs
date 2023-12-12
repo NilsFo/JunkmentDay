@@ -277,10 +277,10 @@ public class RobotBase : MonoBehaviour
         int flechetteCount = FlechetteCount;
         float flechetteProgress = FlechetteProgress;
 
-        var playerPos = _gameState.player.transform.position + Vector3.up;
+        var playerPos = _gameState.player.transform.position;
         var myPos = transform.position;
 
-        var b = 50f * Mathf.Deg2Rad; // Angle of the shot
+        var b = 30f * Mathf.Deg2Rad; // Angle of the shot
         var toPlayerVec = Vector3.ProjectOnPlane(playerPos - myPos, Vector3.up);
         var d = toPlayerVec.magnitude; // Distance to the player on the y plane
         var y = (playerPos - myPos).y; // Height difference to the player
@@ -293,7 +293,7 @@ public class RobotBase : MonoBehaviour
             Vector3.Cross(toPlayerVec, Vector3.up)) * toPlayerVec;
         v = Mathf.Clamp(v, 5f, 30f);
 
-        rb.AddForce(direction * v * flechetteProgress, ForceMode.VelocityChange);
+        rb.AddForce(direction.normalized * v * flechetteProgress, ForceMode.VelocityChange);
         myMarkable.RemoveAllFlechettes();
     }
 }

@@ -21,10 +21,23 @@ public class PlayerData : MonoBehaviour
         set => SetHealth(value);
     }
 
-    // Events
+    // Health Events
 
     public UnityEvent<int> OnHealthChanged;
     public UnityEvent OnPlayerDeath;
+    
+    // Energy
+    private int _currentEnergy;
+    public int CurrentEnergy
+    {
+        get => _currentEnergy;
+        set => SetEnergy(value);
+    }
+    public int maxEnergy = 8;
+
+    // Energy Events
+
+    public UnityEvent<int> OnEnergyChanged;
 
     // Start is called before the first frame update
     void Start()
@@ -95,6 +108,30 @@ public class PlayerData : MonoBehaviour
             }
         }
     }
+
+    // Modify the player's health
+    // No damage binning is applied
+    public void ModEnergy(int change)
+    {
+        SetEnergy(_currentEnergy + change);
+    }
+
+    private void SetEnergy(int newEnergy)
+    {
+        newEnergy = Mathf.Clamp(newEnergy, 0, maxEnergy);
+        if (newEnergy != _currentEnergy)
+        {
+            _currentEnergy = newEnergy;
+            OnEnergyChanged.Invoke(_currentEnergy);
+            Debug.Log("Player health now " + _currentEnergy);
+            if (_currentEnergy <= 0)
+            {
+                Debug.Log("Player is dead");
+                OnPlayerDeath.Invoke();
+            }
+        }
+    }
+
 
     public float GetDistanceToPlayer(Vector3 fromPosition)
     {
