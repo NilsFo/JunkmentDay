@@ -54,7 +54,7 @@ public class RobotSawAI : MonoBehaviour
         if (RobotAIStateCurrent == RobotBase.RobotAIState.MAGNETIZED
             && !attractableMagnetized)
         {
-            RobotAIStateCurrent = RobotBase.RobotAIState.IDLE;
+            RobotAIStateCurrent = RobotBase.RobotAIState.RAGDOLL;
         }
 
         if (RobotAIStateCurrent == RobotBase.RobotAIState.IDLE

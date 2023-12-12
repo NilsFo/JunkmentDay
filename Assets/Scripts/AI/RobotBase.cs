@@ -5,6 +5,7 @@ using System.Timers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 public class RobotBase : MonoBehaviour
 {
@@ -18,8 +19,10 @@ public class RobotBase : MonoBehaviour
 
     [Header("AI Config")] public Transform head;
     public float playerDetectionDistance = 50f;
-    public float ragDollTime = 1f;
-    private float _ragDollTime;
+    public float getUpTimer = 1.337f;
+    public float getUpDeathTimer = 8f;
+    private float _getUpTimer;
+    private float _getUpDeathTimer;
     private bool _pullNextFrame;
 
     [Header("The machine spirit")] public float health;
@@ -63,7 +66,8 @@ public class RobotBase : MonoBehaviour
         }
 
         _gameState.allRobots.Add(this);
-        _ragDollTime = 0;
+        _getUpTimer = 0;
+        _getUpDeathTimer = 0;
     }
 
     private void Update()
@@ -77,15 +81,30 @@ public class RobotBase : MonoBehaviour
 
         if (robotAIState == RobotAIState.RAGDOLL)
         {
-            _ragDollTime += Time.deltaTime;
-            if (_ragDollTime >= ragDollTime)
+            _getUpDeathTimer += Time.deltaTime;
+            if (RigidBodyChangeRate() <= 0.01f)
             {
-                robotAIState = RobotAIState.IDLE;
+                _getUpTimer += Time.deltaTime;
+                if (_getUpTimer >= getUpTimer)
+                {
+                    robotAIState = RobotAIState.IDLE;
+                    Debug.Log("Enough of this ragdoll.");
+                }
+            }
+            else
+            {
+                _getUpTimer = 0;
+            }
+
+            if (_getUpDeathTimer >= getUpDeathTimer)
+            {
+                DealDamage(1000f);
             }
         }
         else
         {
-            _ragDollTime = 0;
+            _getUpTimer = 0;
+            _getUpDeathTimer = 0;
         }
 
         if (robotAIState == RobotAIState.FLECHETTESTUNNED && !FlechetteProgressReached)
@@ -100,7 +119,7 @@ public class RobotBase : MonoBehaviour
                       "%";
         if (robotAIState == RobotAIState.RAGDOLL)
         {
-            text = text + "\nR: " + _ragDollTime + "/" + ragDollTime + "\n" +
+            text = text + "\nR: " + _getUpTimer + "/" + getUpTimer + "\n" +
                    "Pos: " + RigidBodyChangeRate();
         }
 
@@ -115,6 +134,12 @@ public class RobotBase : MonoBehaviour
         if (_healthCurrent <= 0f)
         {
             Kill();
+        }
+
+        // Kill Plane
+        if (transform.position.y <= -100)
+        {
+            DealDamage(100000f);
         }
     }
 
@@ -148,6 +173,8 @@ public class RobotBase : MonoBehaviour
 
     private void OnAIStateChanged(RobotAIState oldState, RobotAIState newState)
     {
+        Debug.Log(name + " - Robot state changed: " + oldState + " -> " + newState, gameObject);
+
         switch (oldState)
         {
             case RobotAIState.MAGNETIZED:
@@ -232,8 +259,9 @@ public class RobotBase : MonoBehaviour
 
     private float RigidBodyChangeRate()
     {
-        return (_positionCache.magnitude - transform.position.magnitude)
-               + (_rotationCache.magnitude - transform.rotation.eulerAngles.magnitude);
+        float m = Mathf.Abs(_positionCache.magnitude - transform.position.magnitude)
+                  + Mathf.Abs(_rotationCache.magnitude - transform.rotation.eulerAngles.magnitude);
+        return Mathf.Abs(m);
     }
 
     public void PullToPlayer()
@@ -247,13 +275,12 @@ public class RobotBase : MonoBehaviour
 
         _pullNextFrame = false;
         int flechetteCount = FlechetteCount;
-        myMarkable.RemoveAllFlechettes();
+        float flechetteProgress = FlechetteProgress;
 
-        
         var playerPos = _gameState.player.transform.position + Vector3.up;
         var myPos = transform.position;
 
-        var b = 30f * Mathf.Deg2Rad; // Angle of the shot
+        var b = 50f * Mathf.Deg2Rad; // Angle of the shot
         var toPlayerVec = Vector3.ProjectOnPlane(playerPos - myPos, Vector3.up);
         var d = toPlayerVec.magnitude; // Distance to the player on the y plane
         var y = (playerPos - myPos).y; // Height difference to the player
@@ -262,9 +289,11 @@ public class RobotBase : MonoBehaviour
         // Calculate necessary velocity
         float v = Mathf.Sqrt(-0.5f * g * d * d / (Mathf.Pow(Mathf.Cos(b), 2) * (y - d * Mathf.Tan(b))));
 
-        Vector3 direction = Quaternion.AngleAxis(b * Mathf.Rad2Deg, Vector3.Cross(toPlayerVec, Vector3.up)) * toPlayerVec;
+        Vector3 direction = Quaternion.AngleAxis(b * Mathf.Rad2Deg,
+            Vector3.Cross(toPlayerVec, Vector3.up)) * toPlayerVec;
         v = Mathf.Clamp(v, 5f, 30f);
-        
-        rb.AddForce(direction * v * FlechetteProgress, ForceMode.VelocityChange);
+
+        rb.AddForce(direction * v * flechetteProgress, ForceMode.VelocityChange);
+        myMarkable.RemoveAllFlechettes();
     }
 }

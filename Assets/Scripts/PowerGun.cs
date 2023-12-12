@@ -88,7 +88,6 @@ public class PowerGun : MonoBehaviour
 
             if (!stillMarked)
             {
-                Debug.Log("unmarking because no more flechettes: " + markable.gameObject.name);
                 deleteListMarkable.Add(markable);
             }
         }

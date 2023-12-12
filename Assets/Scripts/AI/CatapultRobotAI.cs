@@ -47,8 +47,8 @@ public class CatapultRobotAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        myNavMeshAgent.speed = _movementSpeed * (1-robotBase.FlechetteProgress);
-        
+        myNavMeshAgent.speed = _movementSpeed * (1 - robotBase.FlechetteProgress);
+
         if (_robotAIStateLastKnown != RobotAIStateCurrent)
         {
             var tmpState = _robotAIStateLastKnown;
@@ -92,7 +92,7 @@ public class CatapultRobotAI : MonoBehaviour
         {
             RobotAIStateCurrent = RobotBase.RobotAIState.RAGDOLL;
         }
-        
+
         if (RobotAIStateCurrent == RobotBase.RobotAIState.IDLE
             || RobotAIStateCurrent == RobotBase.RobotAIState.RAGDOLL
             || RobotAIStateCurrent == RobotBase.RobotAIState.FLECHETTESTUNNED
