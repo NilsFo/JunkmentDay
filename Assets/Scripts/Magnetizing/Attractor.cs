@@ -91,7 +91,12 @@ public class Attractor : MonoBehaviour
             // print("Enter: " + other.gameObject.name);
             _knownAttractables.Add(attractable);
             attractable.AddAttractor(this);
+        } else {
+            var blockade = other.attachedRigidbody.GetComponent<Blockade>();
+            if (blockade != null)
+                blockade.DestroyBlockade();
         }
+        
     }
 
     private void OnTriggerExit(Collider other)
