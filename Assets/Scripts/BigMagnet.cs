@@ -55,13 +55,19 @@ public class BigMagnet : MonoBehaviour {
     }
 
     public void MoveForward() {
-        currentStop++;
-        currentStop = Mathf.Clamp(currentStop, 0, _railStopPositions.Length);
+        var targetRailPos = _railStopPositions [currentStop];
+        if (Mathf.Approximately(railPos, targetRailPos)) {
+            currentStop++;
+            currentStop = Mathf.Clamp(currentStop, 0, _railStopPositions.Length);
+        }
     }
 
     public void MoveBackward() {
-        currentStop--;
-        currentStop = Mathf.Clamp(currentStop, 0, _railStopPositions.Length);
+        var targetRailPos = _railStopPositions [currentStop];
+        if (Mathf.Approximately(railPos, targetRailPos)) {
+            currentStop--;
+            currentStop = Mathf.Clamp(currentStop, 0, _railStopPositions.Length);
+        }
     }
 
     public void Stop() {

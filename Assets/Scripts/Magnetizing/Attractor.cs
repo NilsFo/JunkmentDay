@@ -92,9 +92,12 @@ public class Attractor : MonoBehaviour
             _knownAttractables.Add(attractable);
             attractable.AddAttractor(this);
         } else {
-            var blockade = other.attachedRigidbody.GetComponent<Blockade>();
-            if (blockade != null)
-                blockade.DestroyBlockade();
+            var otherAttachedRigidbody = other.attachedRigidbody;
+            if (otherAttachedRigidbody != null) {
+                var blockade = otherAttachedRigidbody.GetComponent<Blockade>();
+                if (blockade != null)
+                    blockade.DestroyBlockade();
+            }
         }
         
     }
