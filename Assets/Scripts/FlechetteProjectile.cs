@@ -46,7 +46,7 @@ public class FlechetteProjectile : MonoBehaviour
         if (stickToLayers == (stickToLayers | (1 << layer)))
         {
             Markable markable = other.GetComponent<Markable>();
-            
+
             if (markable == null)
             {
                 CreateClutterReplacement(impactPoint);
@@ -67,15 +67,17 @@ public class FlechetteProjectile : MonoBehaviour
 
                 Destroy(gameObject);
             }
-            
+
             var powerable = other.GetComponent<Powerable>();
-            if (powerable != null) {
+            if (powerable != null)
+            {
                 powerable.Power();
             }
         }
         else
         {
-            if (becomeClutterLayers == (becomeClutterLayers | (1 << layer))) {
+            if (becomeClutterLayers == (becomeClutterLayers | (1 << layer)))
+            {
                 CreateClutterReplacement(impactPoint);
                 Destroy(gameObject);
             }
@@ -94,6 +96,12 @@ public class FlechetteProjectile : MonoBehaviour
         Rigidbody rb = clutter.GetComponent<Rigidbody>();
         var direction = _originPoint - clutter.transform.position;
         direction = direction.normalized;
+        
+        rb.AddRelativeTorque(new Vector3(
+            Random.Range(-20f, 20f),
+            Random.Range(-20f, 20f),
+            Random.Range(-20f, 20f)
+        ));
 
         float force = Random.Range(3f, 5f);
         rb.AddForce(direction * force, ForceMode.Impulse);

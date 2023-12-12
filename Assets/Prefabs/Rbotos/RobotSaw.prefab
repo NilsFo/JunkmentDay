@@ -59,10 +59,13 @@ MonoBehaviour:
   myMarkable: {fileID: 4382379025895395621}
   robotAIState: 1
   debugTF: {fileID: 4769210972884522601}
+  rb: {fileID: 6600554069236638786}
   head: {fileID: 812427213114174878}
   playerDetectionDistance: 50
+  ragDollTime: 1
   health: 100
   healthRegen: 5
+  flechetteStunThreshold: 8
   onDeath:
     m_PersistentCalls:
       m_Calls: []
@@ -143,8 +146,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sawGameObject: {fileID: 6294574029357636979}
-  rotationSpeed: 600
-  rotationSpeedChangeRate: 250
+  rotationSpeed: 1100
+  rotationSpeedChangeRate: 450
+  robotSawAI: {fileID: 7185597027432528687}
 --- !u!114 &4382379025895395621
 MonoBehaviour:
   m_ObjectHideFlags: 0

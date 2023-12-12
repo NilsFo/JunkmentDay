@@ -51,7 +51,8 @@ public class Attractable : MonoBehaviour
             return true;
         }
 
-        return myMarkable.myFlechettes.Count > 0;
+        return true;
+        //return myMarkable.myFlechettes.Count > 0;
     }
 
     public void AddAttractor(Attractor attractor)
@@ -78,7 +79,8 @@ public class Attractable : MonoBehaviour
                     return true;
                 }
 
-                return myMarkable.marked;
+                //return myMarkable.marked;
+                return true;
             }
         }
 

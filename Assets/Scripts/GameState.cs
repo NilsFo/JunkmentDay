@@ -13,6 +13,8 @@ public class GameState : MonoBehaviour
 
     [Header("Gameplay constants")] public float magnetDPS = 35f;
 
+    [Header("Hookups")] public List<RobotBase> allRobots;
+
     public PlayerData player => _player;
     public PowerGun PowerGun => _powerGun;
 

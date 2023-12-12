@@ -44,7 +44,7 @@ public class PowerGun : MonoBehaviour
 
         if (mouse.rightButton.wasPressedThisFrame)
         {
-            ShootPowerGun();
+            ActivateAllFlechettes();
         }
 
         if (keyboard.rKey.wasPressedThisFrame)
@@ -64,7 +64,6 @@ public class PowerGun : MonoBehaviour
 
         foreach (StickyFlechette flechette in deleteListFlechette)
         {
-            print("removing a flechette that was deleted");
             _flechettes.Remove(flechette);
         }
 
@@ -101,6 +100,15 @@ public class PowerGun : MonoBehaviour
         }
     }
 
+    private void ActivateAllFlechettes()
+    {
+        foreach (RobotBase robot in _gameState.allRobots)
+        {
+            robot.RequestPullToPlayer();
+        }
+    }
+
+    [Obsolete]
     void ShootPowerGun()
     {
         var camTransform = transform;
