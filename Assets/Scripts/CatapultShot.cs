@@ -15,7 +15,7 @@ public class CatapultShot : MonoBehaviour {
             if (playerData == null)
                 return;
             Debug.Log("Catapult Shot is hurting the Player for " + damage + " damage", this);
-            playerData.Damage(damage);
+            playerData.Damage(damage,shooter.transform);
         }
 
         Destroy(gameObject);

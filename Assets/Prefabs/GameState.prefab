@@ -178,6 +178,9 @@ MonoBehaviour:
   magnetDPS: 35
   allRobots: []
   musicManager: {fileID: 4478731648881398114}
+  ui: {fileID: 0}
+  uiHurtIndicatorPrefab: {fileID: 3278398178656922662, guid: 376ad4876dfa24d4581f0d699c2fab9a,
+    type: 3}
 --- !u!1 &6434332805771652172
 GameObject:
   m_ObjectHideFlags: 0

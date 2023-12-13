@@ -65,7 +65,7 @@ public class MusicManager : MonoBehaviour
             _playList[index].Play();
         }
 
-        print("Playing: " + _playList[index].gameObject.name);
+        // print("Playing: " + _playList[index].gameObject.name);
     }
 
     public void SkipFade()
