@@ -16,9 +16,14 @@ public class BigMagnet : MonoBehaviour {
     public List<Transform> railStops = new();
     private float[] _railStopPositions;
     public int currentStop = 0;
+
+    private GameState _gameState;
+
+    public int moveEnergy = 6;
     
     // Start is called before the first frame update
     void Start() {
+        _gameState = FindObjectOfType<GameState>();
         _railLength = rail.CalculateLength();
         _railStopPositions = new float[railStops.Count];
         for (var index = 0; index < railStops.Count; index++) {
@@ -55,19 +60,25 @@ public class BigMagnet : MonoBehaviour {
     }
 
     public void MoveForward() {
-        var targetRailPos = _railStopPositions [currentStop];
-        if (Mathf.Approximately(railPos, targetRailPos)) {
-            currentStop++;
-            currentStop = Mathf.Clamp(currentStop, 0, _railStopPositions.Length);
+        if (IsStopped()) {
+            if (_gameState.player.CurrentEnergy >= moveEnergy) {
+                _gameState.player.ModEnergy(-moveEnergy);
+                currentStop++;
+                currentStop = Mathf.Clamp(currentStop, 0, _railStopPositions.Length);
+            }
         }
     }
 
     public void MoveBackward() {
-        var targetRailPos = _railStopPositions [currentStop];
-        if (Mathf.Approximately(railPos, targetRailPos)) {
+        if (IsStopped()) {
             currentStop--;
             currentStop = Mathf.Clamp(currentStop, 0, _railStopPositions.Length);
         }
+    }
+
+    public bool IsStopped() {
+        var targetRailPos = _railStopPositions [currentStop];
+        return Mathf.Approximately(railPos, targetRailPos);
     }
 
     public void Stop() {
