@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Splines;
 
 public class BigMagnet : MonoBehaviour {
@@ -20,6 +21,10 @@ public class BigMagnet : MonoBehaviour {
     private GameState _gameState;
 
     public int moveEnergy = 6;
+    public UnityEvent startMoving;
+    public UnityEvent stopMoving;
+    public UnityEvent noEnergy;
+
     
     // Start is called before the first frame update
     void Start() {
@@ -31,12 +36,17 @@ public class BigMagnet : MonoBehaviour {
             SplineUtility.GetNearestPoint(rail.Spline, railStop.localPosition, out var nearest, out float f);
             _railStopPositions[index] = f * _railLength;
         }
+        railPos = _railStopPositions [currentStop];
+
     }
 
     // Update is called once per frame
     void Update() {
         var targetRailPos = _railStopPositions [currentStop];
         if (Mathf.Approximately(railPos, targetRailPos)) {
+            if (railMove != 0) {
+                stopMoving.Invoke();
+            }
             // We are at the current stop
             railMove = 0;
         } else if (railPos < targetRailPos) {
@@ -63,8 +73,11 @@ public class BigMagnet : MonoBehaviour {
         if (IsStopped()) {
             if (_gameState.player.CurrentEnergy >= moveEnergy) {
                 _gameState.player.ModEnergy(-moveEnergy);
+                startMoving.Invoke();
                 currentStop++;
                 currentStop = Mathf.Clamp(currentStop, 0, _railStopPositions.Length);
+            } else {
+                noEnergy.Invoke();
             }
         }
     }

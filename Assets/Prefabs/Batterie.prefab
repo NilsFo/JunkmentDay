@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7314462058753248950}
   - component: {fileID: 6664478867944601667}
   - component: {fileID: 295742221893057328}
-  m_Layer: 6
+  m_Layer: 12
   m_Name: Batterie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,7 +179,7 @@ PrefabInstance:
     - target: {fileID: -3477864577585124648, guid: ba3eb4b83000e9544aa6c11b0a385e98,
         type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: -2671162359992826708, guid: ba3eb4b83000e9544aa6c11b0a385e98,
         type: 3}
@@ -194,7 +194,7 @@ PrefabInstance:
     - target: {fileID: -885264430177597064, guid: ba3eb4b83000e9544aa6c11b0a385e98,
         type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ba3eb4b83000e9544aa6c11b0a385e98,
         type: 3}
@@ -204,12 +204,12 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: ba3eb4b83000e9544aa6c11b0a385e98,
         type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 1396792749669637682, guid: ba3eb4b83000e9544aa6c11b0a385e98,
         type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

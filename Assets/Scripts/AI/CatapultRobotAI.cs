@@ -211,7 +211,7 @@ public class CatapultRobotAI : MonoBehaviour
         var playerPos = _gameState.player.transform.position + Vector3.up;
         var myPos = shootOrigin.position;
 
-        var b = 30f * Mathf.Deg2Rad; // Angle of the shot
+        var b = 20f * Mathf.Deg2Rad; // Angle of the shot
         var d = Vector3.ProjectOnPlane(playerPos - myPos, Vector3.up)
             .magnitude; // Distance to the player on the y plane
         var y = (playerPos - myPos).y; // Height difference to the player
@@ -247,7 +247,7 @@ public class CatapultRobotAI : MonoBehaviour
         Quaternion rot;
         if (Mathf.Abs(lookDelta) <= Mathf.Abs(alpha))
         {
-            rot = Quaternion.Euler(0, Mathf.Asin(lookDelta), 0);
+            rot = Quaternion.Euler(0, Mathf.Asin(lookDelta) * Mathf.Rad2Deg, 0);
         }
         else
         {
