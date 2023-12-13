@@ -42,7 +42,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: df704807ca7b6c04baf15edb3786d47e, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 0b824b6065e8c494a998814c4d6f052d, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -178,6 +178,7 @@ MonoBehaviour:
   magnetDPS: 35
   allRobots: []
   musicManager: {fileID: 4478731648881398114}
+  uiCanvas: {fileID: 0}
   ui: {fileID: 0}
   uiHurtIndicatorPrefab: {fileID: 3278398178656922662, guid: 376ad4876dfa24d4581f0d699c2fab9a,
     type: 3}
@@ -276,7 +277,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 19d04202336c85645befc04c526a561c, type: 3}
+  m_audioClip: {fileID: 8300000, guid: fba865bda2b3bf744a84081f7ebea810, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
