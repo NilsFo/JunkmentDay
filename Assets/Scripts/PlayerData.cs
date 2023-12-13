@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,7 @@ using UnityEngine.Events;
 public class PlayerData : MonoBehaviour
 {
     public GameObject head;
+    private GameState _gameState;
 
     public int maxHealth = 100;
     private int _currentHealth;
@@ -14,6 +16,11 @@ public class PlayerData : MonoBehaviour
     public float damageBinningTime = 0.5f;
     private int _damageBin;
     private float _damageBinTimer;
+
+    private void Awake()
+    {
+        _gameState = FindObjectOfType<GameState>();
+    }
 
     public int CurrentHealth
     {
@@ -25,14 +32,16 @@ public class PlayerData : MonoBehaviour
 
     public UnityEvent<int> OnHealthChanged;
     public UnityEvent OnPlayerDeath;
-    
+
     // Energy
     private int _currentEnergy;
+
     public int CurrentEnergy
     {
         get => _currentEnergy;
         set => SetEnergy(value);
     }
+
     public int maxEnergy = 8;
 
     // Energy Events
@@ -61,8 +70,10 @@ public class PlayerData : MonoBehaviour
 
     // Hurt the player while respecting damage binning
     // Only the maximum Damage value over the last half second is applied if damageBinning = true
-    public void Damage(int damage, bool damageBinning = true)
+    public void Damage(int damage, Transform damageSourcePosition, bool damageBinning = true)
     {
+        _gameState.DisplayDamageIndicator(damageSourcePosition);
+
         if (damageBinning)
         {
             if (_damageBinTimer > 0)

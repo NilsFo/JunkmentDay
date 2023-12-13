@@ -152,7 +152,7 @@ public class PowerGun : MonoBehaviour
         projectile.transform.rotation = flechetteProjectileOrigin.transform.rotation;
         projectile.transform.RotateAround(projectile.transform.position, projectile.transform.up, 180f);
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
-        rb.AddForce(direction * flechetteProjectileSpeed, ForceMode.Impulse);
+        rb.AddForce(direction * flechetteProjectileSpeed, ForceMode.VelocityChange);
     }
 
     [Obsolete]

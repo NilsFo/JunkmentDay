@@ -18,17 +18,19 @@ public class StickyFlechette : MonoBehaviour
 
     public void DestroyFlechette()
     {
-        _markedForDeath = true;
+        myMark.myFlechettes.Remove(this);
+        CreateClutterReplacement();
+        Destroy(gameObject);
     }
 
     private void LateUpdate()
     {
-        if (_markedForDeath)
+        /*if (_markedForDeath)
         {
             myMark.myFlechettes.Remove(this);
             CreateClutterReplacement();
             Destroy(gameObject);
-        }
+        }*/
     }
 
     private void CreateClutterReplacement()

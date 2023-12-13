@@ -331,7 +331,7 @@ MonoBehaviour:
   flechetteProjectileOrigin: {fileID: 4177431804129768534}
   flechetteProjectilePrefab: {fileID: 5728496482213902233, guid: 1909cafd639494e4e9ccb05963bcc7f2,
     type: 3}
-  flechetteProjectileSpeed: 20
+  flechetteProjectileSpeed: 40
 --- !u!54 &6588024583854662388
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -538,6 +538,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   OnPlayerDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  maxEnergy: 8
+  OnEnergyChanged:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &9095946871819127337

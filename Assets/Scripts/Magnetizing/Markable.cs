@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -20,10 +21,9 @@ public class Markable : MonoBehaviour
         _gameState = FindObjectOfType<GameState>();
     }
 
-    public void RemoveAllFlechettes()
-    {
-        foreach (StickyFlechette flechette in myFlechettes)
-        {
+    public void RemoveAllFlechettes() {
+        for (var index = myFlechettes.Count - 1; index >= 0; index--) {
+            var flechette = myFlechettes [index];
             flechette.DestroyFlechette();
         }
     }
@@ -69,6 +69,8 @@ public class Markable : MonoBehaviour
             else
                 Unmark();
         }
+
+        myFlechettes.RemoveAll(flechette => flechette.IsDestroyed());
     }
 
     public void Mark()

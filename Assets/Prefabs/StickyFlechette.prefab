@@ -56,13 +56,28 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 116351555861443376}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e85ea51f8dd105d43ab57e0061c3a761, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aliveTime: 4
+  aliveTime: 10
   timerActive: 1
+  OnEndOfLife:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3578913876437338307}
+        m_TargetAssemblyTypeName: StickyFlechette, Assembly-CSharp
+        m_MethodName: DestroyFlechette
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &1206946093621578859
 PrefabInstance:
   m_ObjectHideFlags: 0

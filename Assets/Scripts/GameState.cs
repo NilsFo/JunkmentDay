@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class GameState : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class GameState : MonoBehaviour
 
     [Header("Hookups")] public List<RobotBase> allRobots;
     public MusicManager musicManager;
+    public Canvas uiCanvas;
+    public UI ui;
+    public GameObject uiHurtIndicatorPrefab;
 
     public PlayerData player => _player;
     public PowerGun PowerGun => _powerGun;
@@ -63,5 +67,16 @@ public class GameState : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void DisplayDamageIndicator(Transform damageSource)
+    {
+        RectTransform rectTransform = uiCanvas.GetComponent<RectTransform>();
+        GameObject indicatorGameObject = Instantiate(uiHurtIndicatorPrefab, rectTransform);
+
+        UIDamageIndicator indicator = indicatorGameObject.GetComponent<UIDamageIndicator>();
+        indicator.damageSourcePos = damageSource;
+        
+        ui.StartDamageOverlay();
     }
 }

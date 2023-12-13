@@ -6,8 +6,8 @@ using UnityEngine;
 public class HurtBox : MonoBehaviour
 {
     public int damage = 10;
-
     public bool once = false;
+    public GameObject damageSource;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +27,7 @@ public class HurtBox : MonoBehaviour
             if (playerData == null)
                 return;
             Debug.Log("Hurting the Player for " + damage + " damage", this);
-            playerData.Damage(damage);
+            playerData.Damage(damage, damageSource.transform);
             if (once)
             {
                 Destroy(gameObject);
