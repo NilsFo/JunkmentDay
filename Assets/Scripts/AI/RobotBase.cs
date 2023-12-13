@@ -31,6 +31,7 @@ public class RobotBase : MonoBehaviour
     private float _damageBuffer = 0f;
     private Vector3 _positionCache = Vector3.zero;
     private Vector3 _rotationCache = Vector3.zero;
+    private float _originalDampening;
 
     public int flechetteStunThreshold = 5;
     public int FlechetteCount => myMarkable.myFlechettes.Count;
@@ -68,6 +69,7 @@ public class RobotBase : MonoBehaviour
         _gameState.allRobots.Add(this);
         _getUpTimer = 0;
         _getUpDeathTimer = 0;
+        _originalDampening = rb.drag;
     }
 
     private void Update()
@@ -179,6 +181,7 @@ public class RobotBase : MonoBehaviour
         {
             case RobotAIState.MAGNETIZED:
                 myMarkable.RemoveAllFlechettes();
+                rb.drag = _originalDampening;
                 break;
             case RobotAIState.RAGDOLL:
                 myMarkable.RemoveAllFlechettes();
@@ -191,6 +194,9 @@ public class RobotBase : MonoBehaviour
 
         switch (newState)
         {
+            case RobotAIState.MAGNETIZED:
+                rb.drag = 2f;
+                break;
             default:
                 break;
         }
@@ -293,7 +299,7 @@ public class RobotBase : MonoBehaviour
             Vector3.Cross(toPlayerVec, Vector3.up)) * toPlayerVec;
         v = Mathf.Clamp(v, 5f, 30f);
 
-        rb.AddForce(direction.normalized * v * flechetteProgress, ForceMode.VelocityChange);
+        rb.AddForce(direction.normalized * v * flechetteProgress * 0.9f, ForceMode.VelocityChange);
         myMarkable.RemoveAllFlechettes();
     }
 }

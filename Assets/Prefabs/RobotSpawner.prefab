@@ -527,9 +527,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83fec31b4681d5b48a01512a3149da26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  robotPrefab: {fileID: 919132149155446097, guid: 351fd14fbba3f2a4c8ec51f711276aa0,
+  robotPrefab: {fileID: 6207079495784422046, guid: bafe28bc722503546b2cdf9e7e881709,
     type: 3}
   closeDistance: 5
+  spawnInRagDollMode: 0
+  maxSpawnCount: 1
+  autoSpawn: 0
   myDoor: {fileID: 3951614077375443881}
   robotSpawnLocation: {fileID: 8741099645008077784}
 --- !u!1 &3081904673586338074
