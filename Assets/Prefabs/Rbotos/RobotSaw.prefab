@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6699157956084649710}
   - component: {fileID: 4382379025895395621}
   - component: {fileID: 9210029708931218696}
-  m_Layer: 6
+  m_Layer: 13
   m_Name: RobotSaw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67,7 +67,7 @@ MonoBehaviour:
   getUpDeathTimer: 8
   health: 100
   healthRegen: 5
-  flechetteStunThreshold: 8
+  flechetteStunThreshold: 6
   onDeath:
     m_PersistentCalls:
       m_Calls: []
@@ -181,10 +181,10 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 7
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 220
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -202,7 +202,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6310651910502341018}
-  m_Layer: 6
+  m_Layer: 13
   m_Name: saw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -236,7 +236,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3657240177372218783}
   - component: {fileID: 4676949270836593651}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: RobotClutterSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -281,7 +281,7 @@ GameObject:
   - component: {fileID: 5126558549352112987}
   - component: {fileID: 5661546487779744898}
   - component: {fileID: 4448972292747265389}
-  m_Layer: 6
+  m_Layer: 13
   m_Name: HurtBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -348,7 +348,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 812427213114174878}
-  m_Layer: 6
+  m_Layer: 13
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -428,10 +428,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8553417584757162366, guid: 3fbe34b760634ad49bd353d97e336319,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: -3477864577585124648, guid: 3fbe34b760634ad49bd353d97e336319,
         type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3fbe34b760634ad49bd353d97e336319,
         type: 3}
@@ -441,7 +446,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 3fbe34b760634ad49bd353d97e336319,
         type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1396792749669637682, guid: 3fbe34b760634ad49bd353d97e336319,
         type: 3}
@@ -540,7 +545,7 @@ PrefabInstance:
     - target: {fileID: 9071005299456845316, guid: ca7cb7fc32a4c0d4a8dfef84d3360f76,
         type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -641,12 +646,12 @@ PrefabInstance:
     - target: {fileID: -6198068988319008574, guid: 351fd14fbba3f2a4c8ec51f711276aa0,
         type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: -5976071629391176779, guid: 351fd14fbba3f2a4c8ec51f711276aa0,
         type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: -5647438765818059359, guid: 351fd14fbba3f2a4c8ec51f711276aa0,
         type: 3}
@@ -656,7 +661,7 @@ PrefabInstance:
     - target: {fileID: -3477864577585124648, guid: 351fd14fbba3f2a4c8ec51f711276aa0,
         type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: -2942907718953753970, guid: 351fd14fbba3f2a4c8ec51f711276aa0,
         type: 3}
@@ -666,7 +671,7 @@ PrefabInstance:
     - target: {fileID: -885264430177597064, guid: 351fd14fbba3f2a4c8ec51f711276aa0,
         type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 351fd14fbba3f2a4c8ec51f711276aa0,
         type: 3}
@@ -676,22 +681,22 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 351fd14fbba3f2a4c8ec51f711276aa0,
         type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1396792749669637682, guid: 351fd14fbba3f2a4c8ec51f711276aa0,
         type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 6574091114309173524, guid: 351fd14fbba3f2a4c8ec51f711276aa0,
         type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 6773935864695782916, guid: 351fd14fbba3f2a4c8ec51f711276aa0,
         type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8280704227580990285, guid: 351fd14fbba3f2a4c8ec51f711276aa0,
         type: 3}
@@ -722,10 +727,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7039115972650536572}
     m_Modifications:
+    - target: {fileID: 1372261139345059613, guid: 8dff2b55de3bbcd489036e0564b518fc,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 4847789340921281930, guid: 8dff2b55de3bbcd489036e0564b518fc,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 6234798226447498897, guid: 8dff2b55de3bbcd489036e0564b518fc,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 6755051929913032985, guid: 8dff2b55de3bbcd489036e0564b518fc,
         type: 3}
       propertyPath: m_Name
       value: RobotDebugUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 6755051929913032985, guid: 8dff2b55de3bbcd489036e0564b518fc,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8614471405780521371, guid: 8dff2b55de3bbcd489036e0564b518fc,
         type: 3}

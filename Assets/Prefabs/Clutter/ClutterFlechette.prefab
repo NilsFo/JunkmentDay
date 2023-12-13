@@ -99,6 +99,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aliveTime: 15
   timerActive: 1
+  OnEndOfLife:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &3671240977188319891
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -157,10 +160,45 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5976071629391176779, guid: 80f76adc80ff326429690882d0be4454,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -3477864577585124648, guid: 80f76adc80ff326429690882d0be4454,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -885264430177597064, guid: 80f76adc80ff326429690882d0be4454,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 80f76adc80ff326429690882d0be4454,
         type: 3}
       propertyPath: m_Name
       value: Pfeil
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 80f76adc80ff326429690882d0be4454,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1396792749669637682, guid: 80f76adc80ff326429690882d0be4454,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6574091114309173524, guid: 80f76adc80ff326429690882d0be4454,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6773935864695782916, guid: 80f76adc80ff326429690882d0be4454,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

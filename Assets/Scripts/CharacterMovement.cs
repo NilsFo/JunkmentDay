@@ -16,6 +16,8 @@ public class CharacterMovement : MonoBehaviour
     public float gravity = 20f;
     public float jumpSpeed = 10f;
 
+    public bool sprintEnabled;
+
     public Vector3 velocity;
     private Vector3 acc;
 
@@ -92,7 +94,8 @@ public class CharacterMovement : MonoBehaviour
         bool sprint = false;
         if (!inputDisabled && keyboard != null)
         {
-            sprint = keyboard.shiftKey.isPressed;
+            if(sprintEnabled)
+                sprint = keyboard.shiftKey.isPressed;
             if (_controller.isGrounded)
             {
                 velocity.y = -gravity * 0.5f;

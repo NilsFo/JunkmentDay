@@ -100,7 +100,7 @@ public class FlechetteProjectile : MonoBehaviour
         rb.AddRelativeTorque(new Vector3(
             Random.Range(-20f, 20f),
             Random.Range(-20f, 20f),
-            Random.Range(-20f, 20f)
+            0
         ));
 
         float force = Random.Range(3f, 5f);

@@ -182,9 +182,11 @@ public class RobotBase : MonoBehaviour
             case RobotAIState.MAGNETIZED:
                 myMarkable.RemoveAllFlechettes();
                 rb.drag = _originalDampening;
+                rb.excludeLayers = 0;
                 break;
             case RobotAIState.RAGDOLL:
                 myMarkable.RemoveAllFlechettes();
+                rb.excludeLayers = 0;
                 break;
             case RobotAIState.FLECHETTESTUNNED:
                 break;
@@ -196,6 +198,10 @@ public class RobotBase : MonoBehaviour
         {
             case RobotAIState.MAGNETIZED:
                 rb.drag = 2f;
+                rb.excludeLayers = 1 << LayerMask.NameToLayer("Enemies");
+                break;
+            case RobotAIState.RAGDOLL:
+                rb.excludeLayers = 1 << LayerMask.NameToLayer("Enemies");
                 break;
             default:
                 break;

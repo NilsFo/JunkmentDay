@@ -52,7 +52,7 @@ MonoBehaviour:
     type: 3}
   stickToLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 8256
   becomeClutterLayers:
     serializedVersion: 2
     m_Bits: 1152
@@ -120,6 +120,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aliveTime: 10
   timerActive: 1
+  OnEndOfLife:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &5871592017544946589
 PrefabInstance:
   m_ObjectHideFlags: 0
