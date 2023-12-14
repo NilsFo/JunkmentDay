@@ -175,7 +175,7 @@ public class RobotBase : MonoBehaviour
 
     private void OnAIStateChanged(RobotAIState oldState, RobotAIState newState)
     {
-        Debug.Log(name + " - Robot state changed: " + oldState + " -> " + newState, gameObject);
+        // Debug.Log(name + " - Robot state changed: " + oldState + " -> " + newState, gameObject);
 
         switch (oldState)
         {

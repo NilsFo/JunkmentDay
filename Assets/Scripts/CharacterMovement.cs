@@ -7,7 +7,7 @@ using UnityEngine.Rendering.PostProcessing;
 
 public class CharacterMovement : MonoBehaviour
 {
-    public float maximumSpeed = 6f;
+    [Header("Movement Parameters")] public float maximumSpeed = 6f;
     public float sprintSpeedModifier = 1.5f;
     public float crouchSpeedModifier = 0.5f;
     public float acceleration = 50f;
@@ -15,25 +15,23 @@ public class CharacterMovement : MonoBehaviour
     public float terminalYVelocity = 55f;
     public float gravity = 20f;
     public float jumpSpeed = 10f;
+    public float coyoteTime = 0.1f;
+    private float _jumpCoyoteTimer;
 
-    public bool sprintEnabled;
-
-    public Vector3 velocity;
-    private Vector3 acc;
-
+    [Header("Movement Config")] public bool sprintEnabled;
     public bool inputDisabled = false;
 
-    public float playerHeightStanding = 1.8f;
+    public Vector3 velocity;
+    private Vector3 _acc;
+    private Vector3 _startingPos;
+
+    [Header("Player Collision")] public float playerHeightStanding = 1.8f;
     public float playerHeightCrouching = 1.1f;
     public bool crouching;
     public bool sprinting;
 
-
-    private CharacterController _controller;
+    [Header("Game Hookup")] private CharacterController _controller;
     private Camera _camera;
-
-    public float coyoteTime = 0.1f;
-    private float _jumpCoyoteTimer;
 
 
     // Start is called before the first frame update
@@ -42,6 +40,7 @@ public class CharacterMovement : MonoBehaviour
         velocity = new Vector3();
         _controller = GetComponent<CharacterController>();
         _camera = GetComponentInChildren<Camera>();
+        _startingPos = transform.position;
     }
 
     private void Update()
@@ -86,26 +85,26 @@ public class CharacterMovement : MonoBehaviour
         }
 
         // Movement
-        acc.x = 0;
-        acc.y = 0;
-        acc.z = 0;
+        _acc.x = 0;
+        _acc.y = 0;
+        _acc.z = 0;
         bool hasJumped = false;
         sprinting = false;
         bool sprint = false;
         if (!inputDisabled && keyboard != null)
         {
-            if(sprintEnabled)
+            if (sprintEnabled)
                 sprint = keyboard.shiftKey.isPressed;
             if (_controller.isGrounded)
             {
                 velocity.y = -gravity * 0.5f;
                 DampenXZ();
 
-                acc.x = x;
-                acc.z = z;
+                _acc.x = x;
+                _acc.z = z;
 
-                acc.Normalize();
-                acc *= acceleration;
+                _acc.Normalize();
+                _acc *= acceleration;
             }
             else
             {
@@ -120,11 +119,11 @@ public class CharacterMovement : MonoBehaviour
                     DampenXZ();
                 }
 
-                acc.x = x;
-                acc.z = z;
+                _acc.x = x;
+                _acc.z = z;
 
-                acc.Normalize();
-                acc *= acceleration * 0.05f;
+                _acc.Normalize();
+                _acc *= acceleration * 0.05f;
             }
 
             if (keyboard.spaceKey.wasPressedThisFrame && !crouching)
@@ -174,8 +173,8 @@ public class CharacterMovement : MonoBehaviour
         }
 
         // local acceleration to world velocity
-        acc = transform.rotation * acc;
-        velocity += acc * Time.deltaTime;
+        _acc = transform.rotation * _acc;
+        velocity += _acc * Time.deltaTime;
 
         // Handle max speed
         float speedSqrd = velocity.x * velocity.x + velocity.z * velocity.z;
@@ -206,6 +205,14 @@ public class CharacterMovement : MonoBehaviour
         {
             // head bump :(
             velocity.y = Mathf.Min(0, velocity.y);
+        }
+    }
+
+    private void LateUpdate()
+    {
+        if (transform.position.y <= -100)
+        {
+            transform.position = _startingPos;
         }
     }
 
