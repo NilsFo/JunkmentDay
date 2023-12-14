@@ -257,6 +257,11 @@ public class RobotBase : MonoBehaviour
         return _gameState.player.PlayerInView(head.position);
     }
 
+    public void ResetVisionRange()
+    {
+        playerDetectionDistance = 50f;
+    }
+
     public void RequestPullToPlayer()
     {
         if (FlechetteCount > 0
