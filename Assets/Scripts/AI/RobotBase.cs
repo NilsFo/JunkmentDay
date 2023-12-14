@@ -289,14 +289,14 @@ public class RobotBase : MonoBehaviour
         int flechetteCount = FlechetteCount;
         float flechetteProgress = FlechetteProgress;
 
-        var playerPos = _gameState.player.transform.position;
-        var myPos = transform.position;
+        Vector3 playerPos = _gameState.player.transform.position;
+        Vector3 myPos = transform.position;
 
-        var b = 30f * Mathf.Deg2Rad; // Angle of the shot
-        var toPlayerVec = Vector3.ProjectOnPlane(playerPos - myPos, Vector3.up);
-        var d = toPlayerVec.magnitude; // Distance to the player on the y plane
-        var y = (playerPos - myPos).y; // Height difference to the player
-        var g = 9.8f; // Gravity
+        float b = 30f * Mathf.Deg2Rad; // Angle of the shot
+        Vector3 toPlayerVec = Vector3.ProjectOnPlane(playerPos - myPos, Vector3.up);
+        float d = toPlayerVec.magnitude; // Distance to the player on the y plane
+        float y = (playerPos - myPos).y; // Height difference to the player
+        float g = 9.8f; // Gravity
 
         // Calculate necessary velocity
         float v = Mathf.Sqrt(-0.5f * g * d * d / (Mathf.Pow(Mathf.Cos(b), 2) * (y - d * Mathf.Tan(b))));
@@ -304,8 +304,16 @@ public class RobotBase : MonoBehaviour
         Vector3 direction = Quaternion.AngleAxis(b * Mathf.Rad2Deg,
             Vector3.Cross(toPlayerVec, Vector3.up)) * toPlayerVec;
         v = Mathf.Clamp(v, 5f, 30f);
+        Vector3 force = direction.normalized * v * flechetteProgress * 0.9f;
 
-        rb.AddForce(direction.normalized * v * flechetteProgress * 0.9f, ForceMode.VelocityChange);
+        if (float.IsNaN(direction.x) || float.IsNaN(direction.y) || float.IsNaN(direction.z) ||
+            float.IsNaN(force.x) || float.IsNaN(force.y) || float.IsNaN(force.z))
+        {
+            Debug.LogError("Failed to calculate path for pulling robot!", gameObject);
+            return;
+        }
+
+        rb.AddForce(force, ForceMode.VelocityChange);
         myMarkable.RemoveAllFlechettes();
     }
 }

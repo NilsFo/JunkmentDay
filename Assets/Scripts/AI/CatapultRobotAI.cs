@@ -208,22 +208,30 @@ public class CatapultRobotAI : MonoBehaviour
 
     public void ShootCatapult()
     {
-        var playerPos = _gameState.player.transform.position + Vector3.up;
-        var myPos = shootOrigin.position;
+        Vector3 playerPos = _gameState.player.transform.position + Vector3.up;
+        Vector3 myPos = shootOrigin.position;
 
-        var b = 20f * Mathf.Deg2Rad; // Angle of the shot
-        var d = Vector3.ProjectOnPlane(playerPos - myPos, Vector3.up)
+        float b = 20f * Mathf.Deg2Rad; // Angle of the shot
+        float d = Vector3.ProjectOnPlane(playerPos - myPos, Vector3.up)
             .magnitude; // Distance to the player on the y plane
-        var y = (playerPos - myPos).y; // Height difference to the player
-        var g = 9.8f; // Gravity
+        float y = (playerPos - myPos).y; // Height difference to the player
+        float g = 9.8f; // Gravity
 
         // Calculate necessary force
         float v = Mathf.Sqrt(-0.5f * g * d * d / (Mathf.Pow(Mathf.Cos(b), 2) * (y - d * Mathf.Tan(b))));
-
-        var projectile = Instantiate(projectilePrefab, shootOrigin.position, shootOrigin.rotation);
         Vector3 direction = Quaternion.AngleAxis(b * Mathf.Rad2Deg, -shootOrigin.right) * shootOrigin.forward;
         v = Mathf.Clamp(v, 5f, 30f);
-        projectile.velocity = direction.normalized * v;
+        Vector3 velocity = direction.normalized * v;
+
+        if (float.IsNaN(direction.x) || float.IsNaN(direction.y) || float.IsNaN(direction.z) || 
+            float.IsNaN(velocity.x) || float.IsNaN(velocity.y) || float.IsNaN(velocity.z))
+        {
+            Debug.LogWarning("Failed to calculate path for projectile!", gameObject);
+            return;
+        }
+
+        Rigidbody projectile = Instantiate(projectilePrefab, shootOrigin.position, shootOrigin.rotation);
+        projectile.velocity = velocity;
         projectile.GetComponent<CatapultShot>().shooter = this;
     }
 
