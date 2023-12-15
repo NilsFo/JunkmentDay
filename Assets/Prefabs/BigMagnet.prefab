@@ -484,7 +484,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rail: {fileID: 0}
   railMove: 0
-  railMoveSpeed: 1
+  railMoveSpeed: 1.5
   railPos: 0
   railStops:
   - {fileID: 0}
@@ -581,7 +581,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 8af9f51b7dd5e70468e99c00808adaf5,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 8af9f51b7dd5e70468e99c00808adaf5,
         type: 3}
