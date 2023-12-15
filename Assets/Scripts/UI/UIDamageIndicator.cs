@@ -24,6 +24,11 @@ public class UIDamageIndicator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (_gameState.playerState != GameState.PlayerState.PLAYING)
+        {
+            Destroy(gameObject);
+        }
+
         Vector3 playerPos = _gameState.player.transform.position;
         Vector3 otherPos = damageSourcePos.position;
 

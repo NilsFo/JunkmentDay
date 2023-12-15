@@ -203,6 +203,11 @@ public class CatapultRobotAI : MonoBehaviour
                 RobotAIStateCurrent = RobotBase.RobotAIState.POSITIONING;
             }
         }
+
+        if (_gameState.playerState != GameState.PlayerState.PLAYING)
+        {
+            myNavMeshAgent.SetDestination(transform.position);
+        }
     }
 
 
@@ -223,7 +228,7 @@ public class CatapultRobotAI : MonoBehaviour
         v = Mathf.Clamp(v, 5f, 30f);
         Vector3 velocity = direction.normalized * v;
 
-        if (float.IsNaN(direction.x) || float.IsNaN(direction.y) || float.IsNaN(direction.z) || 
+        if (float.IsNaN(direction.x) || float.IsNaN(direction.y) || float.IsNaN(direction.z) ||
             float.IsNaN(velocity.x) || float.IsNaN(velocity.y) || float.IsNaN(velocity.z))
         {
             Debug.LogWarning("Failed to calculate path for projectile!", gameObject);

@@ -2,12 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 public class GameState : MonoBehaviour
 {
     private PlayerData _player;
     private PowerGun _powerGun;
+    private CharacterMovement _movement;
 
     public enum PlayerState
     {
@@ -20,7 +22,7 @@ public class GameState : MonoBehaviour
 
     [Header("Gameplay constants")] public float magnetDPS = 35f;
     public int FPS = 60;
-    
+    public bool restartEnabled = false;
 
     [Header("Hookups")] public List<RobotBase> allRobots;
     public MusicManager musicManager;
@@ -29,14 +31,16 @@ public class GameState : MonoBehaviour
     public GameObject uiHurtIndicatorPrefab;
 
     [Header("Player info")] public PlayerState playerState;
-    
+
     public PlayerData player => _player;
     public PowerGun PowerGun => _powerGun;
+    public CharacterMovement CharacterMovement => _movement;
 
     private void Awake()
     {
         _player = FindObjectOfType<PlayerData>();
         _powerGun = FindObjectOfType<PowerGun>();
+        _movement = FindObjectOfType<CharacterMovement>();
     }
 
     // Start is called before the first frame update
@@ -44,22 +48,44 @@ public class GameState : MonoBehaviour
     {
         InvokeRepeating(nameof(UpdateMusic), 0, 1.337f);
         Application.targetFrameRate = FPS;
+        restartEnabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        _movement.enabled = playerState == PlayerState.PLAYING;
+    }
+
+    public void RestartLevel()
+    {
+        SceneManager.LoadScene("PHScene");
     }
 
     public void UpdateMusic()
     {
-        if (IsPlayerInDanger())
+        switch (playerState)
         {
-            musicManager.Play(0);
-        }
-        else
-        {
-            musicManager.Play(1);
+            case PlayerState.WIN:
+                musicManager.Play(1);
+                break;
+            case PlayerState.PLAYING:
+                if (IsPlayerInDanger())
+                {
+                    musicManager.Play(0);
+                }
+                else
+                {
+                    musicManager.Play(1);
+                }
+
+                break;
+            case PlayerState.DEAD:
+                musicManager.Play(2);
+                break;
+            default:
+                musicManager.Play(1);
+                break;
         }
     }
 
@@ -100,6 +126,6 @@ public class GameState : MonoBehaviour
     public void Loose()
     {
         playerState = PlayerState.DEAD;
+        ui.DeathUI();
     }
-    
 }

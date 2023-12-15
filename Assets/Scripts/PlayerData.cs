@@ -72,6 +72,11 @@ public class PlayerData : MonoBehaviour
     // Only the maximum Damage value over the last half second is applied if damageBinning = true
     public void Damage(int damage, Transform damageSourcePosition, bool damageBinning = true)
     {
+        if (_gameState.playerState != GameState.PlayerState.PLAYING)
+        {
+            return;
+        }
+
         _gameState.DisplayDamageIndicator(damageSourcePosition);
 
         if (damageBinning)
@@ -114,10 +119,16 @@ public class PlayerData : MonoBehaviour
             Debug.Log("Player health now " + _currentHealth);
             if (_currentHealth <= 0)
             {
-                Debug.Log("Player is dead");
-                OnPlayerDeath.Invoke();
+                PlayerDeath();
             }
         }
+    }
+
+    private void PlayerDeath()
+    {
+        Debug.Log("Player is dead");
+        OnPlayerDeath.Invoke();
+        _gameState.Loose();
     }
 
     // Modify the player's health
@@ -149,7 +160,8 @@ public class PlayerData : MonoBehaviour
         return Vector3.Distance(head.transform.position, fromPosition);
     }
 
-    public bool PlayerInView(Vector3 fromPosition) {
+    public bool PlayerInView(Vector3 fromPosition)
+    {
         var hit = Physics.Linecast(head.transform.position, fromPosition, out RaycastHit hitInfo,
             LayerMask.GetMask("World", "Entities"));
         return !hit;

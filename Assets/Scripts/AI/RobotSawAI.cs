@@ -158,5 +158,10 @@ public class RobotSawAI : MonoBehaviour
                 RobotAIStateCurrent = RobotBase.RobotAIState.IDLE;
             }
         }
+
+        if (_gameState.playerState!=GameState.PlayerState.PLAYING)
+        {
+            myNavMeshAgent.SetDestination(transform.position);
+        }
     }
 }

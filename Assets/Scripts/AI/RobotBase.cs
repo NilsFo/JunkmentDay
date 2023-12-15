@@ -143,6 +143,15 @@ public class RobotBase : MonoBehaviour
         {
             DealDamage(100000f);
         }
+
+        // GameOver
+        if (_gameState.playerState != GameState.PlayerState.PLAYING
+            && robotAIState != RobotAIState.FLECHETTESTUNNED
+            && robotAIState != RobotAIState.RAGDOLL
+           )
+        {
+            robotAIState = RobotAIState.IDLE;
+        }
     }
 
     private void LateUpdate()

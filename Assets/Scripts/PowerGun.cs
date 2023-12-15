@@ -38,28 +38,40 @@ public class PowerGun : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update() {
+    void Update()
+    {
         _cycleTimer -= Time.deltaTime;
         if (_cycleTimer < 0)
             _cycleTimer = 0;
-        
+
         var mouse = Mouse.current;
         var keyboard = Keyboard.current;
         if (mouse == null)
             return;
+        
         if (mouse.leftButton.isPressed)
         {
-            ShootFlechetteGun();
+            if (_gameState.restartEnabled)
+            {
+                _gameState.RestartLevel();
+            }
+            else
+            {
+                ShootFlechetteGun();
+            }
         }
 
-        if (mouse.rightButton.wasPressedThisFrame)
+        if (_gameState.playerState == GameState.PlayerState.PLAYING)
         {
-            ActivateAllFlechettes();
-        }
+            if (mouse.rightButton.wasPressedThisFrame)
+            {
+                ActivateAllFlechettes();
+            }
 
-        if (keyboard.rKey.wasPressedThisFrame)
-        {
-            ResetMarkers();
+            if (keyboard.rKey.wasPressedThisFrame)
+            {
+                ResetMarkers();
+            }
         }
 
         // cleanup flechettes
@@ -115,6 +127,7 @@ public class PowerGun : MonoBehaviour
         {
             robot.RequestPullToPlayer();
         }
+
         OnMagnetize.Invoke();
     }
 
@@ -153,7 +166,8 @@ public class PowerGun : MonoBehaviour
         }
     }
 
-    private void ShootFlechetteGun() {
+    private void ShootFlechetteGun()
+    {
         if (_cycleTimer > 0)
             return;
         _cycleTimer = cycleTime;
@@ -166,7 +180,7 @@ public class PowerGun : MonoBehaviour
         projectile.transform.RotateAround(projectile.transform.position, projectile.transform.up, 180f);
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
         rb.AddForce(direction * flechetteProjectileSpeed, ForceMode.VelocityChange);
-        
+
         OnShoot.Invoke();
     }
 
