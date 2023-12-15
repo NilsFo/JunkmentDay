@@ -9,9 +9,18 @@ public class GameState : MonoBehaviour
     private PlayerData _player;
     private PowerGun _powerGun;
 
+    public enum PlayerState
+    {
+        PLAYING,
+        DEAD,
+        WIN
+    }
+
     [Header("Creation templates")] public GameObject stickyFlechettePrefab;
 
     [Header("Gameplay constants")] public float magnetDPS = 35f;
+    public int FPS = 60;
+    
 
     [Header("Hookups")] public List<RobotBase> allRobots;
     public MusicManager musicManager;
@@ -19,6 +28,8 @@ public class GameState : MonoBehaviour
     public UI ui;
     public GameObject uiHurtIndicatorPrefab;
 
+    [Header("Player info")] public PlayerState playerState;
+    
     public PlayerData player => _player;
     public PowerGun PowerGun => _powerGun;
 
@@ -32,6 +43,7 @@ public class GameState : MonoBehaviour
     void Start()
     {
         InvokeRepeating(nameof(UpdateMusic), 0, 1.337f);
+        Application.targetFrameRate = FPS;
     }
 
     // Update is called once per frame
@@ -76,7 +88,18 @@ public class GameState : MonoBehaviour
 
         UIDamageIndicator indicator = indicatorGameObject.GetComponent<UIDamageIndicator>();
         indicator.damageSourcePos = damageSource;
-        
+
         ui.StartDamageOverlay();
     }
+
+    public void Win()
+    {
+        playerState = PlayerState.WIN;
+    }
+
+    public void Loose()
+    {
+        playerState = PlayerState.DEAD;
+    }
+    
 }
