@@ -16,6 +16,7 @@ public class RobotBase : MonoBehaviour
     private GameState _gameState;
     public TMP_Text debugTF;
     public Rigidbody rb;
+    public List<ParticleSystem> stunnedParticles;
 
     [Header("AI Config")] public Transform head;
     public float playerDetectionDistance = 50f;
@@ -127,12 +128,19 @@ public class RobotBase : MonoBehaviour
 
         debugTF.text = text;
 
+        foreach (ParticleSystem particle in stunnedParticles)
+        {
+            ParticleSystem.EmissionModule particleEmission = particle.emission;
+            particleEmission.enabled = robotAIState == RobotAIState.FLECHETTESTUNNED;
+        }
+
         if (robotAIState == RobotAIState.UNKNOWN)
         {
             Debug.LogError("Robot has an unknown state!", gameObject);
             _healthCurrent = health;
         }
 
+        // kill
         if (_healthCurrent <= 0f)
         {
             Kill();

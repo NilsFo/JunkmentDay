@@ -47,7 +47,7 @@ public class GameState : MonoBehaviour
     void Start()
     {
         InvokeRepeating(nameof(UpdateMusic), 0, 1.337f);
-        Application.targetFrameRate = FPS;
+        // Application.targetFrameRate = FPS;
         restartEnabled = false;
     }
 

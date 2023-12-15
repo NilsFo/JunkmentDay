@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8802390550372738450}
   - component: {fileID: 4326364628318462705}
   - component: {fileID: 3848066024200458067}
-  - component: {fileID: 284427153923055798}
+  - component: {fileID: 644358482103536634}
   m_Layer: 8
   m_Name: ClutterFlechette
   m_TagString: Untagged
@@ -85,7 +85,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!114 &284427153923055798
+--- !u!114 &644358482103536634
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,10 +94,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3062510579948425428}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e85ea51f8dd105d43ab57e0061c3a761, type: 3}
+  m_Script: {fileID: 11500000, guid: 482d4fb4ee6e48a68126aafbd0f3ace2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aliveTime: 15
+  aliveTime: 8
+  animationSpeed: 1.1337
   timerActive: 1
   OnEndOfLife:
     m_PersistentCalls:

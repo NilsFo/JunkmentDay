@@ -71,6 +71,7 @@ Transform:
   - {fileID: 8783845305894923348}
   - {fileID: 8264048216885620657}
   - {fileID: 6357390281059376085}
+  - {fileID: 8204374246002998399}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6387878957108656325
@@ -111,6 +112,8 @@ MonoBehaviour:
   robotAIState: 1
   debugTF: {fileID: 2288741957165479073}
   rb: {fileID: 6600554069236638786}
+  stunnedParticles:
+  - {fileID: 6333068779442866262}
   head: {fileID: 812427213114174878}
   playerDetectionDistance: 50
   getUpTimer: 1.337
@@ -459,6 +462,86 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 626a8804eff28b943b95c0411bd0a123, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &8214319940454529159
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7039115972650536572}
+    m_Modifications:
+    - target: {fileID: 10391065960645880, guid: be96dfba72f9a8344ad63cb63497a54f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 10391065960645880, guid: be96dfba72f9a8344ad63cb63497a54f,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 10391065960645880, guid: be96dfba72f9a8344ad63cb63497a54f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 10391065960645880, guid: be96dfba72f9a8344ad63cb63497a54f,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10391065960645880, guid: be96dfba72f9a8344ad63cb63497a54f,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 10391065960645880, guid: be96dfba72f9a8344ad63cb63497a54f,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 10391065960645880, guid: be96dfba72f9a8344ad63cb63497a54f,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 10391065960645880, guid: be96dfba72f9a8344ad63cb63497a54f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 10391065960645880, guid: be96dfba72f9a8344ad63cb63497a54f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 10391065960645880, guid: be96dfba72f9a8344ad63cb63497a54f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7848569382806463848, guid: be96dfba72f9a8344ad63cb63497a54f,
+        type: 3}
+      propertyPath: m_Name
+      value: RobotSmokeParticles
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: be96dfba72f9a8344ad63cb63497a54f, type: 3}
+--- !u!198 &6333068779442866262 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2746268844983857361, guid: be96dfba72f9a8344ad63cb63497a54f,
+    type: 3}
+  m_PrefabInstance: {fileID: 8214319940454529159}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8204374246002998399 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 10391065960645880, guid: be96dfba72f9a8344ad63cb63497a54f,
+    type: 3}
+  m_PrefabInstance: {fileID: 8214319940454529159}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9109873545384823743
 PrefabInstance:
   m_ObjectHideFlags: 0
