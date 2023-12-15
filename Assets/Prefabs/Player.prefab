@@ -269,7 +269,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.05
+  near clip plane: 0.01
   far clip plane: 1000
   field of view: 60.86629
   orthographic: 0
@@ -334,6 +334,8 @@ MonoBehaviour:
     type: 3}
   flechetteProjectileSpeed: 40
   cycleTime: 0.2
+  magnetizeCooldown: 1
+  magnetizeDelay: 0.5833333
   OnShoot:
     m_PersistentCalls:
       m_Calls:
@@ -351,7 +353,19 @@ MonoBehaviour:
         m_CallState: 2
   OnMagnetize:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4946351174147077361}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Remote
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!54 &6588024583854662388
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -676,10 +690,110 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -3129279688861963326, guid: 8348955835f179b45b3e9ff72a998f4c,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3129279688861963326, guid: 8348955835f179b45b3e9ff72a998f4c,
+        type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -271515893408899843, guid: 8348955835f179b45b3e9ff72a998f4c,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -271515893408899843, guid: 8348955835f179b45b3e9ff72a998f4c,
+        type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8348955835f179b45b3e9ff72a998f4c,
         type: 3}
       propertyPath: m_Name
       value: PowerGun
+      objectReference: {fileID: 0}
+    - target: {fileID: 2750685438321288414, guid: 8348955835f179b45b3e9ff72a998f4c,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2750685438321288414, guid: 8348955835f179b45b3e9ff72a998f4c,
+        type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3095231804976826610, guid: 8348955835f179b45b3e9ff72a998f4c,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3095231804976826610, guid: 8348955835f179b45b3e9ff72a998f4c,
+        type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3101198487952676126, guid: 8348955835f179b45b3e9ff72a998f4c,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3101198487952676126, guid: 8348955835f179b45b3e9ff72a998f4c,
+        type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5884757145791429023, guid: 8348955835f179b45b3e9ff72a998f4c,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5884757145791429023, guid: 8348955835f179b45b3e9ff72a998f4c,
+        type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7205140776170859923, guid: 8348955835f179b45b3e9ff72a998f4c,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7205140776170859923, guid: 8348955835f179b45b3e9ff72a998f4c,
+        type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8346821067743876200, guid: 8348955835f179b45b3e9ff72a998f4c,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8346821067743876200, guid: 8348955835f179b45b3e9ff72a998f4c,
+        type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8417361359673230750, guid: 8348955835f179b45b3e9ff72a998f4c,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8417361359673230750, guid: 8348955835f179b45b3e9ff72a998f4c,
+        type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8439749261167768350, guid: 8348955835f179b45b3e9ff72a998f4c,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8439749261167768350, guid: 8348955835f179b45b3e9ff72a998f4c,
+        type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

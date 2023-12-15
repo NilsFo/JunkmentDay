@@ -20,6 +20,10 @@ public class PowerGun : MonoBehaviour
     public float cycleTime = 0.2f;
     private float _cycleTimer;
 
+    public float magnetizeCooldown = 1f;
+    public float magnetizeDelay = 35f/60f;
+    private float _magnetizeTime;
+
     public UnityEvent OnShoot;
     public UnityEvent OnMagnetize;
 
@@ -44,6 +48,11 @@ public class PowerGun : MonoBehaviour
         if (_cycleTimer < 0)
             _cycleTimer = 0;
 
+        
+        _magnetizeTime -= Time.deltaTime;
+        if (_magnetizeTime < 0)
+            _magnetizeTime = 0;
+        
         var mouse = Mouse.current;
         var keyboard = Keyboard.current;
         if (mouse == null)
@@ -123,12 +132,20 @@ public class PowerGun : MonoBehaviour
 
     private void ActivateAllFlechettes()
     {
+        if (_magnetizeTime > 0)
+            return;
+        _magnetizeTime = magnetizeCooldown;
+        
+        OnMagnetize.Invoke();
+        Invoke(nameof(ActivateAllFlechettesLate), magnetizeDelay);
+    }
+
+    private void ActivateAllFlechettesLate() {
         foreach (RobotBase robot in _gameState.allRobots)
         {
             robot.RequestPullToPlayer();
         }
 
-        OnMagnetize.Invoke();
     }
 
     [Obsolete]
@@ -166,9 +183,8 @@ public class PowerGun : MonoBehaviour
         }
     }
 
-    private void ShootFlechetteGun()
-    {
-        if (_cycleTimer > 0)
+    private void ShootFlechetteGun() {
+        if (_cycleTimer > 0 || _magnetizeTime > 0)
             return;
         _cycleTimer = cycleTime;
         var camTransform = transform;

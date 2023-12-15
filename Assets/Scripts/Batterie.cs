@@ -24,13 +24,15 @@ public class Batterie : MonoBehaviour {
         }
     }
 
-    private void OnTriggerEnter(Collider other) {
+    private void OnTriggerStay(Collider other) {
         var player = other.GetComponent<PlayerData>();
         if (player != null) {
-            collected = true;
-            Destroy(GetComponent<Rigidbody>());
-            Destroy(GetComponent<BoxCollider>());
-            Destroy(GetComponent<SphereCollider>());
+            if (player.PlayerInView(transform.position)) {
+                collected = true;
+                Destroy(GetComponent<Rigidbody>());
+                Destroy(GetComponent<BoxCollider>());
+                Destroy(GetComponent<SphereCollider>());
+            }
         }
     }
 }
