@@ -149,10 +149,9 @@ public class PlayerData : MonoBehaviour
         return Vector3.Distance(head.transform.position, fromPosition);
     }
 
-    public bool PlayerInView(Vector3 fromPosition)
-    {
+    public bool PlayerInView(Vector3 fromPosition) {
         var hit = Physics.Linecast(head.transform.position, fromPosition, out RaycastHit hitInfo,
-            LayerMask.GetMask("World"));
+            LayerMask.GetMask("World", "Entities"));
         return !hit;
     }
 }

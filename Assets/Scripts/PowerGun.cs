@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class PowerGun : MonoBehaviour
@@ -15,6 +16,12 @@ public class PowerGun : MonoBehaviour
     [Header("Flechette Gun")] public Transform flechetteProjectileOrigin;
     public GameObject flechetteProjectilePrefab;
     public float flechetteProjectileSpeed = 100f;
+
+    public float cycleTime = 0.2f;
+    private float _cycleTimer;
+
+    public UnityEvent OnShoot;
+    public UnityEvent OnMagnetize;
 
     private void Awake()
     {
@@ -31,13 +38,16 @@ public class PowerGun : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
+        _cycleTimer -= Time.deltaTime;
+        if (_cycleTimer < 0)
+            _cycleTimer = 0;
+        
         var mouse = Mouse.current;
         var keyboard = Keyboard.current;
         if (mouse == null)
             return;
-        if (mouse.leftButton.wasPressedThisFrame)
+        if (mouse.leftButton.isPressed)
         {
             ShootFlechetteGun();
         }
@@ -105,6 +115,7 @@ public class PowerGun : MonoBehaviour
         {
             robot.RequestPullToPlayer();
         }
+        OnMagnetize.Invoke();
     }
 
     [Obsolete]
@@ -142,8 +153,10 @@ public class PowerGun : MonoBehaviour
         }
     }
 
-    private void ShootFlechetteGun()
-    {
+    private void ShootFlechetteGun() {
+        if (_cycleTimer > 0)
+            return;
+        _cycleTimer = cycleTime;
         var camTransform = transform;
         var direction = camTransform.rotation * Vector3.forward;
 
@@ -153,6 +166,8 @@ public class PowerGun : MonoBehaviour
         projectile.transform.RotateAround(projectile.transform.position, projectile.transform.up, 180f);
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
         rb.AddForce(direction * flechetteProjectileSpeed, ForceMode.VelocityChange);
+        
+        OnShoot.Invoke();
     }
 
     [Obsolete]
