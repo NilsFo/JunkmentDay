@@ -235,6 +235,7 @@ Transform:
   m_Children:
   - {fileID: 1764197315215825361}
   - {fileID: 3545936153277495430}
+  - {fileID: 2286685265240327908}
   m_Father: {fileID: 9095946871819127338}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &9095946871532686806
@@ -332,6 +333,25 @@ MonoBehaviour:
   flechetteProjectilePrefab: {fileID: 5728496482213902233, guid: 1909cafd639494e4e9ccb05963bcc7f2,
     type: 3}
   flechetteProjectileSpeed: 40
+  cycleTime: 0.2
+  OnShoot:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4946351174147077361}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Shoot
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnMagnetize:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &6588024583854662388
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -564,14 +584,14 @@ MonoBehaviour:
   terminalYVelocity: 55
   gravity: 10
   jumpSpeed: 4
+  coyoteTime: 0.1
   sprintEnabled: 0
-  velocity: {x: 0, y: 0, z: 0}
   inputDisabled: 0
+  velocity: {x: 0, y: 0, z: 0}
   playerHeightStanding: 1.8
   playerHeightCrouching: 1.1
   crouching: 0
   sprinting: 0
-  coyoteTime: 0.1
 --- !u!143 &9095946871819127336
 CharacterController:
   m_ObjectHideFlags: 0
@@ -598,3 +618,108 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.9, z: 0}
+--- !u!1001 &1743255204707983631
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 9095946871532686805}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 8348955835f179b45b3e9ff72a998f4c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8348955835f179b45b3e9ff72a998f4c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8348955835f179b45b3e9ff72a998f4c,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8348955835f179b45b3e9ff72a998f4c,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8348955835f179b45b3e9ff72a998f4c,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8348955835f179b45b3e9ff72a998f4c,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8348955835f179b45b3e9ff72a998f4c,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8348955835f179b45b3e9ff72a998f4c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8348955835f179b45b3e9ff72a998f4c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8348955835f179b45b3e9ff72a998f4c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8348955835f179b45b3e9ff72a998f4c,
+        type: 3}
+      propertyPath: m_Name
+      value: PowerGun
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8348955835f179b45b3e9ff72a998f4c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4946351174147077361}
+  m_SourcePrefab: {fileID: 100100000, guid: 8348955835f179b45b3e9ff72a998f4c, type: 3}
+--- !u!1 &1508741672538037342 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 8348955835f179b45b3e9ff72a998f4c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1743255204707983631}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &4946351174147077361
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1508741672538037342}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 569295c8e363a934585feb03c0e16d8e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!4 &2286685265240327908 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8348955835f179b45b3e9ff72a998f4c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1743255204707983631}
+  m_PrefabAsset: {fileID: 0}

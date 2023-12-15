@@ -431,9 +431,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myCollider: {fileID: 202958143079625374}
   attractorPoint: {fileID: 8512605360214378949}
-  activeOnStart: 0
-  falloffDistanceMultiplier: 2
-  pullStrength: 800
+  activeOnStart: 1
+  falloffDistanceMultiplier: 3
+  pullStrength: 1600
 --- !u!1 &8151324001064893659
 GameObject:
   m_ObjectHideFlags: 0
@@ -491,62 +491,17 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   currentStop: 0
   moveEnergy: 6
   startMoving:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3311339260220923878}
-        m_TargetAssemblyTypeName: Attractor, Assembly-CSharp
-        m_MethodName: TurnOn
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 582762496829569713}
-        m_TargetAssemblyTypeName: UnityEngine.Renderer, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
   stopMoving:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3311339260220923878}
-        m_TargetAssemblyTypeName: Attractor, Assembly-CSharp
-        m_MethodName: TurnOff
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 582762496829569713}
-        m_TargetAssemblyTypeName: UnityEngine.Renderer, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   noEnergy:
     m_PersistentCalls:
       m_Calls: []
@@ -643,12 +598,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8af9f51b7dd5e70468e99c00808adaf5, type: 3}
---- !u!23 &582762496829569713 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 8af9f51b7dd5e70468e99c00808adaf5,
-    type: 3}
-  m_PrefabInstance: {fileID: 2294573869346891317}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1755647096870781406 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8af9f51b7dd5e70468e99c00808adaf5,
