@@ -12,6 +12,7 @@ public class PowerGun : MonoBehaviour
     private List<Markable> marks;
     private List<StickyFlechette> _flechettes;
     private GameState _gameState;
+    private GunLCDLogic _lcdLogic;
 
     [Header("Flechette Gun")] public Transform flechetteProjectileOrigin;
     public GameObject flechetteProjectilePrefab;
@@ -31,6 +32,7 @@ public class PowerGun : MonoBehaviour
     {
         _flechettes = new List<StickyFlechette>();
         _gameState = FindObjectOfType<GameState>();
+        _lcdLogic = FindObjectOfType<GunLCDLogic>();
 
         _playerData = _gameState.player;
         marks = new List<Markable>();
@@ -74,13 +76,20 @@ public class PowerGun : MonoBehaviour
         {
             if (mouse.rightButton.wasPressedThisFrame)
             {
-                ActivateAllFlechettes();
+                if (_gameState.allFlechettes.Count>0)
+                {
+                    ActivateAllFlechettes();
+                }
+                else
+                {
+                    _lcdLogic.ShowError();
+                }
             }
 
-            if (keyboard.rKey.wasPressedThisFrame)
-            {
-                ResetMarkers();
-            }
+            // if (keyboard.rKey.wasPressedThisFrame)
+            // {
+            //     ResetMarkers();
+            // }
         }
 
         // cleanup flechettes

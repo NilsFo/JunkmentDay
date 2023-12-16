@@ -197,12 +197,12 @@ public class RobotBase : MonoBehaviour
         switch (oldState)
         {
             case RobotAIState.MAGNETIZED:
-                myMarkable.RemoveAllFlechettes();
+                // myMarkable.RemoveAllFlechettes();
                 rb.drag = _originalDampening;
                 rb.excludeLayers = 0;
                 break;
             case RobotAIState.RAGDOLL:
-                myMarkable.RemoveAllFlechettes();
+                // myMarkable.RemoveAllFlechettes();
                 rb.excludeLayers = 0;
                 break;
             case RobotAIState.FLECHETTESTUNNED:
@@ -283,7 +283,7 @@ public class RobotBase : MonoBehaviour
     {
         if (FlechetteCount > 0
             && robotAIState != RobotAIState.UNKNOWN
-            && robotAIState != RobotAIState.RAGDOLL
+            // && robotAIState != RobotAIState.RAGDOLL
             && robotAIState != RobotAIState.MAGNETIZED)
         {
             robotAIState = RobotAIState.RAGDOLL;
@@ -308,6 +308,9 @@ public class RobotBase : MonoBehaviour
         }
 
         _pullNextFrame = false;
+        _getUpDeathTimer = 0;
+        _getUpTimer = 0;
+        
         int flechetteCount = FlechetteCount;
         float flechetteProgress = FlechetteProgress;
 

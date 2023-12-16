@@ -44,7 +44,7 @@ public class BatteryBar : MonoBehaviour
             _colorGradientProgress = _colorGradientProgress - 1;
         }
 
-        fillDesired = GetPercentage(_gameState.player.CurrentEnergy, 6);
+        fillDesired = GetPercentage(_gameState.player.CurrentEnergy, _gameState.player.maxEnergy);
         fillDesired = Math.Clamp(fillDesired, 0.0f, 1.0f);
 
         Color color = fullyChargedGradient.Evaluate(_colorGradientProgress);
