@@ -484,7 +484,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rail: {fileID: 0}
   railMove: 0
-  railMoveSpeed: 1.5
+  railMoveSpeed: 1.8
   railPos: 0
   railStops:
   - {fileID: 0}
