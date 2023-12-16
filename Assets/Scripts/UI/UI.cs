@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -13,8 +14,16 @@ public class UI : MonoBehaviour
     private float _hurtOverlayIntensityProgress;
     private GameState _gameState;
 
+    private bool fadeoutEnabled;
+    public float fadeOutSpeed = 0.69f;
+    private float _fadeOut = 0f;
+
     public TMP_Text deathTextOne;
     public TMP_Text deathTextTwo;
+
+    public TMP_Text winTextOne;
+    public TMP_Text winTextTwo;
+    public Image winOverlay;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +33,9 @@ public class UI : MonoBehaviour
 
         deathTextOne.enabled = false;
         deathTextTwo.enabled = false;
+        winTextOne.enabled = false;
+        winTextTwo.enabled = false;
+        _fadeOut = 0;
     }
 
     // Update is called once per frame
@@ -46,11 +58,38 @@ public class UI : MonoBehaviour
         {
             targetingRect.enabled = true;
         }
+
+        if (fadeoutEnabled)
+        {
+            _fadeOut += fadeOutSpeed * Time.deltaTime;
+            a = MathF.Min(_fadeOut, 1);
+
+            c = winOverlay.color;
+            c.a = a;
+            winOverlay.color = c;
+        }
+
+        int time = (int)_gameState.playTime;
+        winTextTwo.text = "Robots dispatched: " + _gameState.player.killCount + "\n" +
+                          "Time taken: " + time + " seconds.";
     }
 
     public void StartDamageOverlay()
     {
         _hurtOverlayIntensityProgress = 0;
+    }
+
+    public void WinUI()
+    {
+        winTextOne.enabled = true;
+        fadeoutEnabled = true;
+
+        Invoke(nameof(WinUITwo), 3f);
+    }
+
+    private void WinUITwo()
+    {
+        winTextTwo.enabled = true;
     }
 
     public void DeathUI()

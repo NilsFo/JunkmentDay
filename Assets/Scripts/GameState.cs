@@ -23,6 +23,7 @@ public class GameState : MonoBehaviour
     [Header("Gameplay constants")] public float magnetDPS = 35f;
     public int FPS = 60;
     public bool restartEnabled = false;
+    public float playTime;
 
     [Header("Hookups")] public List<RobotBase> allRobots;
     public List<StickyFlechette> allFlechettes;
@@ -32,6 +33,9 @@ public class GameState : MonoBehaviour
     public GameObject uiHurtIndicatorPrefab;
 
     [Header("Player info")] public PlayerState playerState;
+
+    [Header("Encounters")] public int blockadesCount;
+    public int blockadesDestroyed;
 
     public PlayerData player => _player;
     public PowerGun PowerGun => _powerGun;
@@ -59,6 +63,11 @@ public class GameState : MonoBehaviour
     void Update()
     {
         _movement.enabled = playerState == PlayerState.PLAYING;
+
+        if (playerState == PlayerState.PLAYING)
+        {
+            playTime += Time.deltaTime;
+        }
     }
 
     public void RestartLevel()
@@ -122,9 +131,26 @@ public class GameState : MonoBehaviour
         ui.StartDamageOverlay();
     }
 
+    public void RequestWin()
+    {
+        if (playerState == PlayerState.WIN
+            || playerState == PlayerState.DEAD
+           )
+        {
+            return;
+        }
+
+        if (blockadesCount == blockadesDestroyed)
+        {
+            Win();
+        }
+    }
+
     public void Win()
     {
+        Debug.LogWarning("A winner is you!");
         playerState = PlayerState.WIN;
+        ui.WinUI();
     }
 
     public void Loose()

@@ -11,6 +11,7 @@ public class PlayerData : MonoBehaviour
 
     public int maxHealth = 100;
     private int _currentHealth;
+    public int killCount;
 
     // Damage binning only applies the maximum damage value over the damage binning time to avoid accumulated damage from multiple sources
     public float damageBinningTime = 0.5f;

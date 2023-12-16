@@ -44,6 +44,12 @@ public class GunLCDLogic : MonoBehaviour
         }
 
         text += count;
+
+        if (count>99)
+        {
+            text = "99";
+        }
+        
         displayText.text = text;
 
         lcdPrompt.enabled = _lcdErrorTime < 0;

@@ -5,8 +5,17 @@ using UnityEngine;
 
 public class Blockade : MonoBehaviour
 {
+
+    private GameState _gameState;
     public float destructionDelay = 3f;
     // Start is called before the first frame update
+
+    private void Awake()
+    {
+        _gameState = FindObjectOfType<GameState>();
+        _gameState.blockadesCount++;
+    }
+
     void Start()
     {
         
@@ -21,7 +30,10 @@ public class Blockade : MonoBehaviour
         Invoke(nameof(DestroyBlockadeNow), destructionDelay);
     }
 
-    private void DestroyBlockadeNow() {
+    private void DestroyBlockadeNow()
+    {
+        _gameState.blockadesDestroyed++;
+        
         var magnet = FindObjectOfType<BigMagnet>();
         foreach (var debris in GetComponentsInChildren<MoveToAndDestroy>()) {
             debris.target = magnet.GetComponentInChildren<Attractor>().transform;

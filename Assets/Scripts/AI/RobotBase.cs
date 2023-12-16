@@ -25,6 +25,7 @@ public class RobotBase : MonoBehaviour
     private float _getUpTimer;
     private float _getUpDeathTimer;
     private bool _pullNextFrame;
+    private int _flechetteCount;
 
     [Header("The machine spirit")] public float health;
     public float healthRegen = 5;
@@ -80,6 +81,11 @@ public class RobotBase : MonoBehaviour
             var tmpState = _robotAIState;
             _robotAIState = robotAIState;
             OnAIStateChanged(tmpState, robotAIState);
+        }
+
+        if (_flechetteCount != FlechetteCount)
+        {
+            _getUpDeathTimer = 0;
         }
 
         if (robotAIState == RobotAIState.RAGDOLL)
@@ -310,7 +316,7 @@ public class RobotBase : MonoBehaviour
         _pullNextFrame = false;
         _getUpDeathTimer = 0;
         _getUpTimer = 0;
-        
+
         int flechetteCount = FlechetteCount;
         float flechetteProgress = FlechetteProgress;
 

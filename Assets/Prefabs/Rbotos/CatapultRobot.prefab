@@ -117,7 +117,7 @@ MonoBehaviour:
   head: {fileID: 812427213114174878}
   playerDetectionDistance: 50
   getUpTimer: 1.337
-  getUpDeathTimer: 8
+  getUpDeathTimer: 13
   health: 100
   healthRegen: 5
   flechetteStunThreshold: 4
