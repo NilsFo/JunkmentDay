@@ -194,8 +194,13 @@ public class PowerGun : MonoBehaviour
             flechetteProjectileOrigin.transform.position, Quaternion.identity);
         projectile.transform.rotation = flechetteProjectileOrigin.transform.rotation;
         projectile.transform.RotateAround(projectile.transform.position, projectile.transform.up, 180f);
+        var rotation = projectile.transform.rotation;
+        
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
         rb.AddForce(direction * flechetteProjectileSpeed, ForceMode.VelocityChange);
+
+        FlechetteProjectile flechetteProjectile = projectile.GetComponent<FlechetteProjectile>();
+        flechetteProjectile.initialRotation = rotation; 
 
         OnShoot.Invoke();
     }
