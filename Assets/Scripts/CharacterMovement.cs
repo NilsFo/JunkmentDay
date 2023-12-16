@@ -238,7 +238,7 @@ public class CharacterMovement : MonoBehaviour
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if ((_controller.collisionFlags & CollisionFlags.Below) == 0)
+        if ((_controller.collisionFlags & (CollisionFlags.Below | CollisionFlags.Above)) == 0)
         {
             var normal = hit.normal;
             velocity = Vector3.ProjectOnPlane(velocity, normal);
