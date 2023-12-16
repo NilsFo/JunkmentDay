@@ -145,12 +145,7 @@ public class PlayerData : MonoBehaviour
         {
             _currentEnergy = newEnergy;
             OnEnergyChanged.Invoke(_currentEnergy);
-            Debug.Log("Player health now " + _currentEnergy);
-            if (_currentEnergy <= 0)
-            {
-                Debug.Log("Player is dead");
-                OnPlayerDeath.Invoke();
-            }
+            Debug.Log("Player energy now " + _currentEnergy);
         }
     }
 

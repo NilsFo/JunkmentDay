@@ -22,6 +22,12 @@ public class Blockade : MonoBehaviour
     }
 
     private void DestroyBlockadeNow() {
+        var magnet = FindObjectOfType<BigMagnet>();
+        foreach (var debris in GetComponentsInChildren<MoveToAndDestroy>()) {
+            debris.target = magnet.GetComponentInChildren<Attractor>().transform;
+            debris.enabled = true;
+            debris.transform.parent = null;
+        }
         Destroy(gameObject);
     }
 }
