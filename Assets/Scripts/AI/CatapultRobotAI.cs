@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class CatapultRobotAI : MonoBehaviour
 {
@@ -237,6 +238,7 @@ public class CatapultRobotAI : MonoBehaviour
 
         Rigidbody projectile = Instantiate(projectilePrefab, shootOrigin.position, shootOrigin.rotation);
         projectile.velocity = velocity;
+        projectile.angularVelocity = Vector3.Scale(Random.insideUnitSphere, (new Vector3(10f, 1f, 10f)));
         projectile.GetComponent<CatapultShot>().shooter = this;
     }
 
