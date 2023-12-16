@@ -211,30 +211,42 @@ public class CatapultRobotAI : MonoBehaviour
         }
     }
 
+    private float CalculateTrajectoryForce(Vector3 srcPos, Vector3 targetPos, float angle) {
+        float b = angle * Mathf.Deg2Rad; // Angle of the shot
+        float d = Vector3.ProjectOnPlane(targetPos - srcPos, Vector3.up)
+            .magnitude; // Distance to the player on the y plane
+        float y = (targetPos - srcPos).y; // Height difference to the player
+        float g = 9.8f; // Gravity
+
+        // Calculate necessary force
+        float v = Mathf.Sqrt(-0.5f * g * d * d / (Mathf.Pow(Mathf.Cos(b), 2) * (y - d * Mathf.Tan(b))));
+        return v;
+    }
 
     public void ShootCatapult()
     {
         Vector3 playerPos = _gameState.player.transform.position + Vector3.up;
         Vector3 myPos = shootOrigin.position;
 
-        float b = 20f * Mathf.Deg2Rad; // Angle of the shot
-        float d = Vector3.ProjectOnPlane(playerPos - myPos, Vector3.up)
-            .magnitude; // Distance to the player on the y plane
-        float y = (playerPos - myPos).y; // Height difference to the player
-        float g = 9.8f; // Gravity
+        float angle = 20f;
+        Vector3 velocity = Vector3.zero;
+        do {
+            float v = CalculateTrajectoryForce(myPos, playerPos, angle);
+            Vector3 direction = Quaternion.AngleAxis(angle, -shootOrigin.right) * shootOrigin.forward;
+            v = Mathf.Clamp(v, 5f, 30f);
+            velocity = direction.normalized * v;
 
-        // Calculate necessary force
-        float v = Mathf.Sqrt(-0.5f * g * d * d / (Mathf.Pow(Mathf.Cos(b), 2) * (y - d * Mathf.Tan(b))));
-        Vector3 direction = Quaternion.AngleAxis(b * Mathf.Rad2Deg, -shootOrigin.right) * shootOrigin.forward;
-        v = Mathf.Clamp(v, 5f, 30f);
-        Vector3 velocity = direction.normalized * v;
-
-        if (float.IsNaN(direction.x) || float.IsNaN(direction.y) || float.IsNaN(direction.z) ||
-            float.IsNaN(velocity.x) || float.IsNaN(velocity.y) || float.IsNaN(velocity.z))
-        {
-            Debug.LogWarning("Failed to calculate path for projectile!", gameObject);
-            return;
-        }
+            if (float.IsNaN(direction.x) || float.IsNaN(direction.y) || float.IsNaN(direction.z) ||
+                float.IsNaN(velocity.x) || float.IsNaN(velocity.y) || float.IsNaN(velocity.z)) {
+                angle += 10f;
+                if (angle >= 90) {
+                    Debug.LogWarning("Failed to calculate path for projectile!", gameObject);
+                    return;
+                }
+            } else {
+                break;
+            }
+        } while (true);
 
         Rigidbody projectile = Instantiate(projectilePrefab, shootOrigin.position, shootOrigin.rotation);
         projectile.velocity = velocity;
