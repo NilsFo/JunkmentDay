@@ -91,7 +91,7 @@ public class RobotBase : MonoBehaviour
                 if (_getUpTimer >= getUpTimer)
                 {
                     robotAIState = RobotAIState.IDLE;
-                    Debug.Log("Enough of this ragdoll.");
+                    // Debug.Log("Enough of this ragdoll.");
                 }
             }
             else

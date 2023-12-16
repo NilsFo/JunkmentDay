@@ -50,6 +50,7 @@ MonoBehaviour:
   flechetteClutterPrefab: {fileID: 3062510579948425428, guid: 494fc6c29f08b7a46aa64f947cf3ea0a,
     type: 3}
   myMark: {fileID: 0}
+  sparks: {fileID: 3849390050494589173}
 --- !u!114 &9088495912141548613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,7 +121,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8815049384788078882}
   serializedVersion: 8
-  lengthInSec: 5
+  lengthInSec: 3
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0

@@ -9,11 +9,15 @@ public class StickyFlechette : MonoBehaviour
     public GameObject flechetteClutterPrefab;
     public Markable myMark;
     private bool _markedForDeath;
+    public ParticleSystem sparks;
 
     private void Start()
     {
         myMark.myFlechettes.Add(this);
         _markedForDeath = false;
+        
+        ParticleSystem.MainModule sparksMain = sparks.main;
+        // sparksMain.duration = Random.Range(2f, 5f);
     }
 
     public void DestroyFlechette()
