@@ -574,7 +574,7 @@ MonoBehaviour:
   OnPlayerDeath:
     m_PersistentCalls:
       m_Calls: []
-  maxEnergy: 8
+  maxEnergy: 100
   OnEnergyChanged:
     m_PersistentCalls:
       m_Calls: []
