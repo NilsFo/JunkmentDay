@@ -9,11 +9,23 @@ public class StickyFlechette : MonoBehaviour
     public GameObject flechetteClutterPrefab;
     public Markable myMark;
     private bool _markedForDeath;
+    public ParticleSystem sparks;
+    private GameState _gameState;
 
     private void Start()
     {
         myMark.myFlechettes.Add(this);
         _markedForDeath = false;
+
+        _gameState.allFlechettes.Add(this);
+
+        ParticleSystem.MainModule sparksMain = sparks.main;
+        // sparksMain.duration = Random.Range(2f, 5f);
+    }
+
+    private void Awake()
+    {
+        _gameState = FindObjectOfType<GameState>();
     }
 
     public void DestroyFlechette()
@@ -21,6 +33,11 @@ public class StickyFlechette : MonoBehaviour
         myMark.myFlechettes.Remove(this);
         CreateClutterReplacement();
         Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        _gameState.allFlechettes.Remove(this);
     }
 
     private void LateUpdate()
@@ -41,7 +58,7 @@ public class StickyFlechette : MonoBehaviour
 
         var direction = clutter.transform.position - myMark.transform.position;
         direction = direction.normalized;
-        
+
         rb.AddRelativeTorque(new Vector3(
             Random.Range(-20f, 20f),
             Random.Range(-20f, 20f),

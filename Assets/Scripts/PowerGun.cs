@@ -12,6 +12,7 @@ public class PowerGun : MonoBehaviour
     private List<Markable> marks;
     private List<StickyFlechette> _flechettes;
     private GameState _gameState;
+    private GunLCDLogic _lcdLogic;
 
     [Header("Flechette Gun")] public Transform flechetteProjectileOrigin;
     public GameObject flechetteProjectilePrefab;
@@ -31,6 +32,7 @@ public class PowerGun : MonoBehaviour
     {
         _flechettes = new List<StickyFlechette>();
         _gameState = FindObjectOfType<GameState>();
+        _lcdLogic = FindObjectOfType<GunLCDLogic>();
 
         _playerData = _gameState.player;
         marks = new List<Markable>();
@@ -74,13 +76,20 @@ public class PowerGun : MonoBehaviour
         {
             if (mouse.rightButton.wasPressedThisFrame)
             {
-                ActivateAllFlechettes();
+                if (_gameState.allFlechettes.Count>0)
+                {
+                    ActivateAllFlechettes();
+                }
+                else
+                {
+                    _lcdLogic.ShowError();
+                }
             }
 
-            if (keyboard.rKey.wasPressedThisFrame)
-            {
-                ResetMarkers();
-            }
+            // if (keyboard.rKey.wasPressedThisFrame)
+            // {
+            //     ResetMarkers();
+            // }
         }
 
         // cleanup flechettes
@@ -194,8 +203,13 @@ public class PowerGun : MonoBehaviour
             flechetteProjectileOrigin.transform.position, Quaternion.identity);
         projectile.transform.rotation = flechetteProjectileOrigin.transform.rotation;
         projectile.transform.RotateAround(projectile.transform.position, projectile.transform.up, 180f);
+        var rotation = projectile.transform.rotation;
+        
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
         rb.AddForce(direction * flechetteProjectileSpeed, ForceMode.VelocityChange);
+
+        FlechetteProjectile flechetteProjectile = projectile.GetComponent<FlechetteProjectile>();
+        flechetteProjectile.initialRotation = rotation; 
 
         OnShoot.Invoke();
     }

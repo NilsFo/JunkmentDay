@@ -13,6 +13,9 @@ public class FlechetteProjectile : MonoBehaviour
 
     private Vector3 _cachePosition;
     private Vector3 _originPoint;
+    public Quaternion initialRotation;
+
+    private float _rotationIterations;
 
     private void Awake()
     {
@@ -24,6 +27,7 @@ public class FlechetteProjectile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _rotationIterations = 0;
     }
 
     // Update is called once per frame
@@ -34,6 +38,13 @@ public class FlechetteProjectile : MonoBehaviour
     private void FixedUpdate()
     {
         _cachePosition = transform.position;
+
+        // Fixing initial rotation being wrong. super hacky spaghetti code. yay.
+        if (_rotationIterations < 3)
+        {
+            transform.rotation = initialRotation;
+            _rotationIterations++;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -96,7 +107,7 @@ public class FlechetteProjectile : MonoBehaviour
         Rigidbody rb = clutter.GetComponent<Rigidbody>();
         var direction = _originPoint - clutter.transform.position;
         direction = direction.normalized;
-        
+
         rb.AddRelativeTorque(new Vector3(
             Random.Range(-20f, 20f),
             Random.Range(-20f, 20f),

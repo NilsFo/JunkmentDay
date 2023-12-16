@@ -25,6 +25,7 @@ public class GameState : MonoBehaviour
     public bool restartEnabled = false;
 
     [Header("Hookups")] public List<RobotBase> allRobots;
+    public List<StickyFlechette> allFlechettes;
     public MusicManager musicManager;
     public Canvas uiCanvas;
     public UI ui;
@@ -41,6 +42,9 @@ public class GameState : MonoBehaviour
         _player = FindObjectOfType<PlayerData>();
         _powerGun = FindObjectOfType<PowerGun>();
         _movement = FindObjectOfType<CharacterMovement>();
+
+        allRobots = new List<RobotBase>();
+        allFlechettes = new List<StickyFlechette>();
     }
 
     // Start is called before the first frame update
