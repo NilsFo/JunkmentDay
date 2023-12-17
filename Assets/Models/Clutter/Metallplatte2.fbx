@@ -11,11 +11,11 @@ FBXHeaderExtension:  {
 		Version: 1000
 		Year: 2023
 		Month: 12
-		Day: 12
-		Hour: 18
-		Minute: 7
-		Second: 32
-		Millisecond: 967
+		Day: 17
+		Hour: 21
+		Minute: 17
+		Second: 24
+		Millisecond: 112
 	}
 	Creator: "Blockbench 4.9.1"
 	OtherFlags:  {
@@ -51,7 +51,7 @@ FBXHeaderExtension:  {
 		}
 	}
 }
-CreationTime: "2023-12-12 17:07:32:967"
+CreationTime: "2023-12-17 20:17:24:112"
 Creator: "Made with Blockbench"
 GlobalSettings:  {
 	Version: 1000
@@ -250,7 +250,7 @@ Definitions:  {
 ;------------------------------------------------------------------
 
 Objects:  {
-	Geometry: 74601498, "Geometry::cube", "Mesh" {
+	Geometry: 59833648, "Geometry::cube", "Mesh" {
 		Vertices: *24 {
 			a: 25,6.25,25,25,6.25,-25,25,0,25,25,0,-25,-25,6.25,-25,-25,6.25,25,-25,0,-25,-25,0,25
 		}
@@ -301,7 +301,7 @@ Objects:  {
 			}
 		}
 	}
-	Model: 32941945, "Model::cube", "Mesh" {
+	Model: 9108999, "Model::cube", "Mesh" {
 		Version: 232
 		Properties70:  {
 			P: "RotationActive", "bool", "", "",1
@@ -316,7 +316,7 @@ Objects:  {
 		Shading: Y
 		Culling: "CullingOff"
 	}
-	Material: 69280296, "Material::texture", "" {
+	Material: 64647522, "Material::texture", "" {
 		Version: 102
 		ShadingModel: "lambert"
 		MultiLayer: 0
@@ -327,7 +327,7 @@ Objects:  {
 			P: "Opacity", "double", "Number", "",1
 		}
 	}
-	Texture: 8288668, "Texture::texture", "" {
+	Texture: 22196553, "Texture::texture", "" {
 		Type: "TextureVideoClip"
 		Version: 202
 		TextureName: "Texture::texture"
@@ -339,7 +339,7 @@ Objects:  {
 		Texture_Alpha_Source: "None"
 		Cropping: 0,0,0,0
 	}
-	Video: 60138410, "Video::texture", "Clip" {
+	Video: 74472632, "Video::texture", "Clip" {
 		Type: "Clip"
 		Properties70:  {
 			P: "Path", "KString", "XRefUrl", "", "texture"
@@ -347,7 +347,7 @@ Objects:  {
 		UseMipMap: 0
 		Filename: ""
 		RelativeFilename: "texture"
-		Content: , "iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABY0lEQVR4Xu2YMWqCQRCFd21SaK2CISoEbHIA+7S5gTexSGWpR1BPYCGk9AAewEYIREOE39SxsDKu/CeYGdD5/ezfuPvm7cx7f+wt/k5B8Ru33xXoEHqDkgo/mw6jpkBMBLTqZVGNTXYIiYCHRkeEP+7WFwIatboIv9tnAQJQAE+AGSAaIDmIIcgWYA3iAzBCOEGsMFlA5CUKE4ZEt89B7uPwazZSfQ+YT44a/kKl31d5edWfn8ExEdCtVUV1lvvfkAgot59E+MPXNwSgAJ4AM4AhKJqgRiC2AGsQH4ARwglihckCdx6GNJ7CfRz+WG1V3wPeXppXtbKa5iVsTAR0nx9FdZafPwECUABPgBkgGiA3AmIIsgVYg/gAjBBOECtMFhDZksKEIdHtc5D7NKi5fBGwroOMRQMgwIJFzzVQgOfuWZwdBViw6LkGCvDcPYuzowALFj3XQAGeu2dxdhRgwaLnGv+1iwxfTwr1fAAAAABJRU5ErkJggg=="
+		Content: , "iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAA25JREFUeF7tWsFR5DAQZMOAGHjehwQIgDSuiIa6NC4AEuDD82K4CwNKVA0113TPaBm5kIX92rIsW9PT09Oy9/Tv/vbl9/Pfi7sfVxft8L/fTpxx2NzKPfzj2n3wsHXa+cuHx9MZS/xw6ckAsJH2gM8G0ANAdG8VsJ1naxsKQJUFHoAGKGaLMQyDtiCzrNq9NwEgWigLyhYbAcACxecwBnhm2vX+3HAA/CIYIyK9iEoAaWwMiYLGsvSsMKb8fPozTgOQfh4Av2B23rMA6c+CRwD8s9U6PAM2BYAtgGXXB1YFAAGOSsZfuykDfCZVFlm2Ua0V/VlNR52ACWQZgF831y899FNqrYJlNY7PQdZEyq9YuRkAWWBewVH9I/HKVJ3VeQTMEABQXdUiGFOivo1iqZ4Tgc2U358bAoCiF2YyAkCN9dCclQZjFVtn2Qd4DfCZUH5AgYKeAS0vs7PYRT7TLjcBgPVopdiMvtE5RmlWKpEw+yQMBUAJFKtzW7QXQ0b3jFU4H/1G1H3a3DIAbTfIFN1nStVjT30z4WOq3mOJ2b2GARC1mmysZxPENKLdt6ri2dqy8bf3ASrbnuZ4I7Up6hE2XxbVDGYBZuObA4Di6QW2ATENANj22EYHax5p7YNVIokiNwUArIZ7AcBSwE7iQdvCyGQUz8bf3wkqI4OGBrOsxlE/1C5vGgZgbWLtollh9GdiigxAAKcHQG12egHIXppMA0DPhoiJXM+bm8j4TOEDmJBlXlx5BLbpUR6iXbsLANCCRsKYqa5pjbFpWgBY0EwoWXYxyIgt0wAQZU7pA2t12c4RO8VUAPQqvjJJah/gGbErAKJsMh1Aq4ysYqUwRRvMTA+zt+jpVQmxV2v+2mkAUGLGAvMm6KtruKfrRNf8tx1mO0L0A7PV8DAA1BvZqPXNYGSGA+ADjn7b2FfX8BAAWPtSLdEL4jIMUC81FLoenN2LYPsyhLY36+e+NJYCgH2hUW3Qymb3AODf5LDGvwUAPZTHjmBzlmAAWmEVLGPDMgAwELAcmEYsBUAGAo7P8GVniBFCDTinGyzhBC2z7Fs+fuJCxJcoAfV5m30BRtu8ewZUa2jv80t/NN578G39BwArZLESw8GACnorzD0YsEIWKzEcDKigt8LcgwErZLESw8GACnorzD0YsEIWKzG8AtMYoX1dVCMgAAAAAElFTkSuQmCC"
 	}
 }
 
@@ -355,11 +355,11 @@ Objects:  {
 ;------------------------------------------------------------------
 
 Connections:  {
-	C: "OO",32941945,0
-	C: "OO",74601498,32941945
-	C: "OO",69280296,32941945
-	C: "OP",8288668,69280296, "DiffuseColor"
-	C: "OO",60138410,8288668
+	C: "OO",9108999,0
+	C: "OO",59833648,9108999
+	C: "OO",64647522,9108999
+	C: "OP",22196553,64647522, "DiffuseColor"
+	C: "OO",74472632,22196553
 }
 
 ; Takes section
