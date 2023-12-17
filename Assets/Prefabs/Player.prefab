@@ -1236,7 +1236,7 @@ MonoBehaviour:
   flechetteProjectilePrefab: {fileID: 5728496482213902233, guid: 1909cafd639494e4e9ccb05963bcc7f2,
     type: 3}
   flechetteProjectileSpeed: 40
-  pullRobotsButtonSFX: {fileID: 2404212517441398614}
+  pullRobotsButtonSFX: {fileID: 5960452211574008992}
   cycleTime: 0.2
   magnetizeCooldown: 1
   magnetizeDelay: 0.5833333
