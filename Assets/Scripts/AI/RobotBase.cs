@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class RobotBase : MonoBehaviour
 {
@@ -28,6 +29,10 @@ public class RobotBase : MonoBehaviour
     private bool _pullNextFrame;
     private int _flechetteCount;
     public bool blinded;
+
+    [Header("Sounds")]
+    public RobotAudioCollection robotAudioCollection;
+    private bool _hasPlayedHello;
 
     [Header("The machine spirit")] public float health;
     public float healthRegen = 5;
@@ -61,6 +66,7 @@ public class RobotBase : MonoBehaviour
         _gameState = FindObjectOfType<GameState>();
         _healthCurrent = health;
         _damageBuffer = 0;
+        _hasPlayedHello = false;
     }
 
     private void Start()
@@ -221,6 +227,12 @@ public class RobotBase : MonoBehaviour
 
         switch (newState)
         {
+            case RobotAIState.ATTACKING:
+                HelloSound();
+                break;
+            case RobotAIState.POSITIONING:
+                HelloSound();
+                break;
             case RobotAIState.MAGNETIZED:
                 rb.drag = 2f;
                 rb.excludeLayers = 1 << LayerMask.NameToLayer("Enemies");
@@ -230,6 +242,15 @@ public class RobotBase : MonoBehaviour
                 break;
             default:
                 break;
+        }
+    }
+
+    public void HelloSound()
+    {
+        if (!_hasPlayedHello)
+        {
+            _hasPlayedHello = true;
+            robotAudioCollection.Play(robotAudioCollection.NextHelloSound());
         }
     }
 
@@ -262,7 +283,11 @@ public class RobotBase : MonoBehaviour
 
         myClutterSpawner.SpawnClutter();
         _gameState.player.killCount++;
-        
+
+        robotAudioCollection.transform.parent = null;
+        robotAudioCollection.timedLife.timerActive = true;
+        robotAudioCollection.Play(robotAudioCollection.NextDeathSound());
+
         Destroy(gameObject);
     }
 
@@ -273,7 +298,7 @@ public class RobotBase : MonoBehaviour
 
     public bool PlayerDetected()
     {
-        return GetDistanceToPlayer() <= playerDetectionDistance && PlayerInView()&& !blinded;
+        return GetDistanceToPlayer() <= playerDetectionDistance && PlayerInView() && !blinded;
     }
 
     public float GetDistanceToPlayer()
@@ -353,6 +378,4 @@ public class RobotBase : MonoBehaviour
         rb.AddForce(force, ForceMode.VelocityChange);
         myMarkable.RemoveAllFlechettes();
     }
-
-    
 }
