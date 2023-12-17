@@ -10,7 +10,7 @@ public class MusicManager : MonoBehaviour
     public GameObject temporalAudioPlayerPrefab;
     public static float userDesiredMusicVolume = 0.5f;
     public static float userDesiredSoundVolume = 0.5f;
-    public readonly float GLOBAL_MUSIC_VOLUME_MULT = 0.6f;
+    public readonly float GLOBAL_MUSIC_VOLUME_MULT = 0.4f;
     public readonly float GLOBAL_SOUND_VOLUME_MULT = 1.4f;
 
     [Range(0, 1)] public float levelVolumeMult = 1.0f;

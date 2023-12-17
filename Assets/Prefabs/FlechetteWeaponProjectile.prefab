@@ -57,6 +57,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1152
   initialRotation: {x: 0, y: 0, z: 0, w: 0}
+  hitSound: {fileID: 8300000, guid: 42e8005a3e227ae42afe8ab7f306ca54, type: 3}
 --- !u!54 &4196573926621638251
 Rigidbody:
   m_ObjectHideFlags: 0
