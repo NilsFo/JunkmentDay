@@ -1,9 +1,10 @@
-# Untitled Game
-Name will be added later.
+# JunkmentDay
 
 ***
 
 Created for 7 day FPS Jam 2023: https://itch.io/jam/7dfps
+
+Play for free in your browser: https://tosmaster.itch.io/junkment-day
 
 ***
 
