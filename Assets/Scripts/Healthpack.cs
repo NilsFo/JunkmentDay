@@ -28,7 +28,10 @@ public class Healthpack : MonoBehaviour
             {
                 _gameState.player.ModHealth(healAmount);
                 _gameState.ui.StartHealingOverlay();
-                _gameState.musicManager.CreateAudioClip(collectSound,transform.position,respectBinning:true);
+                _gameState.musicManager.CreateAudioClip(collectSound,
+                    transform.position,
+                    threeDimensional:false,
+                    respectBinning:true);
                 Destroy(gameObject);
             }
         }
