@@ -73,6 +73,7 @@ Transform:
   - {fileID: 8264048216885620657}
   - {fileID: 6357390281059376085}
   - {fileID: 8204374246002998399}
+  - {fileID: 1920620244243774687}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6387878957108656325
@@ -120,6 +121,8 @@ MonoBehaviour:
   playerDetectionDistance: 50
   getUpTimer: 1.337
   getUpDeathTimer: 13
+  blinded: 0
+  robotAudioCollection: {fileID: 1562975373370664270}
   health: 100
   healthRegen: 5
   flechetteStunThreshold: 4
@@ -264,6 +267,92 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7039115972650536572}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &513776083638285827
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7039115972650536572}
+    m_Modifications:
+    - target: {fileID: 2127428897657785052, guid: b74b2725e64d49b44bc8027c7d92aa91,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2127428897657785052, guid: b74b2725e64d49b44bc8027c7d92aa91,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2127428897657785052, guid: b74b2725e64d49b44bc8027c7d92aa91,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2127428897657785052, guid: b74b2725e64d49b44bc8027c7d92aa91,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2127428897657785052, guid: b74b2725e64d49b44bc8027c7d92aa91,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2127428897657785052, guid: b74b2725e64d49b44bc8027c7d92aa91,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2127428897657785052, guid: b74b2725e64d49b44bc8027c7d92aa91,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2127428897657785052, guid: b74b2725e64d49b44bc8027c7d92aa91,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2127428897657785052, guid: b74b2725e64d49b44bc8027c7d92aa91,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2127428897657785052, guid: b74b2725e64d49b44bc8027c7d92aa91,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2848506024644885478, guid: b74b2725e64d49b44bc8027c7d92aa91,
+        type: 3}
+      propertyPath: m_Name
+      value: RobotAudioSource
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b74b2725e64d49b44bc8027c7d92aa91, type: 3}
+--- !u!114 &1562975373370664270 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1337992891152782157, guid: b74b2725e64d49b44bc8027c7d92aa91,
+    type: 3}
+  m_PrefabInstance: {fileID: 513776083638285827}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8539b1837f61dad4db9f09a4b2c53ae8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1920620244243774687 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2127428897657785052, guid: b74b2725e64d49b44bc8027c7d92aa91,
+    type: 3}
+  m_PrefabInstance: {fileID: 513776083638285827}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3437720811465493070
 PrefabInstance:
   m_ObjectHideFlags: 0
