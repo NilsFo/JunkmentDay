@@ -155,6 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sawGameObject: {fileID: 6294574029357636979}
+  hurtBox: {fileID: 4448972292747265389}
   rotationSpeed: 1100
   rotationSpeedChangeRate: 450
   robotSawAI: {fileID: 7185597027432528687}

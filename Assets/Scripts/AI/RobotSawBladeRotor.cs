@@ -7,6 +7,7 @@ using UnityEngine;
 public class RobotSawBladeRotor : MonoBehaviour
 {
     public GameObject sawGameObject;
+    public HurtBox hurtBox;
 
     private bool _spinning;
     public float rotationSpeed;
@@ -17,16 +18,17 @@ public class RobotSawBladeRotor : MonoBehaviour
     public void TurnOn()
     {
         _spinning = true;
+        hurtBox.gameObject.SetActive(true);
     }
 
     public void TurnOff()
     {
         _spinning = false;
+        hurtBox.gameObject.SetActive(false);
     }
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         TurnOn();
     }
 
