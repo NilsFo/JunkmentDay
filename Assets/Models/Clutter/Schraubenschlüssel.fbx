@@ -13,9 +13,9 @@ FBXHeaderExtension:  {
 		Month: 12
 		Day: 17
 		Hour: 21
-		Minute: 6
-		Second: 0
-		Millisecond: 744
+		Minute: 55
+		Second: 16
+		Millisecond: 193
 	}
 	Creator: "Blockbench 4.9.1"
 	OtherFlags:  {
@@ -51,7 +51,7 @@ FBXHeaderExtension:  {
 		}
 	}
 }
-CreationTime: "2023-12-17 20:06:00:744"
+CreationTime: "2023-12-17 20:55:16:193"
 Creator: "Made with Blockbench"
 GlobalSettings:  {
 	Version: 1000
@@ -80,12 +80,12 @@ GlobalSettings:  {
 
 Definitions:  {
 	Version: 100
-	Count: 17
+	Count: 10
 	ObjectType: "GlobalSettings" {
 		Count: 1
 	}
 	ObjectType: "Model" {
-		Count: 5
+		Count: 3
 		PropertyTemplate: "FbxNode" {
 			Properties70:  {
 				P: "QuaternionInterpolate", "enum", "", "",0
@@ -163,7 +163,7 @@ Definitions:  {
 		}
 	}
 	ObjectType: "Geometry" {
-		Count: 5
+		Count: 3
 		PropertyTemplate: "FbxMesh" {
 			Properties70:  {
 				P: "Color", "ColorRGB", "Color", "",0.8,0.8,0.8
@@ -176,7 +176,7 @@ Definitions:  {
 		}
 	}
 	ObjectType: "Material" {
-		Count: 2
+		Count: 1
 		PropertyTemplate: "FbxSurfaceLambert" {
 			Properties70:  {
 				P: "ShadingModel", "KString", "", "", "Lambert"
@@ -200,7 +200,7 @@ Definitions:  {
 		}
 	}
 	ObjectType: "Texture" {
-		Count: 2
+		Count: 1
 		PropertyTemplate: "FbxFileTexture" {
 			Properties70:  {
 				P: "TextureTypeUse", "enum", "", "",0
@@ -223,7 +223,7 @@ Definitions:  {
 		}
 	}
 	ObjectType: "Video" {
-		Count: 2
+		Count: 1
 		PropertyTemplate: "FbxVideo" {
 			Properties70:  {
 				P: "ImageSequence", "bool", "", "",0
@@ -250,109 +250,7 @@ Definitions:  {
 ;------------------------------------------------------------------
 
 Objects:  {
-	Geometry: 12065436, "Geometry::cube_1", "Mesh" {
-		Vertices: *24 {
-			a: 37.5,12.5,18.75,37.5,12.5,6.25,37.5,0,18.75,37.5,0,6.25,12.5,12.5,6.25,12.5,12.5,18.75,12.5,0,6.25,12.5,0,18.75
-		}
-		PolygonVertexIndex: *24 {
-			a: 3,6,4,-2,2,3,1,-1,7,2,0,-6,6,7,5,-5,5,0,1,-5,6,3,2,-8
-		}
-		GeometryVersion: 124
-		LayerElementNormal: 0 {
-			Version: 101
-			Name: ""
-			MappingInformationType: "ByPolygon"
-			ReferenceInformationType: "Direct"
-			Normals: *18 {
-				a: 0,0,-1,1,0,0,0,0,1,-1,0,0,0,1,0,0,-1,0
-			}
-		}
-		LayerElementUV: 0 {
-			Version: 101
-			Name: ""
-			MappingInformationType: "ByPolygonVertex"
-			ReferenceInformationType: "Direct"
-			UV: *48 {
-				a: 0,0.375,0.25,0.375,0.25,0.5,0,0.5,0.8125,0.625,0.9375,0.625,0.9375,0.75,0.8125,0.75,0.25,0.375,0.5,0.375,0.5,0.5,0.25,0.5,0.8125,0.5,0.9375,0.5,0.9375,0.625,0.8125,0.625,0.75,0.5,0.5,0.5,0.5,0.375,0.75,0.375,0.8125,0.875,0.5625,0.875,0.5625,1,0.8125,1
-			}
-		}
-		LayerElementMaterial: 0 {
-			Version: 101
-			Name: ""
-			MappingInformationType: "AllSame"
-			ReferenceInformationType: "IndexToDirect"
-			Materials: *1 {
-				a: 0
-			}
-		}
-		Layer: 0 {
-			Version: 100
-			LayerElement:  {
-				Type: "LayerElementNormal"
-				TypedIndex: 0
-			}
-			LayerElement:  {
-				Type: "LayerElementMaterial"
-				TypedIndex: 0
-			}
-			LayerElement:  {
-				Type: "LayerElementUV"
-				TypedIndex: 0
-			}
-		}
-	}
-	Geometry: 31577463, "Geometry::cube_2", "Mesh" {
-		Vertices: *24 {
-			a: 37.5,12.5,-6.25,37.5,12.5,-18.75,37.5,0,-6.25,37.5,0,-18.75,12.5,12.5,-18.75,12.5,12.5,-6.25,12.5,0,-18.75,12.5,0,-6.25
-		}
-		PolygonVertexIndex: *24 {
-			a: 3,6,4,-2,2,3,1,-1,7,2,0,-6,6,7,5,-5,5,0,1,-5,6,3,2,-8
-		}
-		GeometryVersion: 124
-		LayerElementNormal: 0 {
-			Version: 101
-			Name: ""
-			MappingInformationType: "ByPolygon"
-			ReferenceInformationType: "Direct"
-			Normals: *18 {
-				a: 0,0,-1,1,0,0,0,0,1,-1,0,0,0,1,0,0,-1,0
-			}
-		}
-		LayerElementUV: 0 {
-			Version: 101
-			Name: ""
-			MappingInformationType: "ByPolygonVertex"
-			ReferenceInformationType: "Direct"
-			UV: *48 {
-				a: 0.5625,0.75,0.8125,0.75,0.8125,0.875,0.5625,0.875,0,0,0.125,0,0.125,0.125,0,0.125,0.5625,0.625,0.8125,0.625,0.8125,0.75,0.5625,0.75,0.125,0,0.25,0,0.25,0.125,0.125,0.125,0.8125,0.625,0.5625,0.625,0.5625,0.5,0.8125,0.5,0.25,0.25,0,0.25,0,0.375,0.25,0.375
-			}
-		}
-		LayerElementMaterial: 0 {
-			Version: 101
-			Name: ""
-			MappingInformationType: "AllSame"
-			ReferenceInformationType: "IndexToDirect"
-			Materials: *1 {
-				a: 0
-			}
-		}
-		Layer: 0 {
-			Version: 100
-			LayerElement:  {
-				Type: "LayerElementNormal"
-				TypedIndex: 0
-			}
-			LayerElement:  {
-				Type: "LayerElementMaterial"
-				TypedIndex: 0
-			}
-			LayerElement:  {
-				Type: "LayerElementUV"
-				TypedIndex: 0
-			}
-		}
-	}
-	Geometry: 35192681, "Geometry::cube_4", "Mesh" {
+	Geometry: 20925091, "Geometry::cube_2", "Mesh" {
 		Vertices: *24 {
 			a: -18.75,12.5,18.75,-18.75,12.5,6.25,-18.75,0,18.75,-18.75,0,6.25,-43.75,12.5,6.25,-43.75,12.5,18.75,-43.75,0,6.25,-43.75,0,18.75
 		}
@@ -403,58 +301,7 @@ Objects:  {
 			}
 		}
 	}
-	Geometry: 70794527, "Geometry::cube_3", "Mesh" {
-		Vertices: *24 {
-			a: -18.75,12.5,-6.25,-18.75,12.5,-18.75,-18.75,0,-6.25,-18.75,0,-18.75,-43.75,12.5,-18.75,-43.75,12.5,-6.25,-43.75,0,-18.75,-43.75,0,-6.25
-		}
-		PolygonVertexIndex: *24 {
-			a: 3,6,4,-2,2,3,1,-1,7,2,0,-6,6,7,5,-5,5,0,1,-5,6,3,2,-8
-		}
-		GeometryVersion: 124
-		LayerElementNormal: 0 {
-			Version: 101
-			Name: ""
-			MappingInformationType: "ByPolygon"
-			ReferenceInformationType: "Direct"
-			Normals: *18 {
-				a: 0,0,-1,1,0,0,0,0,1,-1,0,0,0,1,0,0,-1,0
-			}
-		}
-		LayerElementUV: 0 {
-			Version: 101
-			Name: ""
-			MappingInformationType: "ByPolygonVertex"
-			ReferenceInformationType: "Direct"
-			UV: *48 {
-				a: 0.25,0.25,0.5,0.25,0.5,0.375,0.25,0.375,0.25,0,0.375,0,0.375,0.125,0.25,0.125,0.5,0.25,0.75,0.25,0.75,0.375,0.5,0.375,0.375,0,0.5,0,0.5,0.125,0.375,0.125,0.25,0.25,0,0.25,0,0.125,0.25,0.125,0.5,0.125,0.25,0.125,0.25,0.25,0.5,0.25
-			}
-		}
-		LayerElementMaterial: 0 {
-			Version: 101
-			Name: ""
-			MappingInformationType: "AllSame"
-			ReferenceInformationType: "IndexToDirect"
-			Materials: *1 {
-				a: 0
-			}
-		}
-		Layer: 0 {
-			Version: 100
-			LayerElement:  {
-				Type: "LayerElementNormal"
-				TypedIndex: 0
-			}
-			LayerElement:  {
-				Type: "LayerElementMaterial"
-				TypedIndex: 0
-			}
-			LayerElement:  {
-				Type: "LayerElementUV"
-				TypedIndex: 0
-			}
-		}
-	}
-	Geometry: 99877590, "Geometry::cube", "Mesh" {
+	Geometry: 51680869, "Geometry::cube", "Mesh" {
 		Vertices: *24 {
 			a: 25,12.5,6.25,25,12.5,-6.25,25,0,6.25,25,0,-6.25,-31.25,12.5,-6.25,-31.25,12.5,6.25,-31.25,0,-6.25,-31.25,0,6.25
 		}
@@ -505,7 +352,58 @@ Objects:  {
 			}
 		}
 	}
-	Model: 79827087, "Model::cube", "Mesh" {
+	Geometry: 83843274, "Geometry::cube_1", "Mesh" {
+		Vertices: *24 {
+			a: -18.75,12.5,-6.25,-18.75,12.5,-18.75,-18.75,0,-6.25,-18.75,0,-18.75,-43.75,12.5,-18.75,-43.75,12.5,-6.25,-43.75,0,-18.75,-43.75,0,-6.25
+		}
+		PolygonVertexIndex: *24 {
+			a: 3,6,4,-2,2,3,1,-1,7,2,0,-6,6,7,5,-5,5,0,1,-5,6,3,2,-8
+		}
+		GeometryVersion: 124
+		LayerElementNormal: 0 {
+			Version: 101
+			Name: ""
+			MappingInformationType: "ByPolygon"
+			ReferenceInformationType: "Direct"
+			Normals: *18 {
+				a: 0,0,-1,1,0,0,0,0,1,-1,0,0,0,1,0,0,-1,0
+			}
+		}
+		LayerElementUV: 0 {
+			Version: 101
+			Name: ""
+			MappingInformationType: "ByPolygonVertex"
+			ReferenceInformationType: "Direct"
+			UV: *48 {
+				a: 0.25,0.25,0.5,0.25,0.5,0.375,0.25,0.375,0.25,0,0.375,0,0.375,0.125,0.25,0.125,0.5,0.25,0.75,0.25,0.75,0.375,0.5,0.375,0.375,0,0.5,0,0.5,0.125,0.375,0.125,0.25,0.25,0,0.25,0,0.125,0.25,0.125,0.5,0.125,0.25,0.125,0.25,0.25,0.5,0.25
+			}
+		}
+		LayerElementMaterial: 0 {
+			Version: 101
+			Name: ""
+			MappingInformationType: "AllSame"
+			ReferenceInformationType: "IndexToDirect"
+			Materials: *1 {
+				a: 0
+			}
+		}
+		Layer: 0 {
+			Version: 100
+			LayerElement:  {
+				Type: "LayerElementNormal"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementMaterial"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementUV"
+				TypedIndex: 0
+			}
+		}
+	}
+	Model: 47573950, "Model::cube", "Mesh" {
 		Version: 232
 		Properties70:  {
 			P: "RotationActive", "bool", "", "",1
@@ -520,7 +418,7 @@ Objects:  {
 		Shading: Y
 		Culling: "CullingOff"
 	}
-	Model: 96333276, "Model::cube_1", "Mesh" {
+	Model: 8630772, "Model::cube_1", "Mesh" {
 		Version: 232
 		Properties70:  {
 			P: "RotationActive", "bool", "", "",1
@@ -535,7 +433,7 @@ Objects:  {
 		Shading: Y
 		Culling: "CullingOff"
 	}
-	Model: 47790440, "Model::cube_2", "Mesh" {
+	Model: 72113463, "Model::cube_2", "Mesh" {
 		Version: 232
 		Properties70:  {
 			P: "RotationActive", "bool", "", "",1
@@ -550,37 +448,7 @@ Objects:  {
 		Shading: Y
 		Culling: "CullingOff"
 	}
-	Model: 14125525, "Model::cube_3", "Mesh" {
-		Version: 232
-		Properties70:  {
-			P: "RotationActive", "bool", "", "",1
-			P: "InheritType", "enum", "", "",1
-			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
-			P: "Lcl Translation", "Lcl Translation", "", "A",0,0,0
-			P: "RotationPivot", "Vector3D", "Vector", "",0,0,0
-			P: "Lcl Rotation", "Lcl Rotation", "", "A",0,0,0
-			P: "RotationOrder", "enum", "", "",0
-			P: "DefaultAttributeIndex", "int", "Integer", "",0
-		}
-		Shading: Y
-		Culling: "CullingOff"
-	}
-	Model: 70576634, "Model::cube_4", "Mesh" {
-		Version: 232
-		Properties70:  {
-			P: "RotationActive", "bool", "", "",1
-			P: "InheritType", "enum", "", "",1
-			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
-			P: "Lcl Translation", "Lcl Translation", "", "A",0,0,0
-			P: "RotationPivot", "Vector3D", "Vector", "",0,0,0
-			P: "Lcl Rotation", "Lcl Rotation", "", "A",0,0,0
-			P: "RotationOrder", "enum", "", "",0
-			P: "DefaultAttributeIndex", "int", "Integer", "",0
-		}
-		Shading: Y
-		Culling: "CullingOff"
-	}
-	Material: 53450311, "Material::texture", "" {
+	Material: 44798815, "Material::texture Schraubenschlüssel.png", "" {
 		Version: 102
 		ShadingModel: "lambert"
 		MultiLayer: 0
@@ -591,60 +459,27 @@ Objects:  {
 			P: "Opacity", "double", "Number", "",1
 		}
 	}
-	Texture: 69157017, "Texture::texture", "" {
+	Texture: 4832443, "Texture::texture Schraubenschlüssel.png", "" {
 		Type: "TextureVideoClip"
 		Version: 202
-		TextureName: "Texture::texture"
-		Media: "Video::texture"
-		FileName: ""
-		RelativeFilename: "texture"
+		TextureName: "Texture::texture Schraubenschlüssel.png"
+		Media: "Video::texture Schraubenschlüssel.png"
+		FileName: "F:\dev\UnityProjects\UntitledRobotGame\Assets\Models\Clutter\texture Schraubenschlüssel.png"
+		RelativeFilename: "texture Schraubenschlüssel.png"
 		ModelUVTranslation: 0,0
 		ModelUVScaling: 1,1
 		Texture_Alpha_Source: "None"
 		Cropping: 0,0,0,0
 	}
-	Video: 20777519, "Video::texture", "Clip" {
+	Video: 29978415, "Video::texture Schraubenschlüssel.png", "Clip" {
 		Type: "Clip"
 		Properties70:  {
-			P: "Path", "KString", "XRefUrl", "", "texture"
+			P: "Path", "KString", "XRefUrl", "", "F:\dev\UnityProjects\UntitledRobotGame\Assets\Models\Clutter\texture Schraubenschlüssel.png"
 		}
 		UseMipMap: 0
-		Filename: ""
-		RelativeFilename: "texture"
-		Content: , "iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABY0lEQVR4Xu2YMWqCQRCFd21SaK2CISoEbHIA+7S5gTexSGWpR1BPYCGk9AAewEYIREOE39SxsDKu/CeYGdD5/ezfuPvm7cx7f+wt/k5B8Ru33xXoEHqDkgo/mw6jpkBMBLTqZVGNTXYIiYCHRkeEP+7WFwIatboIv9tnAQJQAE+AGSAaIDmIIcgWYA3iAzBCOEGsMFlA5CUKE4ZEt89B7uPwazZSfQ+YT44a/kKl31d5edWfn8ExEdCtVUV1lvvfkAgot59E+MPXNwSgAJ4AM4AhKJqgRiC2AGsQH4ARwglihckCdx6GNJ7CfRz+WG1V3wPeXppXtbKa5iVsTAR0nx9FdZafPwECUABPgBkgGiA3AmIIsgVYg/gAjBBOECtMFhDZksKEIdHtc5D7NKi5fBGwroOMRQMgwIJFzzVQgOfuWZwdBViw6LkGCvDcPYuzowALFj3XQAGeu2dxdhRgwaLnGv+1iwxfTwr1fAAAAABJRU5ErkJggg=="
-	}
-	Material: 39383578, "Material::texture Schraubenschlüssel", "" {
-		Version: 102
-		ShadingModel: "lambert"
-		MultiLayer: 0
-		Properties70:  {
-			P: "Emissive", "Vector3D", "Vector", "",0,0,0
-			P: "Ambient", "Vector3D", "Vector", "",0.2,0.2,0.2
-			P: "Diffuse", "Vector3D", "Vector", "",0.8,0.8,0.8
-			P: "Opacity", "double", "Number", "",1
-		}
-	}
-	Texture: 2213692, "Texture::texture Schraubenschlüssel", "" {
-		Type: "TextureVideoClip"
-		Version: 202
-		TextureName: "Texture::texture Schraubenschlüssel"
-		Media: "Video::texture Schraubenschlüssel"
-		FileName: ""
-		RelativeFilename: "texture Schraubenschlüssel"
-		ModelUVTranslation: 0,0
-		ModelUVScaling: 1,1
-		Texture_Alpha_Source: "None"
-		Cropping: 0,0,0,0
-	}
-	Video: 40541810, "Video::texture Schraubenschlüssel", "Clip" {
-		Type: "Clip"
-		Properties70:  {
-			P: "Path", "KString", "XRefUrl", "", "texture Schraubenschlüssel"
-		}
-		UseMipMap: 0
-		Filename: ""
-		RelativeFilename: "texture Schraubenschlüssel"
-		Content: , "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAQZJREFUOE+Fk7ENwjAURHENO7AAEjVjUFEgIXooqMIMpKKAHiFRUDEGdSQWyA5QB53Rs35+YpHG8rf/+e7fJXzuy2bgvsuxipX1bhpXvz/Vv/q+KEIAgEu2EVw1jB7XBMp+83x1AfSqwHi9j917vupnYJssiGWnTgGIUWRwKMtmO66STi/BAqEdOQmAgqcrRmrSA/rQTj0OUQwsgJ0B1KGsFTABDhe3EM6zSZOzy9uHpdyPAGKgA4tspfxzpAOQm3guWFECGtEPA4alGeUsjkmEpqerPaFBIjWB6qzFACaExc7GZwBGyQU78T5GPgNY30qi1+lnIRmyzrqUguR/IrT6FCq+FuALAR/xh5BWkKYAAAAASUVORK5CYII="
+		Filename: "F:\dev\UnityProjects\UntitledRobotGame\Assets\Models\Clutter\texture Schraubenschlüssel.png"
+		RelativeFilename: "texture Schraubenschlüssel.png"
+		Content: , "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAQlJREFUOE+Fk6EOwkAQRLkQHJ4PQGDQJHwGCRqDxCHKN1CBQ2LQJHwGCRqD4APwOEJKZpN3WbZtqLnc3u3czM40rSejqhO+YbdnlcfnbWvcD+ZLq2+KIiUAuOQbwVVD/3zMoOxXl1sdQK8KjNeb2L1mi2YGvsmDeHbqFIAYGYNtWVbP0yHrjBI8ENqRkwEoRLpipCY9oA/t1G2IYuAB/AygDmWtgAlwd72ntJ+Oqza7on1Yyn0DEAMdeGQv5Z8jNYC2ibcFyySgEf0wYFiaUZvFlkRoRrraExokUhOozn4YwISw+NnEDMAou+An3sQoZgDrf5IYdcZZSIas8y7lIMWfCK0xhYqvB/gCprL0CUxCH6oAAAAASUVORK5CYII="
 	}
 }
 
@@ -652,25 +487,17 @@ Objects:  {
 ;------------------------------------------------------------------
 
 Connections:  {
-	C: "OO",79827087,0
-	C: "OO",99877590,79827087
-	C: "OO",39383578,79827087
-	C: "OO",96333276,0
-	C: "OO",12065436,96333276
-	C: "OO",39383578,96333276
-	C: "OO",47790440,0
-	C: "OO",31577463,47790440
-	C: "OO",39383578,47790440
-	C: "OO",14125525,0
-	C: "OO",70794527,14125525
-	C: "OO",39383578,14125525
-	C: "OO",70576634,0
-	C: "OO",35192681,70576634
-	C: "OO",39383578,70576634
-	C: "OP",69157017,53450311, "DiffuseColor"
-	C: "OO",20777519,69157017
-	C: "OP",2213692,39383578, "DiffuseColor"
-	C: "OO",40541810,2213692
+	C: "OO",47573950,0
+	C: "OO",51680869,47573950
+	C: "OO",44798815,47573950
+	C: "OO",8630772,0
+	C: "OO",83843274,8630772
+	C: "OO",44798815,8630772
+	C: "OO",72113463,0
+	C: "OO",20925091,72113463
+	C: "OO",44798815,72113463
+	C: "OP",4832443,44798815, "DiffuseColor"
+	C: "OO",29978415,4832443
 }
 
 ; Takes section

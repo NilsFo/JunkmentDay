@@ -13,9 +13,9 @@ FBXHeaderExtension:  {
 		Month: 12
 		Day: 17
 		Hour: 21
-		Minute: 15
-		Second: 32
-		Millisecond: 451
+		Minute: 58
+		Second: 10
+		Millisecond: 876
 	}
 	Creator: "Blockbench 4.9.1"
 	OtherFlags:  {
@@ -51,7 +51,7 @@ FBXHeaderExtension:  {
 		}
 	}
 }
-CreationTime: "2023-12-17 20:15:32:452"
+CreationTime: "2023-12-17 20:58:10:876"
 Creator: "Made with Blockbench"
 GlobalSettings:  {
 	Version: 1000
@@ -250,7 +250,7 @@ Definitions:  {
 ;------------------------------------------------------------------
 
 Objects:  {
-	Geometry: 18775632, "Geometry::cube", "Mesh" {
+	Geometry: 2510507, "Geometry::cube", "Mesh" {
 		Vertices: *24 {
 			a: 50,6.25,50,50,6.25,-50,50,0,50,50,0,-50,-50,6.25,-50,-50,6.25,50,-50,0,-50,-50,0,50
 		}
@@ -301,7 +301,7 @@ Objects:  {
 			}
 		}
 	}
-	Model: 50255757, "Model::cube", "Mesh" {
+	Model: 87059899, "Model::cube", "Mesh" {
 		Version: 232
 		Properties70:  {
 			P: "RotationActive", "bool", "", "",1
@@ -316,7 +316,7 @@ Objects:  {
 		Shading: Y
 		Culling: "CullingOff"
 	}
-	Material: 20837671, "Material::texture", "" {
+	Material: 46882653, "Material::Metallplatte texture.png", "" {
 		Version: 102
 		ShadingModel: "lambert"
 		MultiLayer: 0
@@ -327,27 +327,27 @@ Objects:  {
 			P: "Opacity", "double", "Number", "",1
 		}
 	}
-	Texture: 43497024, "Texture::texture", "" {
+	Texture: 18106651, "Texture::Metallplatte texture.png", "" {
 		Type: "TextureVideoClip"
 		Version: 202
-		TextureName: "Texture::texture"
-		Media: "Video::texture"
-		FileName: ""
-		RelativeFilename: "texture"
+		TextureName: "Texture::Metallplatte texture.png"
+		Media: "Video::Metallplatte texture.png"
+		FileName: "F:\dev\UnityProjects\UntitledRobotGame\Assets\Models\Clutter\Metallplatte texture.png"
+		RelativeFilename: "Metallplatte texture.png"
 		ModelUVTranslation: 0,0
 		ModelUVScaling: 1,1
 		Texture_Alpha_Source: "None"
 		Cropping: 0,0,0,0
 	}
-	Video: 88000079, "Video::texture", "Clip" {
+	Video: 45512225, "Video::Metallplatte texture.png", "Clip" {
 		Type: "Clip"
 		Properties70:  {
-			P: "Path", "KString", "XRefUrl", "", "texture"
+			P: "Path", "KString", "XRefUrl", "", "F:\dev\UnityProjects\UntitledRobotGame\Assets\Models\Clutter\Metallplatte texture.png"
 		}
 		UseMipMap: 0
-		Filename: ""
-		RelativeFilename: "texture"
-		Content: , "iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAA0hJREFUeF7tWktKBTEQ9N1HUNwJnsW9eB5x71kEd6LgfZQILWVZ/dHM+DJh3kaZfLtS3V2dmcPry/P7yUK/x5vrk6v7B3e21m4/1a86HseenV8cerZ/aADwwrbRyBi1aMUAb04bi2sjYG29NpZB7Abg7vL0BwNsob8AYBttfxWw2clnRiPwba5uAJABvHhEV48BfFJosMeQaN0IkNUA4E2zsRGNFVXxWTY28md0Afv/9ultuRigfJ+fRX5eOUllhDLagBqGAbihaqRHF1JBzuJENYozeG3cKjHAQ78SEziKc0BVjKoCoNb/FwDQiL+kOhzTCwCzYBUAVNBDCmcuoCK/N96LGx4r2BVXA4AX8nwYN5rl/SjIekJHBUHUGEcBwMvtTHVmSgZABYRVGWCnqQypUDgTPRUAKgERQVhUB/QAoHQ6G/NbADJB1ubvBqDVAoqq3jOVBZRhUbGU6X0G0xNKbZ5/AwBFSwWwqFaIBFKlzWLFYkKoulnlIpnP4mmr9NkbxbP1s/bP+wB1ukrRRTEC2/CEsswwBAB8Spzz0SDMwfw/AolUjrTCsADgplnPo+EeU7zAyEF0OACiiBtRm9s2ywDeeFTGctWoqkgV+JAFm2AAs6JS4qraXQXKIQFQJ6uqtogBFQAaIL1CJktzWfvXtbgnQNRdANcFXo2v5DFnnOEYwAarmGABz8vxKjPwM5tjSAA4nytQojgwDQCekawRlABSKVOV1MMwQPm6UnqeqovUo3er0+YaCgA8yWp9z9FeBchoriEB4GunChM4MGZVoDFpOABQrCgVx3lV6QMVI7x8PAwAmWDwtP2xDaju2+v37T5AaXk1EJmxeQDU9wERhZnyx5ay3QyIPpBQtB9NynYDgFdiVRdAYKZxgaxwYaSt/+ZdgC9FveKHpa31mwKALJd7mWCJFxO9Ptw7/sdnclziZgtsngH4aqzCBI4VOwCdX2llDFu7/WAMyO73WRxZ/2kYUKE/VnzTZAFUgr/VAg2EKRigRI7dAXht1j4VANH7APV+sIGweSm8dpQdff6uD41HN66yvx2ACkoz99kZMPPpVmzbGVBBaeY+OwNmPt2KbTsDKijN3GdnwMynW7FtZ0AFpZn7fAC6+EF9z9zlUgAAAABJRU5ErkJggg=="
+		Filename: "F:\dev\UnityProjects\UntitledRobotGame\Assets\Models\Clutter\Metallplatte texture.png"
+		RelativeFilename: "Metallplatte texture.png"
+		Content: , "iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAA0lJREFUeF7tWslRxDAQZF8kQA5ksB8gKQIhKeBDBuRAArygRNVQTdNzgOxdWeX9QFnntHpmemQfbu9uPi4W+h3f3y5eLq/c2Vq7/VS/6ngc+/T4fOjZ/qEBwAvbRiNj1KIVA7w5bSyujYC19dpYBrEbgPvj9S8G2EL/AcA22v4qYLOTz4xG4Ntc3QAgA3jxiK4eA/ik0GCPIdG6ESCrAcCbZmMjGiuq4rNsbOTP6AL2/8PL63IxQPk+P4v8vHKSyghltAE1DANwQ9VIjy6kgpzFiWoUZ/DauFVigId+JSZwFOeAqhhVBUCtfxIA0Ij/pDoc0wsAs2AVAFTQQwpnLqAivzfeixseK9gVVwOAF/J8GDea5f0oyHpCRwVB1BhnAcDL7Ux1ZkoGQAWEVRlgp6kMqVA4Ez0VACoBEUFYVAf0AKB0OhvzVwAyQdbm7wag1QKKqt4zlQWUYVGxlOl9BtMTSm2ekwGAoqUCWFQrRAKp0maxYjEhVN2scpHMZ/G0VfrsjeLZ+ln7132AOl2l6KIYgW14QllmGAIAPiXO+WgQ5mD+H4FEKkdaYVgAcNOs59FwjyleYOQgOhwAUcSNqM1tm2UAbzwqY7lqVFWkCnzIgk0wgFlRKXFV7a4C5ZAAqJNVVVvEgAoADZBeIZOluaz9+1rcEyDqLoDrAq/GV/KYM85wDGCDVUywgOfleJUZ+JnNMSQAnM8VKFEcmAYAz0jWCEoAqZSpSuphGKB8XSk9T9VF6tG71WlzDQUAnmS1vudorwJkNNeQAPC1U4UJHBizKtCYNBwAKFaUiuO8qvSBihFePh4GgEwweNr+3AZU9+31+3EfoLS8GojM2DwA6vuAiMJM+XNL2W4GRB9IKNqPJmW7AcArsaoLIDDTuEBWuDDS1n/zLsCXol7xw9LW+k0BQJbLvUywxIuJXh/uHf/rMzkucbMFNs8AfDVWYQLHih2Azq+0Moat3X4wBmT3+yyOrP80DKjQHyu+abIAKsG/aoEGwhQMUCLH7gC8NmufCoDofYB6P9hA2LwUXjvKjj5/14fGoxtX2d8OQAWlmfvsDJj5dCu27QyooDRzn50BM59uxbadARWUZu6zM2Dm063YtjOggtLMfT4B7Z8+fYUyJQ4AAAAASUVORK5CYII="
 	}
 }
 
@@ -355,11 +355,11 @@ Objects:  {
 ;------------------------------------------------------------------
 
 Connections:  {
-	C: "OO",50255757,0
-	C: "OO",18775632,50255757
-	C: "OO",20837671,50255757
-	C: "OP",43497024,20837671, "DiffuseColor"
-	C: "OO",88000079,43497024
+	C: "OO",87059899,0
+	C: "OO",2510507,87059899
+	C: "OO",46882653,87059899
+	C: "OP",18106651,46882653, "DiffuseColor"
+	C: "OO",45512225,18106651
 }
 
 ; Takes section

@@ -12,10 +12,10 @@ FBXHeaderExtension:  {
 		Year: 2023
 		Month: 12
 		Day: 17
-		Hour: 20
-		Minute: 54
-		Second: 39
-		Millisecond: 176
+		Hour: 21
+		Minute: 45
+		Second: 12
+		Millisecond: 162
 	}
 	Creator: "Blockbench 4.9.1"
 	OtherFlags:  {
@@ -51,7 +51,7 @@ FBXHeaderExtension:  {
 		}
 	}
 }
-CreationTime: "2023-12-17 19:54:39:177"
+CreationTime: "2023-12-17 20:45:12:162"
 Creator: "Made with Blockbench"
 GlobalSettings:  {
 	Version: 1000
@@ -80,7 +80,7 @@ GlobalSettings:  {
 
 Definitions:  {
 	Version: 100
-	Count: 9
+	Count: 6
 	ObjectType: "GlobalSettings" {
 		Count: 1
 	}
@@ -176,7 +176,7 @@ Definitions:  {
 		}
 	}
 	ObjectType: "Material" {
-		Count: 2
+		Count: 1
 		PropertyTemplate: "FbxSurfaceLambert" {
 			Properties70:  {
 				P: "ShadingModel", "KString", "", "", "Lambert"
@@ -200,7 +200,7 @@ Definitions:  {
 		}
 	}
 	ObjectType: "Texture" {
-		Count: 2
+		Count: 1
 		PropertyTemplate: "FbxFileTexture" {
 			Properties70:  {
 				P: "TextureTypeUse", "enum", "", "",0
@@ -223,7 +223,7 @@ Definitions:  {
 		}
 	}
 	ObjectType: "Video" {
-		Count: 2
+		Count: 1
 		PropertyTemplate: "FbxVideo" {
 			Properties70:  {
 				P: "ImageSequence", "bool", "", "",0
@@ -250,7 +250,7 @@ Definitions:  {
 ;------------------------------------------------------------------
 
 Objects:  {
-	Geometry: 7225091, "Geometry::tube", "Mesh" {
+	Geometry: 12315395, "Geometry::tube", "Mesh" {
 		Vertices: *144 {
 			a: 5.024047358083548,0,18.75,5.024047358083548,12.5,18.75,3.945264719555217,0,14.723928382689055,3.945264719555217,12.5,14.723928382689055,13.725952641916445,0,13.72595264191645,13.725952641916445,12.5,13.72595264191645,10.778663663133834,0,10.778663663133838,10.778663663133834,12.5,10.778663663133838,18.75,0,5.024047358083548,18.75,12.5,5.024047358083548,14.723928382689055,0,3.945264719555217,14.723928382689055,12.5,3.945264719555217,18.75,0,-5.0240473580835525,18.75,12.5,-5.0240473580835525,14.723928382689055,0,-3.9452647195552215,14.723928382689055,12.5,-3.9452647195552215,13.72595264191645,0,-13.72595264191645,13.72595264191645,12.5,-13.72595264191645,10.778663663133838,0,-10.778663663133836,10.778663663133838,12.5,-10.778663663133836,5.024047358083554,0,-18.749999999999993,5.024047358083554,12.5,-18.749999999999993,3.9452647195552215,0,-14.72392838268905,3.9452647195552215,12.5,-14.72392838268905,-5.024047358083544,0,-18.75,-5.024047358083544,12.5,-18.75,-3.9452647195552135,0,-14.723928382689055,-3.9452647195552135,12.5,-14.723928382689055,-13.72595264191645,0,-13.72595264191645,-13.72595264191645,12.5,-13.72595264191645,-10.778663663133836,0,-10.77866366313384,-10.778663663133836,12.5,-10.77866366313384,-18.749999999999993,0,-5.024047358083548,-18.749999999999993,12.5,-5.024047358083548,-14.723928382689055,0,-3.9452647195552184,-14.723928382689055,12.5,-3.9452647195552184,-18.75,0,5.02404735808354,-18.75,12.5,5.02404735808354,-14.723928382689055,0,3.9452647195552104,-14.723928382689055,12.5,3.9452647195552104,-13.72595264191645,0,13.725952641916445,-13.72595264191645,12.5,13.725952641916445,-10.77866366313384,0,10.778663663133834,-10.77866366313384,12.5,10.778663663133834,-5.02404735808355,0,18.75,-5.02404735808355,12.5,18.75,-3.9452647195552193,0,14.723928382689055,-3.9452647195552193,12.5,14.723928382689055
 		}
@@ -301,7 +301,7 @@ Objects:  {
 			}
 		}
 	}
-	Model: 62362574, "Model::tube", "Mesh" {
+	Model: 65007359, "Model::tube", "Mesh" {
 		Version: 232
 		Properties70:  {
 			P: "RotationActive", "bool", "", "",1
@@ -316,7 +316,7 @@ Objects:  {
 		Shading: Y
 		Culling: "CullingOff"
 	}
-	Material: 74841603, "Material::texture", "" {
+	Material: 25566325, "Material::texture Schraubenmutter.png", "" {
 		Version: 102
 		ShadingModel: "lambert"
 		MultiLayer: 0
@@ -327,59 +327,26 @@ Objects:  {
 			P: "Opacity", "double", "Number", "",1
 		}
 	}
-	Texture: 33171205, "Texture::texture", "" {
+	Texture: 66665683, "Texture::texture Schraubenmutter.png", "" {
 		Type: "TextureVideoClip"
 		Version: 202
-		TextureName: "Texture::texture"
-		Media: "Video::texture"
-		FileName: ""
-		RelativeFilename: "texture"
+		TextureName: "Texture::texture Schraubenmutter.png"
+		Media: "Video::texture Schraubenmutter.png"
+		FileName: "F:\dev\UnityProjects\UntitledRobotGame\Assets\Models\Clutter\texture Schraubenmutter.png"
+		RelativeFilename: "texture Schraubenmutter.png"
 		ModelUVTranslation: 0,0
 		ModelUVScaling: 1,1
 		Texture_Alpha_Source: "None"
 		Cropping: 0,0,0,0
 	}
-	Video: 66595247, "Video::texture", "Clip" {
+	Video: 63257480, "Video::texture Schraubenmutter.png", "Clip" {
 		Type: "Clip"
 		Properties70:  {
-			P: "Path", "KString", "XRefUrl", "", "texture"
+			P: "Path", "KString", "XRefUrl", "", "F:\dev\UnityProjects\UntitledRobotGame\Assets\Models\Clutter\texture Schraubenmutter.png"
 		}
 		UseMipMap: 0
-		Filename: ""
-		RelativeFilename: "texture"
-		Content: , "iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABY0lEQVR4Xu2YMWqCQRCFd21SaK2CISoEbHIA+7S5gTexSGWpR1BPYCGk9AAewEYIREOE39SxsDKu/CeYGdD5/ezfuPvm7cx7f+wt/k5B8Ru33xXoEHqDkgo/mw6jpkBMBLTqZVGNTXYIiYCHRkeEP+7WFwIatboIv9tnAQJQAE+AGSAaIDmIIcgWYA3iAzBCOEGsMFlA5CUKE4ZEt89B7uPwazZSfQ+YT44a/kKl31d5edWfn8ExEdCtVUV1lvvfkAgot59E+MPXNwSgAJ4AM4AhKJqgRiC2AGsQH4ARwglihckCdx6GNJ7CfRz+WG1V3wPeXppXtbKa5iVsTAR0nx9FdZafPwECUABPgBkgGiA3AmIIsgVYg/gAjBBOECtMFhDZksKEIdHtc5D7NKi5fBGwroOMRQMgwIJFzzVQgOfuWZwdBViw6LkGCvDcPYuzowALFj3XQAGeu2dxdhRgwaLnGv+1iwxfTwr1fAAAAABJRU5ErkJggg=="
-	}
-	Material: 38091424, "Material::texture Schraubenmutter", "" {
-		Version: 102
-		ShadingModel: "lambert"
-		MultiLayer: 0
-		Properties70:  {
-			P: "Emissive", "Vector3D", "Vector", "",0,0,0
-			P: "Ambient", "Vector3D", "Vector", "",0.2,0.2,0.2
-			P: "Diffuse", "Vector3D", "Vector", "",0.8,0.8,0.8
-			P: "Opacity", "double", "Number", "",1
-		}
-	}
-	Texture: 60806194, "Texture::texture Schraubenmutter", "" {
-		Type: "TextureVideoClip"
-		Version: 202
-		TextureName: "Texture::texture Schraubenmutter"
-		Media: "Video::texture Schraubenmutter"
-		FileName: ""
-		RelativeFilename: "texture Schraubenmutter"
-		ModelUVTranslation: 0,0
-		ModelUVScaling: 1,1
-		Texture_Alpha_Source: "None"
-		Cropping: 0,0,0,0
-	}
-	Video: 72047745, "Video::texture Schraubenmutter", "Clip" {
-		Type: "Clip"
-		Properties70:  {
-			P: "Path", "KString", "XRefUrl", "", "texture Schraubenmutter"
-		}
-		UseMipMap: 0
-		Filename: ""
-		RelativeFilename: "texture Schraubenmutter"
+		Filename: "F:\dev\UnityProjects\UntitledRobotGame\Assets\Models\Clutter\texture Schraubenmutter.png"
+		RelativeFilename: "texture Schraubenmutter.png"
 		Content: , "iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAQ1JREFUWEftVTsOwjAMbXaOwgU4BmJHYmZF5QxUrMxI7IhjcAGOwl70Kj3Jct2kSSqxOEtV5/Nenp+dsDuc+sYYz/s13Dbr0dzx/Rni3+2+Wb0eDb7ntg3WGXNigQQAiA3y/9J1PUA4CEYCiGMepOaAWWsGAgTnAitWCpDaFyVABSg3DmMK5MHVCuCwqRRQZgJKAiCGsYgHtFQ6LSkpS+ej5pmqglIw04Qyz5SbbtdVQA8sTkDmkaA1xsohODQVDQYSMBZToKsgByC11iRAUroMa7ue6QHekiqwy9WUVurWcj5YzUa2XN1wdGXUeiWrDPVDtERVFD8iOTLH1joBV8AVcAVcAVfAFXAF/q7ADxHrvyGuBNDGAAAAAElFTkSuQmCC"
 	}
 }
@@ -388,13 +355,11 @@ Objects:  {
 ;------------------------------------------------------------------
 
 Connections:  {
-	C: "OO",62362574,0
-	C: "OO",7225091,62362574
-	C: "OO",38091424,62362574
-	C: "OP",33171205,74841603, "DiffuseColor"
-	C: "OO",66595247,33171205
-	C: "OP",60806194,38091424, "DiffuseColor"
-	C: "OO",72047745,60806194
+	C: "OO",65007359,0
+	C: "OO",12315395,65007359
+	C: "OO",25566325,65007359
+	C: "OP",66665683,25566325, "DiffuseColor"
+	C: "OO",63257480,66665683
 }
 
 ; Takes section

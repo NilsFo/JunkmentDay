@@ -12,10 +12,10 @@ FBXHeaderExtension:  {
 		Year: 2023
 		Month: 12
 		Day: 17
-		Hour: 20
-		Minute: 11
-		Second: 5
-		Millisecond: 432
+		Hour: 21
+		Minute: 50
+		Second: 42
+		Millisecond: 751
 	}
 	Creator: "Blockbench 4.9.1"
 	OtherFlags:  {
@@ -51,7 +51,7 @@ FBXHeaderExtension:  {
 		}
 	}
 }
-CreationTime: "2023-12-17 19:11:05:432"
+CreationTime: "2023-12-17 20:50:42:751"
 Creator: "Made with Blockbench"
 GlobalSettings:  {
 	Version: 1000
@@ -80,7 +80,7 @@ GlobalSettings:  {
 
 Definitions:  {
 	Version: 100
-	Count: 9
+	Count: 6
 	ObjectType: "GlobalSettings" {
 		Count: 1
 	}
@@ -176,7 +176,7 @@ Definitions:  {
 		}
 	}
 	ObjectType: "Material" {
-		Count: 2
+		Count: 1
 		PropertyTemplate: "FbxSurfaceLambert" {
 			Properties70:  {
 				P: "ShadingModel", "KString", "", "", "Lambert"
@@ -200,7 +200,7 @@ Definitions:  {
 		}
 	}
 	ObjectType: "Texture" {
-		Count: 2
+		Count: 1
 		PropertyTemplate: "FbxFileTexture" {
 			Properties70:  {
 				P: "TextureTypeUse", "enum", "", "",0
@@ -223,7 +223,7 @@ Definitions:  {
 		}
 	}
 	ObjectType: "Video" {
-		Count: 2
+		Count: 1
 		PropertyTemplate: "FbxVideo" {
 			Properties70:  {
 				P: "ImageSequence", "bool", "", "",0
@@ -250,7 +250,7 @@ Definitions:  {
 ;------------------------------------------------------------------
 
 Objects:  {
-	Geometry: 33028589, "Geometry::cylinder", "Mesh" {
+	Geometry: 19372775, "Geometry::cylinder", "Mesh" {
 		Vertices: *78 {
 			a: 0,0,0,0,125,0,13.397459621556132,0,49.99999999999999,13.397459621556132,125,49.99999999999999,36.60254037844386,0,36.60254037844386,36.60254037844386,125,36.60254037844386,49.99999999999999,0,13.397459621556132,49.99999999999999,125,13.397459621556132,49.99999999999999,0,-13.397459621556138,49.99999999999999,125,-13.397459621556138,36.60254037844386,0,-36.60254037844386,36.60254037844386,125,-36.60254037844386,13.397459621556148,0,-49.999999999999986,13.397459621556148,125,-49.999999999999986,-13.397459621556113,0,-50,-13.397459621556113,125,-50,-36.60254037844386,0,-36.60254037844387,-36.60254037844386,125,-36.60254037844387,-49.99999999999999,0,-13.397459621556127,-49.99999999999999,125,-13.397459621556127,-50,0,13.39745962155611,-50,125,13.39745962155611,-36.60254037844387,0,36.602540378443855,-36.60254037844387,125,36.602540378443855,-13.397459621556129,0,49.99999999999999,-13.397459621556129,125,49.99999999999999
 		}
@@ -301,7 +301,7 @@ Objects:  {
 			}
 		}
 	}
-	Model: 55671763, "Model::cylinder", "Mesh" {
+	Model: 95528288, "Model::cylinder", "Mesh" {
 		Version: 232
 		Properties70:  {
 			P: "RotationActive", "bool", "", "",1
@@ -316,7 +316,7 @@ Objects:  {
 		Shading: Y
 		Culling: "CullingOff"
 	}
-	Material: 70360386, "Material::texture", "" {
+	Material: 97355618, "Material::Fass2 Textur.png", "" {
 		Version: 102
 		ShadingModel: "lambert"
 		MultiLayer: 0
@@ -327,59 +327,26 @@ Objects:  {
 			P: "Opacity", "double", "Number", "",1
 		}
 	}
-	Texture: 86468646, "Texture::texture", "" {
+	Texture: 9621498, "Texture::Fass2 Textur.png", "" {
 		Type: "TextureVideoClip"
 		Version: 202
-		TextureName: "Texture::texture"
-		Media: "Video::texture"
-		FileName: ""
-		RelativeFilename: "texture"
+		TextureName: "Texture::Fass2 Textur.png"
+		Media: "Video::Fass2 Textur.png"
+		FileName: "F:\dev\UnityProjects\UntitledRobotGame\Assets\Models\Clutter\Fass2 Textur.png"
+		RelativeFilename: "Fass2 Textur.png"
 		ModelUVTranslation: 0,0
 		ModelUVScaling: 1,1
 		Texture_Alpha_Source: "None"
 		Cropping: 0,0,0,0
 	}
-	Video: 87367149, "Video::texture", "Clip" {
+	Video: 59524598, "Video::Fass2 Textur.png", "Clip" {
 		Type: "Clip"
 		Properties70:  {
-			P: "Path", "KString", "XRefUrl", "", "texture"
+			P: "Path", "KString", "XRefUrl", "", "F:\dev\UnityProjects\UntitledRobotGame\Assets\Models\Clutter\Fass2 Textur.png"
 		}
 		UseMipMap: 0
-		Filename: ""
-		RelativeFilename: "texture"
-		Content: , "iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAAaBJREFUeF7tmL1KQ0EQhWcRUTCNRRSiREXhNoIiogG10TJa+tMGLKztzAPYCXkCESwsbAxYCjYWSWFnI/hPhKi1YBCJLPgEcxaukz23n8nutzNnzsTtziVtAb79kyIQLbK5cQbFV68fHJLAeQD3P9+qHONd3eIB9AwlqvjW6236AHa2S1AFVPb6bQNYXytCAI4riW0A0bdA9ACib4HFpQVIAy6O5m1rwFQ+1x7N9qrG2NPHl9QvtwjAtA+IvgVmZ6YhDbg6XWYLmG4BiiCnQA7SAD8GkS/1dXileQABqB62kPtLplyG9nnox0XEeQCFwQFVntrbu3gAfWN5Vfzn4wsBsALYAtQAiqBKQQMFcQpwDNIH0AjRCdIKcxeIfBlCPIX5dfj85hn6P2B1ciRVK4s8no91HkBhYliVp3bXEAJgBbAFqAEqAfknQRRBTgGOQfoAGiE6QVph7gIqW9Ixy5Dq9n9B5rdB5PKdEGt6kQnxAAQQgqLlHKwAy68X4uysgBAULedgBVh+vRBnZwWEoGg5ByvA8uuFODsrIARFyzl+AQPw0FBTqC4sAAAAAElFTkSuQmCC"
-	}
-	Material: 79855077, "Material::Fass Textur", "" {
-		Version: 102
-		ShadingModel: "lambert"
-		MultiLayer: 0
-		Properties70:  {
-			P: "Emissive", "Vector3D", "Vector", "",0,0,0
-			P: "Ambient", "Vector3D", "Vector", "",0.2,0.2,0.2
-			P: "Diffuse", "Vector3D", "Vector", "",0.8,0.8,0.8
-			P: "Opacity", "double", "Number", "",1
-		}
-	}
-	Texture: 8468107, "Texture::Fass Textur", "" {
-		Type: "TextureVideoClip"
-		Version: 202
-		TextureName: "Texture::Fass Textur"
-		Media: "Video::Fass Textur"
-		FileName: ""
-		RelativeFilename: "Fass Textur"
-		ModelUVTranslation: 0,0
-		ModelUVScaling: 1,1
-		Texture_Alpha_Source: "None"
-		Cropping: 0,0,0,0
-	}
-	Video: 11405111, "Video::Fass Textur", "Clip" {
-		Type: "Clip"
-		Properties70:  {
-			P: "Path", "KString", "XRefUrl", "", "Fass Textur"
-		}
-		UseMipMap: 0
-		Filename: ""
-		RelativeFilename: "Fass Textur"
+		Filename: "F:\dev\UnityProjects\UntitledRobotGame\Assets\Models\Clutter\Fass2 Textur.png"
+		RelativeFilename: "Fass2 Textur.png"
 		Content: , "iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAAghJREFUeF7tmL9Ow0AMxnMLVMAKrVQJQRlY2FhgRmJl4AmY2YCpD9CpsDHzBAysSMywsLEw8EdIlVpYAZUuoIsSKU1E6ktjx0o+xuKL7Z+/8/nO7PRPfz3Hv5vGsRk+HTmvq62dmbir/YOT1O9cXnQTaxzDTTU3FsBWfYn8zbvBuxcCmG2uk9f99B69KIAw8Wa9kfqN3qDv/58LRCEAbPKTEo9TsSA4IACA9BbIUv1QDRwqEFcAAGTY/1BAQABbgOEkQA/AKSA8CVb+FLD9LAsEjgZoYxHvAQAQHGmVvgxFLzqVvQ6T79HMhoX0gGhO59sbqQ8ih7cP5XwQmZR4vPBcIHwFuKps2icx1+TD+DggsMrrP7CqAHx2Os4KWGi3zd5ma2zd7sxcIt/r0ffYb1f3zyZr8lwqMBbA/OoyeRd8vbx5AAAFYAskegBlD5W6B7x+DBMMVhZraIJRAqVWAI5B4hxgFZF1FmCZBKXnAAAImoKrCjiq7z+JFaEAVdfhogFQ5gdOm9wUQAnSHoMUO0mb3ABQByHJ5Ci+cgNAnQMoQUnaAACaoPCDiKS8Kb78LUAxjNpM8yLk6ovbXt2xxJ1w/PsAIE1cmz8oQFtFpOOBAqSJa/MHBWiriHQ8UIA0cW3+oABtFZGOBwqQJq7NHxSgrSLS8UAB0sS1+YMCtFVEOh4oQJq4Nn9/mfjCX473imYAAAAASUVORK5CYII="
 	}
 }
@@ -388,13 +355,11 @@ Objects:  {
 ;------------------------------------------------------------------
 
 Connections:  {
-	C: "OO",55671763,0
-	C: "OO",33028589,55671763
-	C: "OO",79855077,55671763
-	C: "OP",86468646,70360386, "DiffuseColor"
-	C: "OO",87367149,86468646
-	C: "OP",8468107,79855077, "DiffuseColor"
-	C: "OO",11405111,8468107
+	C: "OO",95528288,0
+	C: "OO",19372775,95528288
+	C: "OO",97355618,95528288
+	C: "OP",9621498,97355618, "DiffuseColor"
+	C: "OO",59524598,9621498
 }
 
 ; Takes section
