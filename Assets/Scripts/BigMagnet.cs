@@ -28,6 +28,11 @@ public class BigMagnet : MonoBehaviour
     public UnityEvent stopMoving;
     public UnityEvent noEnergy;
 
+    public List<Powerable> buttons;
+    public Material buttonReadyMaterial;
+    public Material buttonDisabledMaterial;
+    public Material buttonMovingMaterial;
+
     private void Awake()
     {
         _gunLcdLogic = FindObjectOfType<GunLCDLogic>();
@@ -46,7 +51,9 @@ public class BigMagnet : MonoBehaviour
             _railStopPositions[index] = f * _railLength;
         }
 
-        railPos = _railStopPositions[currentStop];
+        stopMoving.AddListener(UpdateButtonState);
+        startMoving.AddListener(UpdateButtonState);
+        _gameState.player.OnEnergyChanged.AddListener(_ => UpdateButtonState());
     }
 
     // Update is called once per frame
@@ -87,19 +94,14 @@ public class BigMagnet : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(newDirection);
     }
 
-    public void MoveForward()
-    {
-        if (IsStopped())
-        {
-            if (_gameState.player.CurrentEnergy >= moveEnergy)
-            {
-                _gameState.player.ModEnergy(-moveEnergy);
-                startMoving.Invoke();
+    public void MoveForward() {
+        if (IsStopped()) {
+            if (_gameState.player.CurrentEnergy >= moveEnergy) {
                 currentStop++;
                 currentStop = Mathf.Clamp(currentStop, 0, _railStopPositions.Length);
-            }
-            else
-            {
+                _gameState.player.ModEnergy(-moveEnergy);
+                startMoving.Invoke();
+            } else {
                 OnNoEnergy();
             }
         }
@@ -129,5 +131,23 @@ public class BigMagnet : MonoBehaviour
     public void Stop()
     {
         //railMove = 0f;
+    }
+
+    private void UpdateButtonState() {
+        Material mat;
+        if (!IsStopped()) {
+            mat = buttonMovingMaterial;
+        } else {
+            if (_gameState.player.CurrentEnergy < moveEnergy) {
+                mat = buttonDisabledMaterial;
+            } else {
+                mat = buttonReadyMaterial;
+            }
+        }
+        foreach (var btn in buttons) {
+            foreach (var rend in btn.GetComponentsInChildren<MeshRenderer>()) {
+                rend.material = mat;
+            }
+        }
     }
 }

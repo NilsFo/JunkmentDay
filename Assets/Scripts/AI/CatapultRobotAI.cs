@@ -36,13 +36,20 @@ public class CatapultRobotAI : MonoBehaviour
     void Awake()
     {
         _gameState = FindObjectOfType<GameState>();
-        InvokeRepeating(nameof(NavigationUpdate), 0f, 0.5f);
     }
 
     private void Start()
     {
         _movementSpeed = myNavMeshAgent.speed;
         _robotAIStateLastKnown = RobotBase.RobotAIState.UNKNOWN;
+    }
+
+    private void OnEnable() {
+        InvokeRepeating(nameof(NavigationUpdate), 0f, 0.5f);
+    }
+
+    private void OnDisable() {
+        CancelInvoke(nameof(NavigationUpdate));
     }
 
     // Update is called once per frame
