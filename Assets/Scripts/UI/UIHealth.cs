@@ -8,7 +8,10 @@ public class UIHealth : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         _text = GetComponent<TextMeshProUGUI>();
-        FindObjectOfType<PlayerData>().OnHealthChanged.AddListener(newHealth => _text.text = newHealth.ToString());
+        FindObjectOfType<PlayerData>().OnHealthChanged.AddListener(UpdateHealthText);
+    }
+    private void UpdateHealthText(int newHealth) {
+        _text.text = string.Format("{0:D3}", newHealth);
     }
 
 }
