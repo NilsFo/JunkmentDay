@@ -17,7 +17,7 @@ public class RobotKillZone : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        RobotBase robotBase = FindObjectOfType<RobotBase>();
+        RobotBase robotBase = other.GetComponent<RobotBase>();
         if (robotBase != null)
         {
             robotBase.MarkForMagnetDeath();

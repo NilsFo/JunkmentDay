@@ -74,13 +74,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scrapStates:
   - {fileID: 4219224025773326069}
-  - {fileID: 0}
   - {fileID: 3402255399189499195}
-  - {fileID: 0}
   - {fileID: 754199965258303171}
   - {fileID: 7403356163333540285}
   - {fileID: 7752283177449689962}
   - {fileID: 523890948957304450}
+  - {fileID: 2782420011711776291}
   bumpSounds:
   - {fileID: 8300000, guid: 7bd51c440b2c4da44a48e46c76ecbb08, type: 3}
   - {fileID: 8300000, guid: eec943909c8a0cb4793473c5838ed896, type: 3}
