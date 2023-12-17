@@ -95,7 +95,7 @@ public class GameState : MonoBehaviour
         // Menu state
         _mouseLook.lockCursor = playerState != PlayerState.MAINMENU;
         menuUI.SetActive(playerState == PlayerState.MAINMENU);
-        mainMenuCamera.gameObject.SetActive(playerState == PlayerState.MAINMENU);
+        mainMenuCamera.transform.parent.gameObject.SetActive(playerState == PlayerState.MAINMENU);
         ingameUI.SetActive(playerState != PlayerState.MAINMENU);
         player.gameObject.SetActive(playerState != PlayerState.MAINMENU);
 
@@ -145,7 +145,7 @@ public class GameState : MonoBehaviour
                 musicManager.Play(2);
                 break;
             case PlayerState.MAINMENU:
-                musicManager.Play(0);
+                musicManager.Play(1);
                 break;
             default:
                 musicManager.Play(1);

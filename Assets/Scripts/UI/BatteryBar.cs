@@ -52,10 +52,11 @@ public class BatteryBar : MonoBehaviour
         {
             textfield.text = "";
             color = chargingGradient.Evaluate(fillCurrent);
+            textfield.text = "SEARCH BATTERIES";
         }
         else
         {
-            textfield.text = "FULLY CHARGED";
+            textfield.text = "MOVE THE MAGNET";
         }
 
         fillCurrent = Mathf.MoveTowards(fillCurrent, fillDesired, fillSpeed * Time.deltaTime);
