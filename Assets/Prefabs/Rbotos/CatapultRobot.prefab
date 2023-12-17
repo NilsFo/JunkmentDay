@@ -87,7 +87,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myNavMeshAgent: {fileID: 9210029708931218696}
-  shootDistance: 20
+  shootDistance: 30
   fleeDistance: 3
   shootPeriod: 3
   shootOrigin: {fileID: 8264048216885620657}
