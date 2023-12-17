@@ -41,18 +41,21 @@ public class CharacterMovement : MonoBehaviour
         _controller = GetComponent<CharacterController>();
         _camera = GetComponentInChildren<Camera>();
         _startingPos = transform.position;
+        myLayerMask = GetPhysicsLayerMask(gameObject.layer);
     }
 
-    private void Update()
-    {
+    private void Update() {
+        Vector3 groundNormal = GetNormalBelow();
+        
+        bool isGrounded = _controller.isGrounded && Vector3.Angle(groundNormal, Vector3.up) < _controller.slopeLimit;
         // Coyote Time
-        if (_controller.isGrounded)
+        if (isGrounded)
             _jumpCoyoteTimer = 0;
         _jumpCoyoteTimer += Time.deltaTime;
 
         float x = 0, z = 0;
 
-        if (!_controller.isGrounded)
+        if (!isGrounded)
         {
             if (velocity.y > 0)
             {
@@ -95,7 +98,7 @@ public class CharacterMovement : MonoBehaviour
         {
             if (sprintEnabled)
                 sprint = keyboard.shiftKey.isPressed;
-            if (_controller.isGrounded)
+            if (isGrounded)
             {
                 velocity.y = -gravity * 0.5f;
                 DampenXZ();
@@ -128,9 +131,9 @@ public class CharacterMovement : MonoBehaviour
 
             if (keyboard.spaceKey.wasPressedThisFrame && !crouching)
             {
-                if (_controller.isGrounded || _jumpCoyoteTimer <= coyoteTime)
+                if (isGrounded || _jumpCoyoteTimer <= coyoteTime)
                 {
-                    /*if (!_controller.isGrounded && _jumpCoyoteTimer <= coyoteTime)
+                    /*if (!isGrounded && _jumpCoyoteTimer <= coyoteTime)
                         Debug.Log("Coyote Jump!");
                     else {
                         Debug.Log("Normal Jump");
@@ -167,7 +170,7 @@ public class CharacterMovement : MonoBehaviour
             }
         }
 
-        if (inputDisabled && _controller.isGrounded)
+        if (inputDisabled && isGrounded)
         {
             DampenXZ();
         }
@@ -189,7 +192,7 @@ public class CharacterMovement : MonoBehaviour
             maxSpeed = maximumSpeed;
         sprinting = sprint;
         float maxSpeedSqrd = maxSpeed * maxSpeed;
-        if (speedSqrd > maxSpeedSqrd && (_controller.isGrounded || hasJumped))
+        if (speedSqrd > maxSpeedSqrd && (isGrounded || hasJumped))
         {
             velocity.x *= Mathf.Sqrt(maxSpeedSqrd / speedSqrd);
             velocity.z *= Mathf.Sqrt(maxSpeedSqrd / speedSqrd);
@@ -208,6 +211,24 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
+    private Vector3 GetNormalBelow() {
+        RaycastHit hit;
+        var layerMask = myLayerMask;
+        Vector3 result = Vector3.zero;
+        // Does the ray intersect any objects excluding the player layer
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, 3f, layerMask)) {
+            result = hit.normal;
+        }
+        return result;
+    }
+    private int myLayerMask;
+    public static LayerMask GetPhysicsLayerMask(int currentLayer) {
+        int finalMask = 0;
+        for (int i=0; i<32; i++) {
+            if (!Physics.GetIgnoreLayerCollision(currentLayer, i)) finalMask = finalMask | (1 << i);
+        }
+        return finalMask;
+    }
     private void LateUpdate()
     {
         if (transform.position.y <= -100)

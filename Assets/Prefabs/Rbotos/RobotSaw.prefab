@@ -159,6 +159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sawGameObject: {fileID: 6294574029357636979}
+  hurtBox: {fileID: 4448972292747265389}
   rotationSpeed: 1100
   rotationSpeedChangeRate: 450
   robotSawAI: {fileID: 7185597027432528687}
@@ -915,6 +916,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RobotAudioSource
+      objectReference: {fileID: 0}
+    - target: {fileID: 8692579259375942051, guid: b74b2725e64d49b44bc8027c7d92aa91,
+        type: 3}
+      propertyPath: rolloffMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8692579259375942051, guid: b74b2725e64d49b44bc8027c7d92aa91,
+        type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 0.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
