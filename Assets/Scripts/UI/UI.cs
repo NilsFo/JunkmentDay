@@ -8,10 +8,14 @@ using UnityEngine.UI;
 public class UI : MonoBehaviour
 {
     public Image hurtOverlayImage;
+    public Image healthOverlayImage;
+    public Image batteryOverlayImage;
     public AnimationCurve hurtOverlayIntensityCurve;
     public Image targetingRect;
 
     private float _hurtOverlayIntensityProgress;
+    private float _healthOverlayIntensityProgress;
+    private float _batteryOverlayIntensityProgress;
     private GameState _gameState;
 
     private bool fadeoutEnabled;
@@ -30,6 +34,8 @@ public class UI : MonoBehaviour
     {
         _gameState = FindObjectOfType<GameState>();
         _hurtOverlayIntensityProgress = 10f;
+        _healthOverlayIntensityProgress = 10f;
+        _batteryOverlayIntensityProgress = 10f;
 
         deathTextOne.enabled = false;
         deathTextTwo.enabled = false;
@@ -41,7 +47,10 @@ public class UI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // HURT OVERLAY
         _hurtOverlayIntensityProgress += Time.deltaTime;
+        _healthOverlayIntensityProgress += Time.deltaTime;
+        _batteryOverlayIntensityProgress += Time.deltaTime;
         float a = hurtOverlayIntensityCurve.Evaluate(_hurtOverlayIntensityProgress);
 
         if (_gameState.playerState == GameState.PlayerState.DEAD)
@@ -52,7 +61,20 @@ public class UI : MonoBehaviour
         Color c = hurtOverlayImage.color;
         c.a = a * 0.5f;
         hurtOverlayImage.color = c;
+        
+        // Health Overlay
+        a = hurtOverlayIntensityCurve.Evaluate(_healthOverlayIntensityProgress);
+        c = healthOverlayImage.color;
+        c.a = a * 0.15f;
+        healthOverlayImage.color = c;
+        
+        // Battery Overlay
+        a = hurtOverlayIntensityCurve.Evaluate(_batteryOverlayIntensityProgress);
+        c = batteryOverlayImage.color;
+        c.a = a * 0.35f;
+        batteryOverlayImage.color = c;
 
+        // DEATH
         targetingRect.enabled = false;
         if (_gameState.playerState == GameState.PlayerState.PLAYING)
         {
@@ -77,6 +99,20 @@ public class UI : MonoBehaviour
     public void StartDamageOverlay()
     {
         _hurtOverlayIntensityProgress = 0;
+    }
+    public void StartHealingOverlay()
+    {
+        if (!(_healthOverlayIntensityProgress < 1))
+        {
+            _healthOverlayIntensityProgress = 0;
+        }
+    }
+    public void StartBatteryOverlay()
+    {
+        if (!(_batteryOverlayIntensityProgress < 1))
+        {
+            _batteryOverlayIntensityProgress = 0;
+        }
     }
 
     public void WinUI()

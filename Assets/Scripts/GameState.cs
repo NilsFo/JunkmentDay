@@ -9,6 +9,7 @@ public class GameState : MonoBehaviour
 {
     private PlayerData _player;
     private PowerGun _powerGun;
+    private BigMagnet _bigMagnet;
     private CharacterMovement _movement;
 
     public enum PlayerState
@@ -25,9 +26,10 @@ public class GameState : MonoBehaviour
     public bool restartEnabled = false;
     public float playTime;
 
-    [Header("Hookups")] public List<RobotBase> allRobots;
+    [Header("Lists")] public List<RobotBase> allRobots;
     public List<StickyFlechette> allFlechettes;
-    public MusicManager musicManager;
+    public List<RobotSpawner> allSpawners;
+    [Header("Lists")] public MusicManager musicManager;
     public Canvas uiCanvas;
     public UI ui;
     public GameObject uiHurtIndicatorPrefab;
@@ -39,6 +41,7 @@ public class GameState : MonoBehaviour
 
     public PlayerData player => _player;
     public PowerGun PowerGun => _powerGun;
+    public BigMagnet BigMagnet => _bigMagnet;
     public CharacterMovement CharacterMovement => _movement;
 
     private void Awake()
@@ -46,7 +49,9 @@ public class GameState : MonoBehaviour
         _player = FindObjectOfType<PlayerData>();
         _powerGun = FindObjectOfType<PowerGun>();
         _movement = FindObjectOfType<CharacterMovement>();
+        _bigMagnet = FindObjectOfType<BigMagnet>();
 
+        allSpawners = new List<RobotSpawner>();
         allRobots = new List<RobotBase>();
         allFlechettes = new List<StickyFlechette>();
     }

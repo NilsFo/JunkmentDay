@@ -146,7 +146,7 @@ public class PlayerData : MonoBehaviour
         {
             _currentEnergy = newEnergy;
             OnEnergyChanged.Invoke(_currentEnergy);
-            Debug.Log("Player energy now " + _currentEnergy);
+            // Debug.Log("Player energy now " + _currentEnergy);
         }
     }
 

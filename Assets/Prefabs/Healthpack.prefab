@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collected: 0
-  healAmount: 25
+  healAmount: 55
 --- !u!1001 &2714667824192544389
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -34,6 +34,7 @@ public class RobotSpawner : MonoBehaviour
     void Start()
     {
         myDoor.Close();
+        _gameState.allSpawners.Add(this);
     }
 
     // Update is called once per frame
