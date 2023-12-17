@@ -25,7 +25,10 @@ public class Batterie : MonoBehaviour
             if (Vector3.Distance(transform.position, playerPos) < 0.1f)
             {
                 _gameState.player.ModEnergy(1);
-                _gameState.musicManager.CreateAudioClip(collectSound, transform.position, respectBinning: false);
+                _gameState.musicManager.CreateAudioClip(collectSound,
+                    transform.position,
+                    threeDimensional:false,
+                    respectBinning: false);
                 _gameState.ui.StartBatteryOverlay();
                 Destroy(gameObject);
             }

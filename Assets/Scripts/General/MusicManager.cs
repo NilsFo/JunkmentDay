@@ -149,6 +149,7 @@ public class MusicManager : MonoBehaviour
         Vector3 position,
         float pitchRange = 0.0f,
         float soundInstanceVolumeMult = 1.0f,
+        bool threeDimensional = true,
         bool respectBinning = false)
     {
         // Registering in the jail
@@ -176,6 +177,16 @@ public class MusicManager : MonoBehaviour
         AudioSource source = adp.GetComponent<AudioSource>();
         TimedLife life = adp.GetComponent<TimedLife>();
         life.aliveTime = audioClip.length * 2;
+
+        if (threeDimensional)
+        {
+            source.spatialBlend = 1;
+        }
+        else
+        {
+            source.spatialBlend = 0;
+        }
+        
         source.clip = audioClip;
         source.pitch = 1.0f + Random.Range(-pitchRange, pitchRange);
         source.volume = MathF.Min(GetVolumeSound() * soundInstanceVolumeMult * levelVolumeMult*binningMult, 1.0f);

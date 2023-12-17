@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class GameState : MonoBehaviour
 {
@@ -12,9 +13,13 @@ public class GameState : MonoBehaviour
     private BigMagnet _bigMagnet;
     private CharacterMovement _movement;
     private MusicManager _musicManager;
+    private MouseLook _mouseLook;
+
+    public Camera mainMenuCamera;
 
     public enum PlayerState
     {
+        MAINMENU,
         PLAYING,
         DEAD,
         WIN
@@ -39,12 +44,17 @@ public class GameState : MonoBehaviour
     [Header("Player info")] public PlayerState playerState;
     private bool _finaleMusic;
 
+    [Header("Main Menu")] public GameObject menuUI;
+    public GameObject ingameUI;
+    public Button playBT;
+
     [Header("Encounters")] public int blockadesCount;
     public int blockadesDestroyed;
 
     public PlayerData player => _player;
     public PowerGun PowerGun => _powerGun;
     public BigMagnet BigMagnet => _bigMagnet;
+    public MouseLook MouseLook => _mouseLook;
     public CharacterMovement CharacterMovement => _movement;
 
     private void Awake()
@@ -53,6 +63,7 @@ public class GameState : MonoBehaviour
         _powerGun = FindObjectOfType<PowerGun>();
         _movement = FindObjectOfType<CharacterMovement>();
         _bigMagnet = FindObjectOfType<BigMagnet>();
+        _mouseLook = FindObjectOfType<MouseLook>();
 
         allSpawners = new List<RobotSpawner>();
         allRobots = new List<RobotBase>();
@@ -67,12 +78,32 @@ public class GameState : MonoBehaviour
         restartEnabled = false;
         _finaleMusic = false;
         StopAllRobotSpawns();
+
+        playBT.onClick.AddListener(Play);
+    }
+
+    private void Play()
+    {
+        playerState = PlayerState.PLAYING;
     }
 
     // Update is called once per frame
     void Update()
     {
         _movement.inputDisabled = playerState == PlayerState.DEAD;
+
+        // Menu state
+        _mouseLook.lockCursor = playerState != PlayerState.MAINMENU;
+        menuUI.SetActive(playerState == PlayerState.MAINMENU);
+        mainMenuCamera.gameObject.SetActive(playerState == PlayerState.MAINMENU);
+        ingameUI.SetActive(playerState != PlayerState.MAINMENU);
+        player.gameObject.SetActive(playerState != PlayerState.MAINMENU);
+
+        if (playerState == PlayerState.MAINMENU)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
 
         if (playerState == PlayerState.PLAYING)
         {
@@ -112,6 +143,9 @@ public class GameState : MonoBehaviour
                 break;
             case PlayerState.DEAD:
                 musicManager.Play(2);
+                break;
+            case PlayerState.MAINMENU:
+                musicManager.Play(0);
                 break;
             default:
                 musicManager.Play(1);
