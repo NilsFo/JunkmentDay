@@ -29,7 +29,8 @@ public class GameState : MonoBehaviour
     [Header("Lists")] public List<RobotBase> allRobots;
     public List<StickyFlechette> allFlechettes;
     public List<RobotSpawner> allSpawners;
-    [Header("Lists")] public MusicManager musicManager;
+
+    [Header("World Hookup")] public MusicManager musicManager;
     public Canvas uiCanvas;
     public UI ui;
     public GameObject uiHurtIndicatorPrefab;
@@ -62,6 +63,7 @@ public class GameState : MonoBehaviour
         InvokeRepeating(nameof(UpdateMusic), 0, 1.337f);
         // Application.targetFrameRate = FPS;
         restartEnabled = false;
+        StopAllRobotSpawns();
     }
 
     // Update is called once per frame
@@ -90,7 +92,14 @@ public class GameState : MonoBehaviour
             case PlayerState.PLAYING:
                 if (IsPlayerInDanger())
                 {
-                    musicManager.Play(0);
+                    if (blockadesDestroyed >= 6)
+                    {
+                        musicManager.Play(3);
+                    }
+                    else
+                    {
+                        musicManager.Play(0);
+                    }
                 }
                 else
                 {
@@ -162,5 +171,13 @@ public class GameState : MonoBehaviour
     {
         playerState = PlayerState.DEAD;
         ui.DeathUI();
+    }
+
+    public void StopAllRobotSpawns()
+    {
+        foreach (RobotSpawner spawner in allSpawners)
+        {
+            spawner.autoSpawn = false;
+        }
     }
 }

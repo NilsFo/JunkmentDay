@@ -41,7 +41,7 @@ public class RobotSawAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        myNavMeshAgent.speed = _movementSpeed * (1-robotBase.FlechetteProgress);
+        myNavMeshAgent.speed = _movementSpeed * (1 - robotBase.FlechetteProgress);
 
         if (_robotAIStateLastKnown != RobotAIStateCurrent)
         {
@@ -141,6 +141,13 @@ public class RobotSawAI : MonoBehaviour
             return;
         }
 
+        if (myNavMeshAgent.pathStatus == NavMeshPathStatus.PathInvalid)
+        {
+            RobotAIStateCurrent = RobotBase.RobotAIState.IDLE;
+            //    myNavMeshAgent.SetDestination(transform.position);
+            return;
+        }
+
         if (RobotAIStateCurrent == RobotBase.RobotAIState.IDLE)
         {
             if (robotBase.PlayerDetected())
@@ -159,7 +166,7 @@ public class RobotSawAI : MonoBehaviour
             }
         }
 
-        if (_gameState.playerState!=GameState.PlayerState.PLAYING)
+        if (_gameState.playerState != GameState.PlayerState.PLAYING)
         {
             myNavMeshAgent.SetDestination(transform.position);
         }

@@ -1,13 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Splines;
 
-public class BigMagnet : MonoBehaviour {
+public class BigMagnet : MonoBehaviour
+{
     public SplineContainer rail;
-    public float railMove = 0f;  // -1 to move backwards at railMoveSpeed
-    
+    public float railMove = 0f; // -1 to move backwards at railMoveSpeed
+
     public float railMoveSpeed = 1f;
     public float railPos;
     private float _railLength;
@@ -19,82 +21,113 @@ public class BigMagnet : MonoBehaviour {
     public int currentStop = 0;
 
     private GameState _gameState;
+    private GunLCDLogic _gunLcdLogic;
 
     public int moveEnergy = 6;
     public UnityEvent startMoving;
     public UnityEvent stopMoving;
     public UnityEvent noEnergy;
 
-    
-    // Start is called before the first frame update
-    void Start() {
+    private void Awake()
+    {
+        _gunLcdLogic = FindObjectOfType<GunLCDLogic>();
         _gameState = FindObjectOfType<GameState>();
         _railLength = rail.CalculateLength();
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
         _railStopPositions = new float[railStops.Count];
-        for (var index = 0; index < railStops.Count; index++) {
-            var railStop = railStops [index];
+        for (var index = 0; index < railStops.Count; index++)
+        {
+            var railStop = railStops[index];
             SplineUtility.GetNearestPoint(rail.Spline, railStop.localPosition, out var nearest, out float f);
             _railStopPositions[index] = f * _railLength;
         }
-        railPos = _railStopPositions [currentStop];
 
+        railPos = _railStopPositions[currentStop];
     }
 
     // Update is called once per frame
-    void Update() {
-        var targetRailPos = _railStopPositions [currentStop];
-        if (Mathf.Approximately(railPos, targetRailPos)) {
-            if (railMove != 0) {
+    void Update()
+    {
+        var targetRailPos = _railStopPositions[currentStop];
+        if (Mathf.Approximately(railPos, targetRailPos))
+        {
+            if (railMove != 0)
+            {
                 stopMoving.Invoke();
             }
+
             // We are at the current stop
             railMove = 0;
-        } else if (railPos < targetRailPos) {
+        }
+        else if (railPos < targetRailPos)
+        {
             // Moving forward
             railMove = 1;
             railPos += railMoveSpeed * Time.deltaTime * railMove;
             if (railPos > targetRailPos)
                 railPos = targetRailPos;
-        } else {
+        }
+        else
+        {
             // Moving backward
             railMove = -1;
             railPos += railMoveSpeed * Time.deltaTime * railMove;
             if (railPos < targetRailPos)
                 railPos = targetRailPos;
         }
-        rail.Evaluate(railPos/_railLength, out var pos, out var tangent, out _);
+
+        rail.Evaluate(railPos / _railLength, out var pos, out var tangent, out _);
         transform.position = pos;
         var tangentVec = new Vector3(tangent.x, 0, tangent.z);
         var newDirection = Vector3.RotateTowards(transform.forward, tangentVec, _rotationSpeed * Time.deltaTime, 0.0f);
         transform.rotation = Quaternion.LookRotation(newDirection);
     }
 
-    public void MoveForward() {
-        if (IsStopped()) {
-            if (_gameState.player.CurrentEnergy >= moveEnergy) {
+    public void MoveForward()
+    {
+        if (IsStopped())
+        {
+            if (_gameState.player.CurrentEnergy >= moveEnergy)
+            {
                 _gameState.player.ModEnergy(-moveEnergy);
                 startMoving.Invoke();
                 currentStop++;
                 currentStop = Mathf.Clamp(currentStop, 0, _railStopPositions.Length);
-            } else {
-                noEnergy.Invoke();
+            }
+            else
+            {
+                OnNoEnergy();
             }
         }
     }
 
-    public void MoveBackward() {
-        if (IsStopped()) {
+    public void OnNoEnergy()
+    {
+        noEnergy.Invoke();
+        _gunLcdLogic.ShowError();
+    }
+
+    public void MoveBackward()
+    {
+        if (IsStopped())
+        {
             currentStop--;
             currentStop = Mathf.Clamp(currentStop, 0, _railStopPositions.Length);
         }
     }
 
-    public bool IsStopped() {
-        var targetRailPos = _railStopPositions [currentStop];
+    public bool IsStopped()
+    {
+        var targetRailPos = _railStopPositions[currentStop];
         return Mathf.Approximately(railPos, targetRailPos);
     }
 
-    public void Stop() {
+    public void Stop()
+    {
         //railMove = 0f;
     }
 }
