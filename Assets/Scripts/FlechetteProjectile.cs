@@ -17,6 +17,8 @@ public class FlechetteProjectile : MonoBehaviour
 
     private float _rotationIterations;
 
+    public List<AudioClip> hitSounds;
+
     private void Awake()
     {
         _cachePosition = transform.position;
@@ -84,6 +86,8 @@ public class FlechetteProjectile : MonoBehaviour
             {
                 powerable.Power();
             }
+
+            PlayHitSound();
         }
         else
         {
@@ -91,12 +95,19 @@ public class FlechetteProjectile : MonoBehaviour
             {
                 CreateClutterReplacement(impactPoint);
                 Destroy(gameObject);
+                PlayHitSound();
             }
             else
             {
                 Debug.LogError("Collided with something i dont know", other.gameObject);
             }
         }
+    }
+
+    public void PlayHitSound()
+    {
+        AudioClip sound = hitSounds[Random.Range(0, hitSounds.Count)];
+        _gameState.musicManager.CreateAudioClip(sound, transform.position, pitchRange: 0.1f);
     }
 
     private void CreateClutterReplacement(Vector3 point)

@@ -4,14 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class MusicManager : MonoBehaviour
 {
     public GameObject temporalAudioPlayerPrefab;
     public static float userDesiredMusicVolume = 0.5f;
     public static float userDesiredSoundVolume = 0.5f;
-    public readonly float GLOBAL_MUSIC_VOLUME_MULT = 0.6f;
-    public readonly float GLOBAL_SOUND_VOLUME_MULT = 1.4f;
+    public readonly float GLOBAL_MUSIC_VOLUME_MULT = 0.69f / 2;
+    public readonly float GLOBAL_SOUND_VOLUME_MULT = 1.337f / 2;
 
     [Range(0, 1)] public float levelVolumeMult = 1.0f;
 
@@ -140,12 +141,10 @@ public class MusicManager : MonoBehaviour
         return userDesiredSoundVolume * GLOBAL_SOUND_VOLUME_MULT;
     }
 
-    public void CreateAudioClip(AudioClip audioClip, float soundInstanceVolumeMult = 1.0f, bool respectBinning = false)
-    {
-        CreateAudioClip(audioClip, transform.position, soundInstanceVolumeMult, respectBinning);
-    }
-
-    public void CreateAudioClip(AudioClip audioClip, Vector3 position, float soundInstanceVolumeMult = 1.0f,
+    public void CreateAudioClip(AudioClip audioClip,
+        Vector3 position,
+        float pitchRange = 0.0f,
+        float soundInstanceVolumeMult = 1.0f,
         bool respectBinning = false)
     {
         // Registering in the jail
@@ -171,6 +170,7 @@ public class MusicManager : MonoBehaviour
         TimedLife life = adp.GetComponent<TimedLife>();
         life.aliveTime = audioClip.length * 2;
         source.clip = audioClip;
+        source.pitch = 1.0f + Random.Range(-pitchRange, pitchRange);
         source.volume = MathF.Min(GetVolumeSound() * soundInstanceVolumeMult * levelVolumeMult, 1.0f);
         source.Play();
     }

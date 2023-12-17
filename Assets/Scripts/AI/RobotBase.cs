@@ -261,6 +261,7 @@ public class RobotBase : MonoBehaviour
         onDeath.Invoke();
 
         myClutterSpawner.SpawnClutter();
+        _gameState.player.killCount++;
         
         Destroy(gameObject);
     }
