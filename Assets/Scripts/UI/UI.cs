@@ -71,7 +71,7 @@ public class UI : MonoBehaviour
         // Battery Overlay
         a = hurtOverlayIntensityCurve.Evaluate(_batteryOverlayIntensityProgress);
         c = batteryOverlayImage.color;
-        c.a = a * 0.35f;
+        c.a = a * 0.15f;
         batteryOverlayImage.color = c;
 
         // DEATH
