@@ -30,9 +30,10 @@ public class RobotBase : MonoBehaviour
     private int _flechetteCount;
     public bool blinded;
 
-    [Header("Sounds")]
-    public RobotAudioCollection robotAudioCollection;
-    private bool _hasPlayedHello;
+    [Header("Sounds")] public RobotAudioCollection robotAudioCollection;
+    public float barkTimer = 8f;
+    private float _barkTimer;
+    public LayerMask bumpLayerMask;
 
     [Header("The machine spirit")] public float health;
     public float healthRegen = 5;
@@ -66,7 +67,7 @@ public class RobotBase : MonoBehaviour
         _gameState = FindObjectOfType<GameState>();
         _healthCurrent = health;
         _damageBuffer = 0;
-        _hasPlayedHello = false;
+        _barkTimer = 0;
     }
 
     private void Start()
@@ -84,6 +85,8 @@ public class RobotBase : MonoBehaviour
 
     private void Update()
     {
+        _barkTimer -= Time.deltaTime;
+
         if (_robotAIState != robotAIState)
         {
             var tmpState = _robotAIState;
@@ -247,9 +250,8 @@ public class RobotBase : MonoBehaviour
 
     public void HelloSound()
     {
-        if (!_hasPlayedHello)
+        if (_barkTimer <= 0)
         {
-            _hasPlayedHello = true;
             robotAudioCollection.Play(robotAudioCollection.NextHelloSound());
         }
     }
@@ -271,6 +273,17 @@ public class RobotBase : MonoBehaviour
                 otherBase.DealDamage(1000000f);
                 DealDamage(1000000f);
             }
+        }
+
+        
+        if ((bumpLayerMask.value & (1 << collision.transform.gameObject.layer)) > 0) {
+            _gameState.musicManager.CreateAudioClip(
+                robotAudioCollection.NetxtBumpSound(),
+                transform.position,
+                pitchRange: 0.1f,
+                soundInstanceVolumeMult: 0.95f,
+                respectBinning: true
+            );
         }
     }
 

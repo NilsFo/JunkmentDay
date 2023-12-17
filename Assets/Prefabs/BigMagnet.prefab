@@ -120,6 +120,10 @@ MonoBehaviour:
       m_Calls: []
   powered: 0
   powerTime: 5
+  onPowerSounds:
+  - {fileID: 8300000, guid: 0e29d9ee8a73c374e9db1c046724cfc7, type: 3}
+  - {fileID: 8300000, guid: edccb41cc708d374c9b74d4c621b4345, type: 3}
+  - {fileID: 8300000, guid: c189c7838360b014baca03de0c9097dc, type: 3}
 --- !u!1 &7463768686031702781
 GameObject:
   m_ObjectHideFlags: 0
@@ -280,6 +284,10 @@ MonoBehaviour:
       m_Calls: []
   powered: 0
   powerTime: 5
+  onPowerSounds:
+  - {fileID: 8300000, guid: 0e29d9ee8a73c374e9db1c046724cfc7, type: 3}
+  - {fileID: 8300000, guid: edccb41cc708d374c9b74d4c621b4345, type: 3}
+  - {fileID: 8300000, guid: c189c7838360b014baca03de0c9097dc, type: 3}
 --- !u!1 &8151324001064893659
 GameObject:
   m_ObjectHideFlags: 0

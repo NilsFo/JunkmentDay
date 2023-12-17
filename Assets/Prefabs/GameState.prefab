@@ -50,7 +50,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 100
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -178,7 +178,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 100
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -368,7 +368,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 100
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -497,6 +497,7 @@ MonoBehaviour:
   temporalAudioPlayerPrefab: {fileID: 5751576040073109321, guid: e6711be86a49aaa4e882bd1f33f050f8,
     type: 3}
   levelVolumeMult: 0.5
+  binningVolumeMult: 0.25
   initiallyKnownSongs:
   - {fileID: 7015036360315949943}
   - {fileID: 4986843602984350807}
@@ -554,7 +555,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 100
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500

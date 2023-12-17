@@ -6,7 +6,7 @@ using UnityEngine;
 public class Batterie : MonoBehaviour
 {
     public bool collected;
-
+    public AudioClip collectSound;
     private GameState _gameState;
 
     // Start is called before the first frame update
@@ -25,6 +25,8 @@ public class Batterie : MonoBehaviour
             if (Vector3.Distance(transform.position, playerPos) < 0.1f)
             {
                 _gameState.player.ModEnergy(1);
+                _gameState.musicManager.CreateAudioClip(collectSound, transform.position, respectBinning: false);
+                _gameState.ui.StartBatteryOverlay();
                 Destroy(gameObject);
             }
         }
@@ -38,7 +40,6 @@ public class Batterie : MonoBehaviour
             if (player.PlayerInView(transform.position))
             {
                 collected = true;
-                _gameState.ui.StartBatteryOverlay();
                 Destroy(GetComponent<Rigidbody>());
                 Destroy(GetComponent<BoxCollider>());
                 Destroy(GetComponent<SphereCollider>());

@@ -82,6 +82,14 @@ MonoBehaviour:
   - {fileID: 7403356163333540285}
   - {fileID: 7752283177449689962}
   - {fileID: 523890948957304450}
+  bumpSounds:
+  - {fileID: 8300000, guid: 7bd51c440b2c4da44a48e46c76ecbb08, type: 3}
+  - {fileID: 8300000, guid: eec943909c8a0cb4793473c5838ed896, type: 3}
+  - {fileID: 8300000, guid: 36ac2e561d183af4ebf73cf52e0e027f, type: 3}
+  bumpLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  bumpAudioVolume: 0.5
 --- !u!54 &7442902849349011407
 Rigidbody:
   m_ObjectHideFlags: 0

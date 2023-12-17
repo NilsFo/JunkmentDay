@@ -14,6 +14,8 @@ public class GunLCDLogic : MonoBehaviour
     private float _lcdErrorTime;
     private bool _lcdErrorPulse;
 
+    public AudioSource errorSFX;
+
     private void Awake()
     {
         _gameState = FindObjectOfType<GameState>();
@@ -55,6 +57,19 @@ public class GunLCDLogic : MonoBehaviour
         lcdPrompt.enabled = _lcdErrorTime < 0;
         displayText.enabled = _lcdErrorTime < 0;
         lcdError.enabled = _lcdErrorTime > 0 && _lcdErrorPulse;
+
+        if (lcdError.enabled)
+        {
+            if (!errorSFX.isPlaying)
+            {
+                errorSFX.Play();
+            }
+        }
+        else
+        {
+            errorSFX.Stop();
+        }
+        
     }
 
     public void ShowError()

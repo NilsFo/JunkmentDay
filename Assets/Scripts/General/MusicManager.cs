@@ -16,14 +16,17 @@ public class MusicManager : MonoBehaviour
 
     [Range(0, 1)] public float levelVolumeMult = 1.0f;
 
-    private AudioListener _listener;
+    [Header("Config")] public float binningVolumeMult = 0.25f;
+
+    [Header("Playlist")]
     public List<AudioSource> initiallyKnownSongs;
+    private AudioListener _listener;
 
     private List<AudioSource> _playList;
     public List<int> _desiredMixingVolumes;
     public float musicChangeSpeed = 1;
 
-    private Dictionary<string, float> audioJail;
+    private Dictionary<string, float> _audioJail;
 
     private void Awake()
     {
@@ -39,7 +42,7 @@ public class MusicManager : MonoBehaviour
         SkipFade();
 
         _listener = FindObjectOfType<AudioListener>();
-        audioJail = new Dictionary<string, float>();
+        _audioJail = new Dictionary<string, float>();
     }
 
     // Start is called before the first frame update
@@ -80,7 +83,8 @@ public class MusicManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (audioJail == null) return;
+        if (_audioJail == null) return;
+
         transform.position = _listener.transform.position;
         userDesiredSoundVolume = MathF.Min(userDesiredMusicVolume * 1.0f, 1.0f);
 
@@ -101,16 +105,16 @@ public class MusicManager : MonoBehaviour
             audioSource.volume = trueVolume;
         }
 
-        var keys = audioJail.Keys.ToArrayPooled().ToList();
+        var keys = _audioJail.Keys.ToArrayPooled().ToList();
         List<string> releaseKeys = new List<string>();
         if (keys.Count > 0)
         {
             for (var i = 0; i < keys.Count; i++)
             {
                 string key = keys[i];
-                float timeout = audioJail[key];
+                float timeout = _audioJail[key];
                 timeout -= Time.deltaTime;
-                audioJail[key] = timeout;
+                _audioJail[key] = timeout;
 
                 if (timeout < 0)
                 {
@@ -121,7 +125,7 @@ public class MusicManager : MonoBehaviour
 
         foreach (var releaseKey in releaseKeys)
         {
-            audioJail.Remove(releaseKey);
+            _audioJail.Remove(releaseKey);
         }
 
         string pg = "";
@@ -150,17 +154,20 @@ public class MusicManager : MonoBehaviour
         // Registering in the jail
         string clipName = audioClip.name;
         float jailTime = audioClip.length * 0.42f;
-        if (audioJail.ContainsKey(clipName))
+        float binningMult=1.0f;
+        
+        if (_audioJail.ContainsKey(clipName))
         {
-            audioJail[clipName] = jailTime;
+            _audioJail[clipName] = jailTime;
             if (respectBinning)
             {
+                binningMult = binningVolumeMult;
                 return;
             }
         }
         else
         {
-            audioJail.Add(clipName, jailTime);
+            _audioJail.Add(clipName, jailTime);
         }
 
         // Instancing the sound
@@ -171,7 +178,22 @@ public class MusicManager : MonoBehaviour
         life.aliveTime = audioClip.length * 2;
         source.clip = audioClip;
         source.pitch = 1.0f + Random.Range(-pitchRange, pitchRange);
-        source.volume = MathF.Min(GetVolumeSound() * soundInstanceVolumeMult * levelVolumeMult, 1.0f);
+        source.volume = MathF.Min(GetVolumeSound() * soundInstanceVolumeMult * levelVolumeMult*binningMult, 1.0f);
         source.Play();
+    }
+
+    public float AudioBinExternalSound(AudioClip audioClip)
+    {
+        string clipName = audioClip.name;
+        float jailTime = audioClip.length * 0.42f;
+        if (_audioJail.ContainsKey(clipName))
+        {
+            return binningVolumeMult;
+        }
+        else
+        {
+            _audioJail.Add(clipName, jailTime);
+            return 1.0f;
+        }
     }
 }

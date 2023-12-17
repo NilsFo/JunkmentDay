@@ -18,11 +18,13 @@ public class PowerGun : MonoBehaviour
     public GameObject flechetteProjectilePrefab;
     public float flechetteProjectileSpeed = 100f;
 
+    [Header("SFX")] public AudioSource pullRobotsButtonSFX;
+
     public float cycleTime = 0.2f;
     private float _cycleTimer;
 
     public float magnetizeCooldown = 1f;
-    public float magnetizeDelay = 35f/60f;
+    public float magnetizeDelay = 35f / 60f;
     private float _magnetizeTime;
 
     public UnityEvent OnShoot;
@@ -50,16 +52,16 @@ public class PowerGun : MonoBehaviour
         if (_cycleTimer < 0)
             _cycleTimer = 0;
 
-        
+
         _magnetizeTime -= Time.deltaTime;
         if (_magnetizeTime < 0)
             _magnetizeTime = 0;
-        
+
         var mouse = Mouse.current;
         var keyboard = Keyboard.current;
         if (mouse == null)
             return;
-        
+
         if (mouse.leftButton.isPressed)
         {
             if (_gameState.restartEnabled)
@@ -76,7 +78,7 @@ public class PowerGun : MonoBehaviour
         {
             if (mouse.rightButton.wasPressedThisFrame)
             {
-                if (_gameState.allFlechettes.Count>0)
+                if (_gameState.allFlechettes.Count > 0)
                 {
                     ActivateAllFlechettes();
                 }
@@ -144,17 +146,19 @@ public class PowerGun : MonoBehaviour
         if (_magnetizeTime > 0)
             return;
         _magnetizeTime = magnetizeCooldown;
-        
+
         OnMagnetize.Invoke();
         Invoke(nameof(ActivateAllFlechettesLate), magnetizeDelay);
     }
 
-    private void ActivateAllFlechettesLate() {
+    private void ActivateAllFlechettesLate()
+    {
+        pullRobotsButtonSFX.Play();
+
         foreach (RobotBase robot in _gameState.allRobots)
         {
             robot.RequestPullToPlayer();
         }
-
     }
 
     [Obsolete]
@@ -192,7 +196,8 @@ public class PowerGun : MonoBehaviour
         }
     }
 
-    private void ShootFlechetteGun() {
+    private void ShootFlechetteGun()
+    {
         if (_cycleTimer > 0 || _magnetizeTime > 0)
             return;
         _cycleTimer = cycleTime;
@@ -204,12 +209,12 @@ public class PowerGun : MonoBehaviour
         projectile.transform.rotation = flechetteProjectileOrigin.transform.rotation;
         projectile.transform.RotateAround(projectile.transform.position, projectile.transform.up, 180f);
         var rotation = projectile.transform.rotation;
-        
+
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
         rb.AddForce(direction * flechetteProjectileSpeed, ForceMode.VelocityChange);
 
         FlechetteProjectile flechetteProjectile = projectile.GetComponent<FlechetteProjectile>();
-        flechetteProjectile.initialRotation = rotation; 
+        flechetteProjectile.initialRotation = rotation;
 
         OnShoot.Invoke();
     }

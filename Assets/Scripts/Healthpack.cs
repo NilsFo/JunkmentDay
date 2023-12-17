@@ -7,6 +7,7 @@ public class Healthpack : MonoBehaviour
 {
     public bool collected;
     public int healAmount = 25;
+    public AudioClip collectSound;
 
     private GameState _gameState;
 
@@ -26,6 +27,8 @@ public class Healthpack : MonoBehaviour
             if (Vector3.Distance(transform.position, playerPos) < 0.1f)
             {
                 _gameState.player.ModHealth(healAmount);
+                _gameState.ui.StartHealingOverlay();
+                _gameState.musicManager.CreateAudioClip(collectSound,transform.position,respectBinning:true);
                 Destroy(gameObject);
             }
         }
@@ -41,7 +44,6 @@ public class Healthpack : MonoBehaviour
                 if (player.CurrentHealth == player.maxHealth)
                     return;
                 collected = true;
-                _gameState.ui.StartHealingOverlay();
                 Destroy(GetComponent<Rigidbody>());
                 Destroy(GetComponent<BoxCollider>());
                 Destroy(GetComponent<SphereCollider>());

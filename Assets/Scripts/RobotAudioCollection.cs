@@ -8,9 +8,12 @@ public class RobotAudioCollection : MonoBehaviour
 {
     public List<AudioClip> helloSounds;
     public List<AudioClip> deathSounds;
+    public List<AudioClip> bumpSounds;
 
     public AudioSource robotAudioSource;
     public TimedLife timedLife;
+
+    private GameState _gameState;
 
     public AudioClip NextHelloSound()
     {
@@ -22,6 +25,17 @@ public class RobotAudioCollection : MonoBehaviour
     {
         AudioClip sound = deathSounds[Random.Range(0, deathSounds.Count)];
         return sound;
+    }
+    
+    public AudioClip NetxtBumpSound()
+    {
+        AudioClip sound = bumpSounds[Random.Range(0, bumpSounds.Count)];
+        return sound;
+    }
+
+    private void Awake()
+    {
+        _gameState = FindObjectOfType<GameState>();
     }
 
     private void Start()
@@ -35,10 +49,10 @@ public class RobotAudioCollection : MonoBehaviour
         {
             return;
         }
-        
+
         robotAudioSource.pitch += Random.Range(-0.1f, 0.1f);
         robotAudioSource.clip = clip;
+        robotAudioSource.volume *= _gameState.musicManager.AudioBinExternalSound(clip);
         robotAudioSource.Play();
     }
-    
 }

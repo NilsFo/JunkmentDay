@@ -150,6 +150,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shooter: {fileID: 0}
   damage: 10
+  creationClips:
+  - {fileID: 8300000, guid: 37e23f18df741434f95b1501891f2abd, type: 3}
+  - {fileID: 8300000, guid: 48a337cbbae92334ebb08758c66eb6c8, type: 3}
+  - {fileID: 8300000, guid: 80f3b081240dd7e43bacbde81a52121d, type: 3}
+  impactClips:
+  - {fileID: 8300000, guid: cb093db2d71aa764d905d0a14778860f, type: 3}
 --- !u!1 &5328202108909818954
 GameObject:
   m_ObjectHideFlags: 0

@@ -119,6 +119,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collected: 0
   healAmount: 55
+  collectSound: {fileID: 8300000, guid: d69ebca8f6a9d2b4caede79cf9ac08cf, type: 3}
 --- !u!1001 &2714667824192544389
 PrefabInstance:
   m_ObjectHideFlags: 0

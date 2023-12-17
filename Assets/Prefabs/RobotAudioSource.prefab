@@ -157,6 +157,10 @@ MonoBehaviour:
   deathSounds:
   - {fileID: 8300000, guid: 8ccd2555a1cf41d4a9c7ceeb331c252f, type: 3}
   - {fileID: 8300000, guid: 307c78bba31db4c4d9bcafbcc36da148, type: 3}
+  bumpSounds:
+  - {fileID: 8300000, guid: f6ea92d6b9539ac4b8212f5ee6d92e8a, type: 3}
+  - {fileID: 8300000, guid: 44f236a26bc666b44aaa88bd4c6b425b, type: 3}
+  - {fileID: 8300000, guid: a0ff70731dafe4446a207a18e1ae3a99, type: 3}
   robotAudioSource: {fileID: 8692579259375942051}
   timedLife: {fileID: 3373947346395289389}
 --- !u!114 &3373947346395289389
