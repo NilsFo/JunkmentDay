@@ -36,6 +36,7 @@ public class GameState : MonoBehaviour
     public GameObject uiHurtIndicatorPrefab;
 
     [Header("Player info")] public PlayerState playerState;
+    private bool _finaleMusic;
 
     [Header("Encounters")] public int blockadesCount;
     public int blockadesDestroyed;
@@ -63,6 +64,7 @@ public class GameState : MonoBehaviour
         InvokeRepeating(nameof(UpdateMusic), 0, 1.337f);
         // Application.targetFrameRate = FPS;
         restartEnabled = false;
+        _finaleMusic = false;
         StopAllRobotSpawns();
     }
 
@@ -92,7 +94,7 @@ public class GameState : MonoBehaviour
             case PlayerState.PLAYING:
                 if (IsPlayerInDanger())
                 {
-                    if (blockadesDestroyed >= 6)
+                    if (_finaleMusic)
                     {
                         musicManager.Play(3);
                     }
@@ -154,10 +156,7 @@ public class GameState : MonoBehaviour
             return;
         }
 
-        if (blockadesCount == blockadesDestroyed)
-        {
-            Win();
-        }
+        Win();
     }
 
     public void Win()
@@ -180,4 +179,10 @@ public class GameState : MonoBehaviour
             spawner.autoSpawn = false;
         }
     }
+
+    public void RequestFinaleMusic()
+    {
+        _finaleMusic = true;
+    }
+    
 }

@@ -117,10 +117,19 @@ public class UI : MonoBehaviour
 
     public void WinUI()
     {
-        winTextOne.enabled = true;
+        Invoke(nameof(WinUIFadeout), 5f);
+        Invoke(nameof(WinUIOne), 7f);
+        Invoke(nameof(WinUITwo), 10f);
+    }
+    
+    private void WinUIFadeout()
+    {
         fadeoutEnabled = true;
-
-        Invoke(nameof(WinUITwo), 3f);
+    }
+    
+    private void WinUIOne()
+    {
+        winTextOne.enabled = true;
     }
 
     private void WinUITwo()

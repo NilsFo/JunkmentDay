@@ -1440,7 +1440,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   targetingRect: {fileID: 7923978547062819016}
-  fadeOutSpeed: 0.69
+  fadeOutSpeed: 0.33
   deathTextOne: {fileID: 5560492933294819941}
   deathTextTwo: {fileID: 6517313569750749804}
   winTextOne: {fileID: 6013838654337553909}
