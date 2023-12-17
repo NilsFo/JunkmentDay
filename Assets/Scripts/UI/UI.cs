@@ -61,13 +61,13 @@ public class UI : MonoBehaviour
         Color c = hurtOverlayImage.color;
         c.a = a * 0.5f;
         hurtOverlayImage.color = c;
-        
+
         // Health Overlay
         a = hurtOverlayIntensityCurve.Evaluate(_healthOverlayIntensityProgress);
         c = healthOverlayImage.color;
         c.a = a * 0.15f;
         healthOverlayImage.color = c;
-        
+
         // Battery Overlay
         a = hurtOverlayIntensityCurve.Evaluate(_batteryOverlayIntensityProgress);
         c = batteryOverlayImage.color;
@@ -92,14 +92,19 @@ public class UI : MonoBehaviour
         }
 
         int time = (int)_gameState.playTime;
+        int minutes = time / 60;
+        int seconds = time % 60;
+        string formattedSeconds = $"{seconds:D2}";
+
         winTextTwo.text = "Robots dispatched: " + _gameState.player.killCount + "\n" +
-                          "Time taken: " + time + " seconds.";
+                          "Time taken: " + minutes + ":" + formattedSeconds + ".";
     }
 
     public void StartDamageOverlay()
     {
         _hurtOverlayIntensityProgress = 0;
     }
+
     public void StartHealingOverlay()
     {
         if (!(_healthOverlayIntensityProgress < 1))
@@ -107,6 +112,7 @@ public class UI : MonoBehaviour
             _healthOverlayIntensityProgress = 0;
         }
     }
+
     public void StartBatteryOverlay()
     {
         if (!(_batteryOverlayIntensityProgress < 1))
@@ -121,12 +127,12 @@ public class UI : MonoBehaviour
         Invoke(nameof(WinUIOne), 7f);
         Invoke(nameof(WinUITwo), 10f);
     }
-    
+
     private void WinUIFadeout()
     {
         fadeoutEnabled = true;
     }
-    
+
     private void WinUIOne()
     {
         winTextOne.enabled = true;

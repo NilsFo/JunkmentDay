@@ -28,7 +28,12 @@ public class RobotClutterSpawner : MonoBehaviour
 
         for (int i = 0; i < spawnCount; i++)
         {
-            Vector3 pos = RandomPointInBounds(originCollider);
+            Vector3 pos = transform.position;
+            if (originCollider != null)
+            {
+                pos = RandomPointInBounds(originCollider);
+            }
+
             GameObject scrap = Instantiate(scrapPrefab, transform);
             scrap.transform.position = pos;
             scrap.SetActive(false);

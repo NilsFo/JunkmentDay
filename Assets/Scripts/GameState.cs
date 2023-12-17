@@ -43,7 +43,6 @@ public class GameState : MonoBehaviour
     public int blockadesDestroyed;
 
     public PlayerData player => _player;
-    public MusicManager MusicManager => _musicManager;
     public PowerGun PowerGun => _powerGun;
     public BigMagnet BigMagnet => _bigMagnet;
     public CharacterMovement CharacterMovement => _movement;

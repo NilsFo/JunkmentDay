@@ -17,7 +17,7 @@ public class FlechetteProjectile : MonoBehaviour
 
     private float _rotationIterations;
 
-    public AudioClip hitSound;
+    public List<AudioClip> hitSounds;
 
     private void Awake()
     {
@@ -86,7 +86,7 @@ public class FlechetteProjectile : MonoBehaviour
             {
                 powerable.Power();
             }
-            
+
             PlayHitSound();
         }
         else
@@ -106,7 +106,8 @@ public class FlechetteProjectile : MonoBehaviour
 
     public void PlayHitSound()
     {
-        _gameState.MusicManager.CreateAudioClip(hitSound,transform.position);
+        AudioClip sound = hitSounds[Random.Range(0, hitSounds.Count)];
+        _gameState.musicManager.CreateAudioClip(sound, transform.position, pitchRange: 0.1f);
     }
 
     private void CreateClutterReplacement(Vector3 point)
