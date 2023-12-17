@@ -17,6 +17,7 @@ public class RobotBase : MonoBehaviour
     public TMP_Text debugTF;
     public Rigidbody rb;
     public List<ParticleSystem> stunnedParticles;
+    [FormerlySerializedAs("mySpawner")] public RobotClutterSpawner myClutterSpawner;
 
     [Header("AI Config")] public Transform head;
     public float playerDetectionDistance = 50f;
@@ -26,6 +27,7 @@ public class RobotBase : MonoBehaviour
     private float _getUpDeathTimer;
     private bool _pullNextFrame;
     private int _flechetteCount;
+    public bool blinded;
 
     [Header("The machine spirit")] public float health;
     public float healthRegen = 5;
@@ -256,7 +258,10 @@ public class RobotBase : MonoBehaviour
         Debug.LogWarning("Robot " + name + " has died. RIP in pieces.");
         myMarkable.RemoveAllFlechettes();
         myAttractable.OnRobotDeath();
+        onDeath.Invoke();
 
+        myClutterSpawner.SpawnClutter();
+        
         Destroy(gameObject);
     }
 
@@ -267,7 +272,7 @@ public class RobotBase : MonoBehaviour
 
     public bool PlayerDetected()
     {
-        return GetDistanceToPlayer() <= playerDetectionDistance && PlayerInView();
+        return GetDistanceToPlayer() <= playerDetectionDistance && PlayerInView()&& !blinded;
     }
 
     public float GetDistanceToPlayer()
@@ -277,7 +282,7 @@ public class RobotBase : MonoBehaviour
 
     public bool PlayerInView()
     {
-        return _gameState.player.PlayerInView(head.position);
+        return _gameState.player.PlayerInView(head.position) && !blinded;
     }
 
     public void ResetVisionRange()
@@ -347,4 +352,6 @@ public class RobotBase : MonoBehaviour
         rb.AddForce(force, ForceMode.VelocityChange);
         myMarkable.RemoveAllFlechettes();
     }
+
+    
 }

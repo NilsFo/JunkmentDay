@@ -11,6 +11,7 @@ public class GameState : MonoBehaviour
     private PowerGun _powerGun;
     private BigMagnet _bigMagnet;
     private CharacterMovement _movement;
+    private MusicManager _musicManager;
 
     public enum PlayerState
     {
@@ -42,6 +43,7 @@ public class GameState : MonoBehaviour
     public int blockadesDestroyed;
 
     public PlayerData player => _player;
+    public MusicManager MusicManager => _musicManager;
     public PowerGun PowerGun => _powerGun;
     public BigMagnet BigMagnet => _bigMagnet;
     public CharacterMovement CharacterMovement => _movement;
@@ -71,7 +73,7 @@ public class GameState : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _movement.enabled = playerState == PlayerState.PLAYING;
+        _movement.inputDisabled = playerState == PlayerState.DEAD;
 
         if (playerState == PlayerState.PLAYING)
         {
@@ -162,6 +164,12 @@ public class GameState : MonoBehaviour
     public void Win()
     {
         Debug.LogWarning("A winner is you!");
+        StopAllRobotSpawns();
+        foreach (RobotBase robot in allRobots)
+        {
+            robot.Kill();
+        }
+
         playerState = PlayerState.WIN;
         ui.WinUI();
     }
@@ -184,5 +192,4 @@ public class GameState : MonoBehaviour
     {
         _finaleMusic = true;
     }
-    
 }

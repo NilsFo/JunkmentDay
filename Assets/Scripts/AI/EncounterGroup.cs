@@ -36,7 +36,7 @@ public class EncounterGroup : MonoBehaviour
         {
             foreach (RobotBase robot in roamingRobots)
             {
-                robot.gameObject.SetActive(false);
+                robot.blinded = true;
             }
 
             _setupDone = true;
@@ -63,7 +63,7 @@ public class EncounterGroup : MonoBehaviour
     {
         foreach (RobotBase robot in roamingRobots)
         {
-            robot.gameObject.SetActive(true);
+            robot.blinded = false;
         }
     }
 
