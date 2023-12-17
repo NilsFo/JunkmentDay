@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 6600554069236638786}
   - component: {fileID: 4382379025895395621}
   - component: {fileID: 9210029708931218696}
+  - component: {fileID: 8958214102870543620}
   m_Layer: 13
   m_Name: CatapultRobot
   m_TagString: Untagged
@@ -114,6 +115,7 @@ MonoBehaviour:
   rb: {fileID: 6600554069236638786}
   stunnedParticles:
   - {fileID: 6333068779442866262}
+  myClutterSpawner: {fileID: 8958214102870543620}
   head: {fileID: 812427213114174878}
   playerDetectionDistance: 50
   getUpTimer: 1.337
@@ -214,6 +216,23 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &8958214102870543620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6207079495784422046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dda58159232644348acd2d40ebfeea37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrapPrefab: {fileID: 3062510579948425428, guid: 60adce1ec8cfc024691685530ef66644,
+    type: 3}
+  originCollider: {fileID: 8156998459897898069}
+  clutterCountMin: 2
+  clutterCountMax: 5
 --- !u!1 &7537719042713571768
 GameObject:
   m_ObjectHideFlags: 0

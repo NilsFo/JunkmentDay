@@ -71,7 +71,7 @@ public class GameState : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _movement.enabled = playerState == PlayerState.PLAYING;
+        _movement.inputDisabled = playerState == PlayerState.DEAD;
 
         if (playerState == PlayerState.PLAYING)
         {
@@ -162,6 +162,12 @@ public class GameState : MonoBehaviour
     public void Win()
     {
         Debug.LogWarning("A winner is you!");
+        StopAllRobotSpawns();
+        foreach (RobotBase robot in allRobots)
+        {
+            robot.Kill();
+        }
+
         playerState = PlayerState.WIN;
         ui.WinUI();
     }
@@ -184,5 +190,4 @@ public class GameState : MonoBehaviour
     {
         _finaleMusic = true;
     }
-    
 }

@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 6699157956084649710}
   - component: {fileID: 4382379025895395621}
   - component: {fileID: 9210029708931218696}
+  - component: {fileID: 3279576379753370496}
   m_Layer: 13
   m_Name: RobotSaw
   m_TagString: Untagged
@@ -41,7 +42,6 @@ Transform:
   - {fileID: 6726604237182429865}
   - {fileID: 6310651910502341018}
   - {fileID: 420354791246182685}
-  - {fileID: 3657240177372218783}
   - {fileID: 5283146421582066124}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -64,6 +64,7 @@ MonoBehaviour:
   rb: {fileID: 6600554069236638786}
   stunnedParticles:
   - {fileID: 8028193850572293605}
+  myClutterSpawner: {fileID: 3279576379753370496}
   head: {fileID: 812427213114174878}
   playerDetectionDistance: 50
   getUpTimer: 1.1337
@@ -196,6 +197,23 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &3279576379753370496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6207079495784422046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dda58159232644348acd2d40ebfeea37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrapPrefab: {fileID: 3062510579948425428, guid: 60adce1ec8cfc024691685530ef66644,
+    type: 3}
+  originCollider: {fileID: 8156998459897898069}
+  clutterCountMin: 3
+  clutterCountMax: 6
 --- !u!1 &6294574029357636979
 GameObject:
   m_ObjectHideFlags: 0
@@ -229,50 +247,6 @@ Transform:
   - {fileID: 5126558549352112987}
   m_Father: {fileID: 7039115972650536572}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &6743688093461593775
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3657240177372218783}
-  - component: {fileID: 4676949270836593651}
-  m_Layer: 13
-  m_Name: RobotClutterSpawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3657240177372218783
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6743688093461593775}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7039115972650536572}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4676949270836593651
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6743688093461593775}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dda58159232644348acd2d40ebfeea37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7259133545798001571
 GameObject:
   m_ObjectHideFlags: 0
