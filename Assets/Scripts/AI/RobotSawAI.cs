@@ -50,7 +50,7 @@ public class RobotSawAI : MonoBehaviour
             OnAIStateChanged(tmpState, RobotAIStateCurrent);
         }
 
-        bool attractableMagnetized = robotBase.myAttractable.IsMagnetized();
+        bool attractableMagnetized = robotBase.myAttractable.IsMagnetized() && robotBase.FlechetteProgressReached;
         if (RobotAIStateCurrent == RobotBase.RobotAIState.MAGNETIZED
             && !attractableMagnetized)
         {

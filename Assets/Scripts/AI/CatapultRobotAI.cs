@@ -94,7 +94,7 @@ public class CatapultRobotAI : MonoBehaviour
             Debug.LogError("Robot has an unknown state!", gameObject);
         }
 
-        bool attractableMagnetized = robotBase.myAttractable.IsMagnetized();
+        bool attractableMagnetized = robotBase.myAttractable.IsMagnetized() && robotBase.FlechetteProgressReached;
         if (RobotAIStateCurrent == RobotBase.RobotAIState.MAGNETIZED
             && !attractableMagnetized)
         {

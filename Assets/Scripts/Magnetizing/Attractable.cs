@@ -79,8 +79,7 @@ public class Attractable : MonoBehaviour
                     return true;
                 }
 
-                //return myMarkable.marked;
-                return true;
+                return myMarkable.marked;
             }
         }
 
