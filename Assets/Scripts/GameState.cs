@@ -139,7 +139,6 @@ public class GameState : MonoBehaviour
                 {
                     musicManager.Play(1);
                 }
-
                 break;
             case PlayerState.DEAD:
                 musicManager.Play(2);

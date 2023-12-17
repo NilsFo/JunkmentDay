@@ -46,15 +46,15 @@ public class ClutterScrapCollapser : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if ((bumpLayerMask.value & (1 << collision.transform.gameObject.layer)) > 0) {
-            _gameState.musicManager.CreateAudioClip(
-                bumpSounds[Random.Range(0, bumpSounds.Count)],
-                transform.position,
-                pitchRange: 0.1f,
-                soundInstanceVolumeMult: bumpAudioVolume,
-                respectBinning: true
-            );
-        }
+        // if ((bumpLayerMask.value & (1 << collision.transform.gameObject.layer)) > 0) {
+        //     _gameState.musicManager.CreateAudioClip(
+        //         bumpSounds[Random.Range(0, bumpSounds.Count)],
+        //         transform.position,
+        //         pitchRange: 0.1f,
+        //         soundInstanceVolumeMult: bumpAudioVolume,
+        //         respectBinning: true
+        //     );
+        // }
     }
 
     // Update is called once per frame

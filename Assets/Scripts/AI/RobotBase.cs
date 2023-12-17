@@ -43,6 +43,9 @@ public class RobotBase : MonoBehaviour
     private Vector3 _rotationCache = Vector3.zero;
     private float _originalDampening;
 
+    private bool _markedForMagnetDeath;
+    private Vector3 _markForDeathLocation;
+
     public int flechetteStunThreshold = 5;
     public int FlechetteCount => myMarkable.myFlechettes.Count;
     public float FlechetteProgress => MathF.Min((float)(FlechetteCount) / flechetteStunThreshold, 1);
@@ -81,6 +84,8 @@ public class RobotBase : MonoBehaviour
         _getUpTimer = 0;
         _getUpDeathTimer = 0;
         _originalDampening = rb.drag;
+        _markedForMagnetDeath = false;
+        _markForDeathLocation = new Vector3();
     }
 
     private void Update()
@@ -167,6 +172,11 @@ public class RobotBase : MonoBehaviour
         if (transform.position.y <= -100)
         {
             DealDamage(100000f);
+        }
+
+        if (_markedForMagnetDeath)
+        {
+            DealDamage(80f * Time.deltaTime);
         }
 
         // GameOver
@@ -275,8 +285,8 @@ public class RobotBase : MonoBehaviour
             }
         }
 
-        
-        if ((bumpLayerMask.value & (1 << collision.transform.gameObject.layer)) > 0) {
+        if ((bumpLayerMask.value & (1 << collision.transform.gameObject.layer)) > 0)
+        {
             _gameState.musicManager.CreateAudioClip(
                 robotAudioCollection.NetxtBumpSound(),
                 transform.position,
@@ -390,5 +400,15 @@ public class RobotBase : MonoBehaviour
 
         rb.AddForce(force, ForceMode.VelocityChange);
         myMarkable.RemoveAllFlechettes();
+    }
+
+    public void MarkForMagnetDeath()
+    {
+        if (!_markedForMagnetDeath)
+        {
+            _markedForMagnetDeath = true;
+            _markForDeathLocation = transform.position;
+            rb.drag = 8f;
+        }
     }
 }
