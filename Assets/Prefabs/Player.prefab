@@ -47,9 +47,9 @@ MonoBehaviour:
   displayText: {fileID: 3020151427312386230}
   lcdPrompt: {fileID: 7134953064407472794}
   lcdError: {fileID: 6898311585275335652}
-  lcdErrorTime: 2
-  lcdErrorPulseRate: 0.55
-  errorSFX: {fileID: 8300000, guid: 81bd3a8686f0359499225c85750ad8bb, type: 3}
+  lcdErrorTime: 1
+  lcdErrorPulseRate: 0.33
+  errorSFX: {fileID: 8300000, guid: 91e8066d756f0ea49a28446d8c3d2357, type: 3}
 --- !u!1 &1536973572046542633
 GameObject:
   m_ObjectHideFlags: 0
