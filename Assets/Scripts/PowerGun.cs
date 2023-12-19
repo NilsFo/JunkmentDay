@@ -46,8 +46,10 @@ public class PowerGun : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
+        if (Time.timeScale == 0)
+            return;
+        
         _cycleTimer -= Time.deltaTime;
         if (_cycleTimer < 0)
             _cycleTimer = 0;
