@@ -262,7 +262,8 @@ public class RobotBase : MonoBehaviour
     {
         if (_barkTimer <= 0)
         {
-            robotAudioCollection.Play(robotAudioCollection.NextHelloSound());
+            // Debug.Log("Playing 'hello' sound from: " + name, gameObject);
+            robotAudioCollection.Play(robotAudioCollection.NextHelloSound(), true);
         }
     }
 
@@ -309,7 +310,7 @@ public class RobotBase : MonoBehaviour
 
         robotAudioCollection.transform.parent = null;
         robotAudioCollection.timedLife.timerActive = true;
-        robotAudioCollection.Play(robotAudioCollection.NextDeathSound());
+        robotAudioCollection.Play(robotAudioCollection.NextDeathSound(), false);
 
         Destroy(gameObject);
     }
@@ -360,7 +361,7 @@ public class RobotBase : MonoBehaviour
 
     public void PullToPlayer()
     {
-        Debug.Log("Pulling " + name + " to player.");
+        // Debug.Log("Pulling " + name + " to player.");
         if (robotAIState != RobotAIState.RAGDOLL)
         {
             Debug.LogError("Failed to pull. Robot is no ragdoll!");

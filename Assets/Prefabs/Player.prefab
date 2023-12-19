@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3064094893946952112}
   - component: {fileID: 3509018271609770337}
-  - component: {fileID: 2404212517441398614}
   m_Layer: 0
   m_Name: Gun LCD Logic
   m_TagString: Untagged
@@ -50,103 +49,7 @@ MonoBehaviour:
   lcdError: {fileID: 6898311585275335652}
   lcdErrorTime: 2
   lcdErrorPulseRate: 0.55
-  errorSFX: {fileID: 2404212517441398614}
---- !u!82 &2404212517441398614
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 191392790594191698}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 37f3ff44bbc1e8a4d8a1f2748cef81f1, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: 0.613
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 191
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  errorSFX: {fileID: 8300000, guid: 81bd3a8686f0359499225c85750ad8bb, type: 3}
 --- !u!1 &1536973572046542633
 GameObject:
   m_ObjectHideFlags: 0
@@ -1212,6 +1115,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b829bdcff00f1da46a3ee80c66f8044e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sensitivitySettings: 0.5
+  sensitivityScaling: 3
   mouseLookEnabled: 1
   clampInDegrees: {x: 360, y: 180}
   lockCursor: 1

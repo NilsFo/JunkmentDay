@@ -13,8 +13,7 @@ public class GunLCDLogic : MonoBehaviour
     public float lcdErrorPulseRate = 0.5f;
     private float _lcdErrorTime;
     private bool _lcdErrorPulse;
-
-    public AudioSource errorSFX;
+    public AudioClip errorSFX;
 
     private void Awake()
     {
@@ -31,6 +30,18 @@ public class GunLCDLogic : MonoBehaviour
     private void Pulse()
     {
         _lcdErrorPulse = !_lcdErrorPulse;
+        if (_lcdErrorPulse)
+        {
+            PlayErrorSound();
+        }
+    }
+
+    public void PlayErrorSound()
+    {
+        GameObject clip = _gameState.musicManager.CreateAudioClip(
+            errorSFX, transform.position,
+            threeDimensional: false);
+        clip.transform.parent = _gameState.player.transform;
     }
 
     // Update is called once per frame
@@ -47,35 +58,29 @@ public class GunLCDLogic : MonoBehaviour
 
         text += count;
 
-        if (count>99)
+        if (count > 99)
         {
             text = "99";
         }
-        
+
         displayText.text = text;
 
         lcdPrompt.enabled = _lcdErrorTime < 0;
         displayText.enabled = _lcdErrorTime < 0;
         lcdError.enabled = _lcdErrorTime > 0 && _lcdErrorPulse;
 
-        if (lcdError.enabled)
+        if (_lcdErrorTime < 0)
         {
-            if (!errorSFX.isPlaying)
-            {
-                errorSFX.Play();
-            }
+            CancelInvoke(nameof(Pulse));
         }
-        else
-        {
-            errorSFX.Stop();
-        }
-        
     }
 
     public void ShowError()
     {
         _lcdErrorTime = lcdErrorTime;
-        _lcdErrorPulse = true;
+        _lcdErrorPulse = false;
+        
+        Pulse();
         CancelInvoke(nameof(Pulse));
         InvokeRepeating(nameof(Pulse), lcdErrorPulseRate, lcdErrorPulseRate);
     }

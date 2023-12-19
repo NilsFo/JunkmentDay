@@ -83,7 +83,7 @@ public class GameState : MonoBehaviour
         StopAllRobotSpawns();
 
         // Setting up main menu
-        sliderVolume.value = musicManager.levelVolumeMult;
+        sliderVolume.value = MusicManager.userDesiredMusicVolume;
         sliderMouseSensitivity.value = _mouseLook.sensitivitySettings;
         playBT.onClick.AddListener(Play);
     }
@@ -109,6 +109,7 @@ public class GameState : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+            musicManager.SkipFade();
         }
 
         if (playerState == PlayerState.PLAYING)
@@ -117,7 +118,8 @@ public class GameState : MonoBehaviour
         }
 
         // Applying settings
-        musicManager.levelVolumeMult = sliderVolume.value;
+        MusicManager.userDesiredMusicVolume = sliderVolume.value;
+        MusicManager.userDesiredSoundVolume = sliderVolume.value;
         _mouseLook.sensitivitySettings = sliderMouseSensitivity.value;
         
         // Restart level

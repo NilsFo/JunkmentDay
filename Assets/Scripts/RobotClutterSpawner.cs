@@ -48,7 +48,7 @@ public class RobotClutterSpawner : MonoBehaviour
 
     public void SpawnClutter()
     {
-        Debug.Log("Spawning clutter");
+        // Debug.Log("Spawning clutter");
         foreach (GameObject scrap in _myScrap)
         {
             scrap.SetActive(true);

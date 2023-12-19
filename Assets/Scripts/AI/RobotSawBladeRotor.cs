@@ -15,6 +15,9 @@ public class RobotSawBladeRotor : MonoBehaviour
     private float _rotationSpeedCurrent;
     public RobotSawAI robotSawAI;
 
+    private GameState _gameState;
+    public AudioSource sawbladeRotorSFX;
+
     public void TurnOn()
     {
         _spinning = true;
@@ -27,9 +30,15 @@ public class RobotSawBladeRotor : MonoBehaviour
         hurtBox.gameObject.SetActive(false);
     }
 
+    private void Awake()
+    {
+        _gameState=FindObjectOfType<GameState>();
+    }
+
     // Start is called before the first frame update
     void Start() {
         TurnOn();
+        _gameState.musicManager.RegisterSoundScaling(sawbladeRotorSFX);
     }
 
     private void FixedUpdate()

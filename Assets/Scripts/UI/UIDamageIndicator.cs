@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,6 +28,13 @@ public class UIDamageIndicator : MonoBehaviour
         if (_gameState.playerState != GameState.PlayerState.PLAYING)
         {
             Destroy(gameObject);
+            return;
+        }
+
+        if (damageSourcePos.IsDestroyed())
+        {
+            Destroy(gameObject);
+            return;
         }
 
         Vector3 playerPos = _gameState.player.transform.position;
