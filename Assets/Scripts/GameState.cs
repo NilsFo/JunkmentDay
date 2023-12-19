@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -47,6 +48,8 @@ public class GameState : MonoBehaviour
     [Header("Main Menu")] public GameObject menuUI;
     public GameObject ingameUI;
     public Button playBT;
+    public Slider sliderMouseSensitivity;
+    public Slider sliderVolume;
 
     [Header("Encounters")] public int blockadesCount;
     public int blockadesDestroyed;
@@ -79,6 +82,9 @@ public class GameState : MonoBehaviour
         _finaleMusic = false;
         StopAllRobotSpawns();
 
+        // Setting up main menu
+        sliderVolume.value = musicManager.levelVolumeMult;
+        sliderMouseSensitivity.value = _mouseLook.sensitivitySettings;
         playBT.onClick.AddListener(Play);
     }
 
@@ -109,11 +115,22 @@ public class GameState : MonoBehaviour
         {
             playTime += Time.deltaTime;
         }
+
+        // Applying settings
+        musicManager.levelVolumeMult = sliderVolume.value;
+        _mouseLook.sensitivitySettings = sliderMouseSensitivity.value;
+        
+        // Restart level
+        var keyboard = Keyboard.current;
+        if (keyboard.backspaceKey.wasPressedThisFrame)
+        {
+            RestartLevel();
+        }
     }
 
     public void RestartLevel()
     {
-        SceneManager.LoadScene("PHScene");
+        SceneManager.LoadScene("GameplayScene");
     }
 
     public void UpdateMusic()
@@ -139,6 +156,7 @@ public class GameState : MonoBehaviour
                 {
                     musicManager.Play(1);
                 }
+
                 break;
             case PlayerState.DEAD:
                 musicManager.Play(2);

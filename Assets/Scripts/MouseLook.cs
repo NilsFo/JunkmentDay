@@ -4,15 +4,22 @@ using UnityEngine.InputSystem;
 [AddComponentMenu("Camera/Simple Smooth Mouse Look ")]
 public class MouseLook : MonoBehaviour
 {
-    Vector2 _mouseAbsolute;
-    Vector2 _smoothMouse;
+    private Vector2 _mouseAbsolute;
+    private Vector2 _smoothMouse;
 
+    [Header("Player Settings")] [Range(0, 1)]public float sensitivitySettings = 0.5f;
+    public float sensitivityScaling = 3;
+    private float _sensitivitySettings;
+    
+    [Header("Editor Config")]
     public bool mouseLookEnabled = true;
 
     public Vector2 clampInDegrees = new Vector2(360, 180);
     public bool lockCursor;
-    public Vector2 sensitivity = new Vector2(2, 2);
+    public Vector2 sensitivity = new Vector2(4, 4);
     public Vector2 smoothing = new Vector2(3, 3);
+    
+    [Header("Look Direction")]
     public Vector2 targetDirection;
     public Vector2 targetCharacterDirection;
 
@@ -44,6 +51,10 @@ public class MouseLook : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
+        
+        // Updating sensitivity
+        _sensitivitySettings = sensitivitySettings * Mathf.Pow(sensitivityScaling, sensitivitySettings);
+        _sensitivitySettings = Mathf.Clamp(_sensitivitySettings, 0.01f, sensitivityScaling);
 
         // Allow the script to clamp based on a desired target value.
         var targetOrientation = Quaternion.Euler(targetDirection);
@@ -53,7 +64,7 @@ public class MouseLook : MonoBehaviour
         var mouseDelta = Mouse.current.delta.ReadValue();
 
         // Scale input against the sensitivity setting and multiply that against the smoothing value.
-        mouseDelta = Vector2.Scale(mouseDelta, new Vector2(sensitivity.x * smoothing.x, sensitivity.y * smoothing.y));
+        mouseDelta = Vector2.Scale(mouseDelta, new Vector2(sensitivity.x * smoothing.x * _sensitivitySettings, sensitivity.y * smoothing.y * _sensitivitySettings));
 
         // Interpolate mouse movement over time to apply smoothing delta.
         _smoothMouse.x = Mathf.Lerp(_smoothMouse.x, mouseDelta.x, 1f / smoothing.x);
