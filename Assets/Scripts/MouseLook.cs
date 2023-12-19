@@ -39,7 +39,7 @@ public class MouseLook : MonoBehaviour
 
     void Update()
     {
-        if (!mouseLookEnabled)
+        if (!mouseLookEnabled || Time.timeScale == 0)
         {
             Cursor.lockState = CursorLockMode.None;
             return;
