@@ -637,6 +637,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5976071629391176779, guid: a1a4e4ef1aa113240bc1e0ac48ae6096,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -3477864577585124648, guid: a1a4e4ef1aa113240bc1e0ac48ae6096,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -885264430177597064, guid: a1a4e4ef1aa113240bc1e0ac48ae6096,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a1a4e4ef1aa113240bc1e0ac48ae6096,
         type: 3}
       propertyPath: m_Name
@@ -644,8 +659,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a1a4e4ef1aa113240bc1e0ac48ae6096,
         type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a1a4e4ef1aa113240bc1e0ac48ae6096,
+        type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1396792749669637682, guid: a1a4e4ef1aa113240bc1e0ac48ae6096,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6773935864695782916, guid: a1a4e4ef1aa113240bc1e0ac48ae6096,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
