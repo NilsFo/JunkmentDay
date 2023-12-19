@@ -41,7 +41,8 @@ AudioSource:
   m_GameObject: {fileID: 3609021680286026195}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 7083230278447279246, guid: f6b42c8c72ddff44d85489982bf54605,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: d45ae573ac06fa7428bf3a28fb8a5697, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.3
@@ -1047,6 +1048,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: RobotAudioSource
       objectReference: {fileID: 0}
+    - target: {fileID: 8692579259375942051, guid: b74b2725e64d49b44bc8027c7d92aa91,
+        type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 7083230278447279246, guid: f6b42c8c72ddff44d85489982bf54605,
+        type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

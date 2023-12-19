@@ -107,7 +107,7 @@ public class FlechetteProjectile : MonoBehaviour
     public void PlayHitSound()
     {
         AudioClip sound = hitSounds[Random.Range(0, hitSounds.Count)];
-        _gameState.musicManager.CreateAudioClip(sound, transform.position, pitchRange: 0.1f, soundInstanceVolumeMult:0.8f);
+        _gameState.musicManager.CreateAudioClip(sound, transform.position, pitchRange: 0.1f, soundVolume:0.8f);
     }
 
     private void CreateClutterReplacement(Vector3 point)

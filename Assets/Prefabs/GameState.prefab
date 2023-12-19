@@ -41,7 +41,8 @@ AudioSource:
   m_GameObject: {fileID: 1348983193224835727}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -8970177069747173286, guid: f6b42c8c72ddff44d85489982bf54605,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: a0768349dda5e2944bd4932e2b20ff30, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -169,7 +170,8 @@ AudioSource:
   m_GameObject: {fileID: 4472424963860863751}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -8970177069747173286, guid: f6b42c8c72ddff44d85489982bf54605,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 85d38820a32200b4da58784a6a0a54c8, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -320,6 +322,8 @@ MonoBehaviour:
   menuUI: {fileID: 0}
   ingameUI: {fileID: 0}
   playBT: {fileID: 0}
+  sliderMouseSensitivity: {fileID: 0}
+  sliderVolume: {fileID: 0}
   blockadesCount: 0
   blockadesDestroyed: 0
 --- !u!1 &6405857053366159236
@@ -363,7 +367,8 @@ AudioSource:
   m_GameObject: {fileID: 6405857053366159236}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -8970177069747173286, guid: f6b42c8c72ddff44d85489982bf54605,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 63716154687090b4b8b2744b38a1e74c, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -500,15 +505,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   temporalAudioPlayerPrefab: {fileID: 5751576040073109321, guid: e6711be86a49aaa4e882bd1f33f050f8,
     type: 3}
+  audioMixer: {fileID: 24100000, guid: f6b42c8c72ddff44d85489982bf54605, type: 2}
+  masterTrackName: master
+  musicTrackName: music
+  soundEffectsTrackName: sfx
   levelVolumeMult: 0.5
   binningVolumeMult: 0.25
+  musicFadeSpeed: 1
   initiallyKnownSongs:
   - {fileID: 7015036360315949943}
   - {fileID: 4986843602984350807}
   - {fileID: 9051145935874287446}
   - {fileID: 3480402531203970085}
-  _desiredMixingVolumes: 
-  musicChangeSpeed: 1
+  initiallyKnownSoundEffects:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &8420202017468933575
 GameObject:
   m_ObjectHideFlags: 0
@@ -550,7 +562,8 @@ AudioSource:
   m_GameObject: {fileID: 8420202017468933575}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -8970177069747173286, guid: f6b42c8c72ddff44d85489982bf54605,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: a8b7553bac6e8a14191bf2cc4b92d97c, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1

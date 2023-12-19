@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -26,14 +27,21 @@ public class CatapultShot : MonoBehaviour
             if (playerData == null)
                 return;
             Debug.Log("Catapult Shot is hurting the Player for " + damage + " damage", this);
-            playerData.Damage(damage, shooter.transform);
+
+            Transform t = _gameState.transform;
+            if (!shooter.IsDestroyed())
+            {
+                t = shooter.transform;
+            }
+            
+            playerData.Damage(damage, t);
         }
 
         _gameState.musicManager.CreateAudioClip(
             impactClips[Random.Range(0, impactClips.Count)],
             transform.position,
             pitchRange: 0.1f,
-            soundInstanceVolumeMult: 0.69f,
+            soundVolume: 0.69f,
             respectBinning: true
         );
 
@@ -46,7 +54,7 @@ public class CatapultShot : MonoBehaviour
             creationClips[Random.Range(0, creationClips.Count)],
             transform.position,
             pitchRange: 0.1f,
-            soundInstanceVolumeMult: 0.69f,
+            soundVolume: 0.69f,
             respectBinning: true
         );
     }

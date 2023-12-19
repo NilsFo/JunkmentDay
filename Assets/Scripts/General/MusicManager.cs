@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Audio;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class MusicManager : MonoBehaviour
@@ -11,19 +13,33 @@ public class MusicManager : MonoBehaviour
     public GameObject temporalAudioPlayerPrefab;
     public static float userDesiredMusicVolume = 0.5f;
     public static float userDesiredSoundVolume = 0.5f;
-    public readonly float GLOBAL_MUSIC_VOLUME_MULT = 0.69f;
-    public readonly float GLOBAL_SOUND_VOLUME_MULT = 1.337f;
+    public static float userDesiredMasterVolume = 0.5f;
 
-    [Range(0, 1)] public float levelVolumeMult = 1.0f;
+    [Header("Custom sound level balance")] [Range(0, 1)]
+    public float baselineMusicVolume = 1.0f;
+
+    [Range(0, 1)] public float baselineSoundVolume = 1.0f;
+    [Range(0, 1)] public float baselineMasterVolume = 1.0f;
+
+    public float userDesiredMusicVolumeDB =>
+        Mathf.Log10(Mathf.Clamp(userDesiredMusicVolume*baselineMusicVolume, 0.0001f, 1.0f)) * 20;
+
+    public float userDesiredSoundVolumeDB =>
+        Mathf.Log10(Mathf.Clamp(userDesiredSoundVolume*baselineSoundVolume, 0.0001f, 1.0f)) * 20;
+
+    public float userDesiredMasterVolumeDB =>
+        Mathf.Log10(Mathf.Clamp(userDesiredMasterVolume*baselineMasterVolume, 0.0001f, 1.0f)) * 20;
+
+    [Header("Mixer")] public AudioMixer audioMixer;
+    public string masterTrackName = "master";
+    public string musicTrackName = "music";
+    public string soundEffectsTrackName = "sfx";
 
     [Header("Config")] public float binningVolumeMult = 0.25f;
-    public float musicChangeSpeed = 1;
+    public float musicFadeSpeed = 1;
 
     [Header("Playlist")] public List<AudioSource> initiallyKnownSongs;
-    public List<AudioSource> initiallyKnownSoundEffects;
     private AudioListener _listener;
-    private Dictionary<AudioSource, float> _registeredSoundEffects;
-    private List<AudioSource> _registeredAudioSourcesSFX; // Exposed for debug
 
     private List<AudioSource> _playList;
     private List<int> _desiredMixingVolumes;
@@ -35,8 +51,6 @@ public class MusicManager : MonoBehaviour
     {
         _playList = new List<AudioSource>();
         _desiredMixingVolumes = new List<int>();
-        _registeredSoundEffects = new Dictionary<AudioSource, float>();
-        _registeredAudioSourcesSFX = new List<AudioSource>();
 
         foreach (AudioSource song in initiallyKnownSongs)
         {
@@ -55,11 +69,6 @@ public class MusicManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        foreach (AudioSource soundEffect in initiallyKnownSoundEffects)
-        {
-            _registeredSoundEffects.Add(soundEffect, soundEffect.volume);
-            _registeredAudioSourcesSFX.Add(soundEffect);
-        }
     }
 
     public void Play(int index, bool fromBeginning = false)
@@ -88,37 +97,17 @@ public class MusicManager : MonoBehaviour
     {
         for (var i = 0; i < _playList.Count; i++)
         {
-            _playList[i].volume = _desiredMixingVolumes[i] * GetVolumeMusic();
+            _playList[i].volume = _desiredMixingVolumes[i];
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        List<AudioSource> deleteListSFX = new List<AudioSource>();
-        foreach (AudioSource source in _registeredSoundEffects.Keys)
-        {
-            if (source.IsDestroyed())
-            {
-                deleteListSFX.Add(source);
-            }
-            else
-            {
-                source.volume = _registeredSoundEffects[source] * GetVolumeSound();
-            }
-        }
-
-        foreach (AudioSource source in deleteListSFX)
-        {
-            _registeredSoundEffects.Remove(source);
-        }
-
-        if (_registeredAudioSourcesSFX.Count != _registeredSoundEffects.Keys.Count)
-        {
-            _registeredAudioSourcesSFX.Clear();
-            _registeredAudioSourcesSFX.AddRange(_registeredSoundEffects.Keys);
-        }
-
+        audioMixer.SetFloat(musicTrackName, userDesiredMusicVolumeDB);
+        audioMixer.SetFloat(soundEffectsTrackName, userDesiredSoundVolumeDB);
+        audioMixer.SetFloat(masterTrackName, userDesiredMasterVolumeDB);
+        
         if (_audioJail == null) return;
 
         transform.position = _listener.transform.position;
@@ -130,10 +119,10 @@ public class MusicManager : MonoBehaviour
             var volumeMixing = _desiredMixingVolumes[i];
 
             var trueVolume = Mathf.Lerp(audioSource.volume,
-                volumeMixing * GetVolumeMusic(),
-                Time.deltaTime * musicChangeSpeed);
+                volumeMixing,
+                Time.deltaTime * musicFadeSpeed);
 
-            if (trueVolume - Time.deltaTime * musicChangeSpeed <= 0 && volumeMixing == 0)
+            if (trueVolume - Time.deltaTime * musicFadeSpeed <= 0 && volumeMixing == 0)
             {
                 trueVolume = 0;
             }
@@ -173,18 +162,26 @@ public class MusicManager : MonoBehaviour
 
     public float GetVolumeMusic()
     {
-        return userDesiredMusicVolume * GLOBAL_MUSIC_VOLUME_MULT * levelVolumeMult;
+        audioMixer.GetFloat(musicTrackName, out float volume);
+        return volume;
     }
 
     public float GetVolumeSound()
     {
-        return userDesiredSoundVolume * GLOBAL_SOUND_VOLUME_MULT * levelVolumeMult;
+        audioMixer.GetFloat(soundEffectsTrackName, out float volume);
+        return volume;
+    }
+
+    public float GetMasterSound()
+    {
+        audioMixer.GetFloat(masterTrackName, out float volume);
+        return volume;
     }
 
     public GameObject CreateAudioClip(AudioClip audioClip,
         Vector3 position,
         float pitchRange = 0.0f,
-        float soundInstanceVolumeMult = 1.0f,
+        float soundVolume = 1.0f,
         bool threeDimensional = true,
         bool respectBinning = false)
     {
@@ -225,18 +222,10 @@ public class MusicManager : MonoBehaviour
 
         source.clip = audioClip;
         source.pitch = 1.0f + Random.Range(-pitchRange, pitchRange);
-        source.volume = MathF.Min(GetVolumeSound() * soundInstanceVolumeMult * binningMult, 1.0f);
+        source.volume = MathF.Min(soundVolume * binningMult, 1.0f);
         source.Play();
 
         return soundInstance;
-    }
-
-    public void RegisterSoundScaling(AudioSource audioSource)
-    {
-        if (!_registeredSoundEffects.Keys.Contains(audioSource))
-        {
-            _registeredSoundEffects.Add(audioSource, audioSource.volume);
-        }
     }
 
     public float AudioBinExternalSoundMult(AudioClip audioClip)

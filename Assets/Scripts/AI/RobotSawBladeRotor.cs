@@ -38,7 +38,6 @@ public class RobotSawBladeRotor : MonoBehaviour
     // Start is called before the first frame update
     void Start() {
         TurnOn();
-        _gameState.musicManager.RegisterSoundScaling(sawbladeRotorSFX);
     }
 
     private void FixedUpdate()

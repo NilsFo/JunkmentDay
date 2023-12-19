@@ -292,7 +292,7 @@ public class RobotBase : MonoBehaviour
                 robotAudioCollection.NetxtBumpSound(),
                 transform.position,
                 pitchRange: 0.1f,
-                soundInstanceVolumeMult: 0.95f,
+                soundVolume: 0.95f,
                 respectBinning: true
             );
         }

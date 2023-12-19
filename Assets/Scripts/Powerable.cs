@@ -75,7 +75,7 @@ public class Powerable : MonoBehaviour
                 onPowerSounds[Random.Range(0, onPowerSounds.Count)],
                 transform.position,
                 pitchRange: 0.1f,
-                soundInstanceVolumeMult: 0.69f,
+                soundVolume: 0.69f,
                 respectBinning: true
             );
         }
