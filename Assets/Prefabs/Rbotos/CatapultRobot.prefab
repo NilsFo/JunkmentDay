@@ -238,8 +238,8 @@ MonoBehaviour:
   scrapPrefab: {fileID: 3062510579948425428, guid: 60adce1ec8cfc024691685530ef66644,
     type: 3}
   originCollider: {fileID: 8156998459897898069}
-  clutterCountMin: 2
-  clutterCountMax: 5
+  clutterCountMin: 4
+  clutterCountMax: 8
 --- !u!1 &7537719042713571768
 GameObject:
   m_ObjectHideFlags: 0

@@ -505,11 +505,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   temporalAudioPlayerPrefab: {fileID: 5751576040073109321, guid: e6711be86a49aaa4e882bd1f33f050f8,
     type: 3}
+  baselineMusicVolume: 0.25
+  baselineSoundVolume: 1
+  baselineMasterVolume: 1
   audioMixer: {fileID: 24100000, guid: f6b42c8c72ddff44d85489982bf54605, type: 2}
   masterTrackName: master
   musicTrackName: music
   soundEffectsTrackName: sfx
-  levelVolumeMult: 0.5
   binningVolumeMult: 0.25
   musicFadeSpeed: 1
   initiallyKnownSongs:
@@ -517,10 +519,6 @@ MonoBehaviour:
   - {fileID: 4986843602984350807}
   - {fileID: 9051145935874287446}
   - {fileID: 3480402531203970085}
-  initiallyKnownSoundEffects:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!1 &8420202017468933575
 GameObject:
   m_ObjectHideFlags: 0
