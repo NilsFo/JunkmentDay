@@ -36,6 +36,7 @@ public class GameState : MonoBehaviour
     [Header("Lists")] public List<RobotBase> allRobots;
     public List<StickyFlechette> allFlechettes;
     public List<RobotSpawner> allSpawners;
+    public List<EncounterGroup> allEncounterGroups;
 
     [Header("World Hookup")] public MusicManager musicManager;
     public Canvas uiCanvas;
@@ -70,6 +71,7 @@ public class GameState : MonoBehaviour
 
         allSpawners = new List<RobotSpawner>();
         allRobots = new List<RobotBase>();
+        allEncounterGroups = new List<EncounterGroup>();
         allFlechettes = new List<StickyFlechette>();
     }
 
@@ -87,6 +89,8 @@ public class GameState : MonoBehaviour
         sliderMouseSensitivity.value = _mouseLook.sensitivitySettings;
         // musicManager.audioMixer.SetFloat(musicManager.masterTrackName, MusicManager.userDesiredMusicVolumeDB);
         playBT.onClick.AddListener(Play);
+
+        Invoke(nameof(CheckEncounterGroups), 0.69f);
     }
 
     private void Play()
@@ -121,12 +125,37 @@ public class GameState : MonoBehaviour
         // Applying settings
         MusicManager.userDesiredMasterVolume = sliderVolume.value;
         _mouseLook.sensitivitySettings = sliderMouseSensitivity.value;
-        
+
         // Restart level
         var keyboard = Keyboard.current;
         if (keyboard.backspaceKey.wasPressedThisFrame)
         {
             RestartLevel();
+        }
+    }
+
+    private void CheckEncounterGroups()
+    {
+        foreach (RobotBase robot in allRobots)
+        {
+            bool found = false;
+            foreach (EncounterGroup encounterGroup in allEncounterGroups)
+            {
+                if (found)
+                {
+                    continue;
+                }
+
+                if (encounterGroup.roamingRobots.Contains(robot))
+                {
+                    found = true;
+                }
+            }
+
+            if (!found)
+            {
+                Debug.LogWarning("Roaming robot not assigned to an encounter Group: " + robot.name, robot.gameObject);
+            }
         }
     }
 

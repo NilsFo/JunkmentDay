@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8802390550372738450}
   - component: {fileID: 3848066024200458067}
   - component: {fileID: 644358482103536634}
+  - component: {fileID: -6932669374909099893}
   m_Layer: 8
   m_Name: ClutterFlechette
   m_TagString: Untagged
@@ -80,6 +81,18 @@ MonoBehaviour:
   OnEndOfLife:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &-6932669374909099893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3062510579948425428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 258399a4356f2de49a5c818c09be9c75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3671240977188319891
 PrefabInstance:
   m_ObjectHideFlags: 0

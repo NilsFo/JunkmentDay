@@ -31,6 +31,14 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 754492819237065909}
+  - {fileID: 4091841120751904237}
+  - {fileID: 1684537657070068255}
+  - {fileID: 7960800257771277262}
+  - {fileID: 4128773805210755923}
+  - {fileID: 715688993869426813}
+  - {fileID: 3527476420099167484}
+  - {fileID: 7267439410582991274}
+  - {fileID: 7035016468445346914}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8406125996140594643
@@ -158,4 +166,596 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0cccd6508fad84b4893692449effa5d4,
     type: 3}
   m_PrefabInstance: {fileID: 1005083669775790942}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3665228560631202196
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 526847947556417908}
+    m_Modifications:
+    - target: {fileID: 481540889659327864, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_Name
+      value: ClutterRobotSmol [Permanent] (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.38099998
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.27400005
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5b5c9483f53f1e14bac77c68716257bb, type: 3}
+--- !u!4 &7267439410582991274 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+    type: 3}
+  m_PrefabInstance: {fileID: 3665228560631202196}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4010392122535840860
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 526847947556417908}
+    m_Modifications:
+    - target: {fileID: 481540889659327864, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_Name
+      value: ClutterRobotSmol [Permanent] (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.38099998
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.27400005
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5b5c9483f53f1e14bac77c68716257bb, type: 3}
+--- !u!4 &7035016468445346914 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+    type: 3}
+  m_PrefabInstance: {fileID: 4010392122535840860}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4070359057510743024
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 526847947556417908}
+    m_Modifications:
+    - target: {fileID: 481540889659327864, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_Name
+      value: ClutterRobotSmol [Permanent] (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.38099998
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.27400005
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5b5c9483f53f1e14bac77c68716257bb, type: 3}
+--- !u!4 &7960800257771277262 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+    type: 3}
+  m_PrefabInstance: {fileID: 4070359057510743024}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4712469752610361889
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 526847947556417908}
+    m_Modifications:
+    - target: {fileID: 481540889659327864, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_Name
+      value: ClutterRobotSmol [Permanent]
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.869
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.274
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5b5c9483f53f1e14bac77c68716257bb, type: 3}
+--- !u!4 &1684537657070068255 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+    type: 3}
+  m_PrefabInstance: {fileID: 4712469752610361889}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6878520362634782021
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 526847947556417908}
+    m_Modifications:
+    - target: {fileID: 3968846334960121326, guid: 1e352604bcd77dc4dbb9c68d0853a1be,
+        type: 3}
+      propertyPath: m_Name
+      value: ClutterRobotScrap [Permanent]
+      objectReference: {fileID: 0}
+    - target: {fileID: 7474930857013395624, guid: 1e352604bcd77dc4dbb9c68d0853a1be,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7474930857013395624, guid: 1e352604bcd77dc4dbb9c68d0853a1be,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 7474930857013395624, guid: 1e352604bcd77dc4dbb9c68d0853a1be,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7474930857013395624, guid: 1e352604bcd77dc4dbb9c68d0853a1be,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7474930857013395624, guid: 1e352604bcd77dc4dbb9c68d0853a1be,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7474930857013395624, guid: 1e352604bcd77dc4dbb9c68d0853a1be,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7474930857013395624, guid: 1e352604bcd77dc4dbb9c68d0853a1be,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7474930857013395624, guid: 1e352604bcd77dc4dbb9c68d0853a1be,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7474930857013395624, guid: 1e352604bcd77dc4dbb9c68d0853a1be,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7474930857013395624, guid: 1e352604bcd77dc4dbb9c68d0853a1be,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1e352604bcd77dc4dbb9c68d0853a1be, type: 3}
+--- !u!4 &4091841120751904237 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7474930857013395624, guid: 1e352604bcd77dc4dbb9c68d0853a1be,
+    type: 3}
+  m_PrefabInstance: {fileID: 6878520362634782021}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6910776988446572611
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 526847947556417908}
+    m_Modifications:
+    - target: {fileID: 481540889659327864, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_Name
+      value: ClutterRobotSmol [Permanent] (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.5699997
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5b5c9483f53f1e14bac77c68716257bb, type: 3}
+--- !u!4 &715688993869426813 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+    type: 3}
+  m_PrefabInstance: {fileID: 6910776988446572611}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7418199662208804034
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 526847947556417908}
+    m_Modifications:
+    - target: {fileID: 481540889659327864, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_Name
+      value: ClutterRobotSmol [Permanent] (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.4300003
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5b5c9483f53f1e14bac77c68716257bb, type: 3}
+--- !u!4 &3527476420099167484 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+    type: 3}
+  m_PrefabInstance: {fileID: 7418199662208804034}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8019496628697518957
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 526847947556417908}
+    m_Modifications:
+    - target: {fileID: 481540889659327864, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_Name
+      value: ClutterRobotSmol [Permanent] (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5b5c9483f53f1e14bac77c68716257bb, type: 3}
+--- !u!4 &4128773805210755923 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6198818233843396670, guid: 5b5c9483f53f1e14bac77c68716257bb,
+    type: 3}
+  m_PrefabInstance: {fileID: 8019496628697518957}
   m_PrefabAsset: {fileID: 0}

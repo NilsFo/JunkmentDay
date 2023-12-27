@@ -24,6 +24,7 @@ public class EncounterGroup : MonoBehaviour
     private void Start()
     {
         _encountered = false;
+        _gameState.allEncounterGroups.Add(this);
     }
 
     private void Update()

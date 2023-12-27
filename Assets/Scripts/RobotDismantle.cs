@@ -13,14 +13,14 @@ public class RobotDismantle : MonoBehaviour
     {
         foreach (GameObject robotPart in robotParts)
         {
-            if (Random.Range(0, 1) <= dismantleChance)
+            if (Random.Range(0.0f, 1.0f) <= dismantleChance)
             {
                 robotPart.transform.parent = null;
 
                 Collider c = robotPart.GetComponent<Collider>();
                 c.enabled = true;
                 robotPart.AddComponent<Rigidbody>();
-                
+
                 TimedLifeAnimated lifeAnimated = robotPart.AddComponent<TimedLifeAnimated>();
                 lifeAnimated.aliveTime = 12;
 
