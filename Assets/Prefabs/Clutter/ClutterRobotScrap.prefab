@@ -53,8 +53,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 482d4fb4ee6e48a68126aafbd0f3ace2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aliveTime: 8
-  timeJitter: 2
+  aliveTime: 20
+  timeJitter: 4
   animationSpeed: 1.1337
   timerActive: 1
   OnEndOfLife:

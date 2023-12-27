@@ -24,6 +24,11 @@ public class TimedLifeAnimated : MonoBehaviour
         {
             aliveTime += Random.Range(-timeJitter, timeJitter);
         }
+        
+        if (OnEndOfLife == null)
+        {
+            OnEndOfLife = new UnityEvent();
+        }
     }
 
     // Update is called once per frame

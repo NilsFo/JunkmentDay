@@ -35,6 +35,7 @@ public class ClutterScrapCollapser : MonoBehaviour
 
         _collapsedState = Random.Range(0, scrapStates.Count);
         scrapStates[_collapsedState].SetActive(true);
+        Debug.Log("Creating scrap: " + scrapStates[_collapsedState].name + " from " + name, gameObject);
 
         transform.rotation = Random.rotation;
     }

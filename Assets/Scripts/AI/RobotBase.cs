@@ -18,7 +18,6 @@ public class RobotBase : MonoBehaviour
     public TMP_Text debugTF;
     public Rigidbody rb;
     public List<ParticleSystem> stunnedParticles;
-    [FormerlySerializedAs("mySpawner")] public RobotClutterSpawner myClutterSpawner;
 
     [Header("AI Config")] public Transform head;
     public float playerDetectionDistance = 50f;
@@ -305,7 +304,6 @@ public class RobotBase : MonoBehaviour
         myAttractable.OnRobotDeath();
         onDeath.Invoke();
 
-        myClutterSpawner.SpawnClutter();
         _gameState.player.killCount++;
 
         robotAudioCollection.transform.parent = null;

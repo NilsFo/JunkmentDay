@@ -14,6 +14,11 @@ public class TimedLife : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (OnEndOfLife == null)
+        {
+            OnEndOfLife = new UnityEvent();
+        }
+
         _timer = 0;
     }
 

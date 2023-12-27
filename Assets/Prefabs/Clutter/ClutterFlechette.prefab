@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8802390550372738450}
-  - component: {fileID: 4326364628318462705}
   - component: {fileID: 3848066024200458067}
   - component: {fileID: 644358482103536634}
   m_Layer: 8
@@ -35,29 +34,6 @@ Transform:
   - {fileID: 3852943052038968696}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &4326364628318462705
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3062510579948425428}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.12
-  m_Height: 1
-  m_Direction: 2
-  m_Center: {x: 0, y: 0.09, z: -0.09}
 --- !u!54 &3848066024200458067
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -97,8 +73,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 482d4fb4ee6e48a68126aafbd0f3ace2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aliveTime: 5
-  timeJitter: 0.69
+  aliveTime: 6
+  timeJitter: 1.69
   animationSpeed: 1.1337
   timerActive: 1
   OnEndOfLife:
