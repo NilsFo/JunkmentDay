@@ -18,6 +18,11 @@ PrefabInstance:
       propertyPath: rotateY
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3438938508478716895, guid: c8a05d98e45ccbc43b64fd1ae27f5018,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9b844080c3713da48b3df29729152e83, type: 2}
     - target: {fileID: 4848933553753570953, guid: c8a05d98e45ccbc43b64fd1ae27f5018,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -307,7 +307,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   robotParts:
-  - {fileID: 3589616494750458215}
   - {fileID: 7858396674664846733}
   - {fileID: 998159787442946759}
   - {fileID: 6015823102980476938}
