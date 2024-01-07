@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 using UnityEngine.Rendering.PostProcessing;
 
 public class CharacterMovement : MonoBehaviour
@@ -17,8 +18,13 @@ public class CharacterMovement : MonoBehaviour
     public float jumpSpeed = 10f;
     public float coyoteTime = 0.1f;
     private float _jumpCoyoteTimer;
+    private int _myLayerMask;
 
-    [Header("Movement Config")] public bool sprintEnabled;
+    [Header("Gamepad Config")] public bool useGamepadOverKBM = false;
+
+    [Header("Movement Config")] public bool sprintEnabled = true;
+    public bool crouchEnabled = true;
+    public bool jumpEnabled = true;
     public bool inputDisabled = false;
 
     public Vector3 velocity;
@@ -41,12 +47,13 @@ public class CharacterMovement : MonoBehaviour
         _controller = GetComponent<CharacterController>();
         _camera = GetComponentInChildren<Camera>();
         _startingPos = transform.position;
-        myLayerMask = GetPhysicsLayerMask(gameObject.layer);
+        _myLayerMask = GetPhysicsLayerMask(gameObject.layer);
     }
 
-    private void Update() {
+    private void Update()
+    {
         Vector3 groundNormal = GetNormalBelow();
-        
+
         bool isGrounded = _controller.isGrounded && Vector3.Angle(groundNormal, Vector3.up) < _controller.slopeLimit;
         // Coyote Time
         if (isGrounded)
@@ -63,7 +70,8 @@ public class CharacterMovement : MonoBehaviour
             }
         }
 
-        var keyboard = Keyboard.current;
+        Keyboard keyboard = Keyboard.current;
+        Gamepad gamepad = Gamepad.current;
         if (keyboard != null)
         {
             if (keyboard.aKey.isPressed)
@@ -87,6 +95,18 @@ public class CharacterMovement : MonoBehaviour
             }
         }
 
+        if (gamepad != null && useGamepadOverKBM)
+        {
+            StickControl stick = gamepad.leftStick;
+            if (stick != null)
+            {
+                var stickX = stick.x.ReadValue();
+                var stickY = stick.y.ReadValue();
+                x = stickX;
+                z = stickY;
+            }
+        }
+
         // Movement
         _acc.x = 0;
         _acc.y = 0;
@@ -94,10 +114,28 @@ public class CharacterMovement : MonoBehaviour
         bool hasJumped = false;
         sprinting = false;
         bool sprint = false;
-        if (!inputDisabled && keyboard != null)
+
+        if (!inputDisabled && (keyboard != null || (gamepad != null && useGamepadOverKBM)))
         {
+            // ############################
+            //   MOVEMENT
+            // ############################
+
+            bool sprintPressed = false;
             if (sprintEnabled)
-                sprint = keyboard.shiftKey.isPressed;
+            {
+                if (useGamepadOverKBM)
+                {
+                    sprintPressed = gamepad.buttonEast.isPressed;
+                }
+                else
+                {
+                    sprintPressed = keyboard.shiftKey.isPressed;
+                }
+
+                sprint = sprintPressed;
+            }
+
             if (isGrounded)
             {
                 velocity.y = -gravity * 0.5f;
@@ -129,7 +167,23 @@ public class CharacterMovement : MonoBehaviour
                 _acc *= acceleration * 0.05f;
             }
 
-            if (keyboard.spaceKey.wasPressedThisFrame && !crouching)
+            // ############################
+            //   JUMPING
+            // ############################
+            bool jumpPressed = false;
+            if (jumpEnabled)
+            {
+                if (useGamepadOverKBM)
+                {
+                    jumpPressed = gamepad.buttonSouth.isPressed;
+                }
+                else
+                {
+                    jumpPressed = keyboard.spaceKey.wasPressedThisFrame;
+                }
+            }
+
+            if (jumpPressed && !crouching)
             {
                 if (isGrounded || _jumpCoyoteTimer <= coyoteTime)
                 {
@@ -155,16 +209,33 @@ public class CharacterMovement : MonoBehaviour
                 }
             }
 
+            // ############################
+            //   CROUCHING
+            // ############################
+            bool crouchPressed = false;
+            if (crouchEnabled)
+            {
+                if (useGamepadOverKBM)
+                {
+                    crouchPressed = gamepad.buttonNorth.isPressed;
+                }
+                else
+                {
+                    crouchPressed = keyboard.leftCtrlKey.wasPressedThisFrame;
+                }
+            }
+
             // Crouching
-            if (keyboard.leftCtrlKey.wasPressedThisFrame && !crouching)
+            if (crouchPressed && !crouching)
             {
                 crouching = true;
                 _controller.height = playerHeightCrouching;
                 _controller.center.Set(0, playerHeightCrouching / 2f, 0);
                 //_camera.transform.localPosition = new Vector3(0,playerHeightCrouching - 0.1f,0);
             }
-            else if ((keyboard.leftCtrlKey.wasPressedThisFrame || keyboard.spaceKey.wasPressedThisFrame ||
-                      keyboard.shiftKey.wasPressedThisFrame) && crouching)
+            else if (((crouchPressed && crouchEnabled) ||
+                      (jumpPressed && jumpEnabled) ||
+                      (sprintPressed && sprintEnabled)) && crouching)
             {
                 var couldStandUp = StandUp();
             }
@@ -211,24 +282,32 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
-    private Vector3 GetNormalBelow() {
+    private Vector3 GetNormalBelow()
+    {
         RaycastHit hit;
-        var layerMask = myLayerMask;
+        var layerMask = _myLayerMask;
         Vector3 result = Vector3.zero;
         // Does the ray intersect any objects excluding the player layer
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, 3f, layerMask)) {
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, 3f, layerMask))
+        {
             result = hit.normal;
         }
+
         return result;
     }
-    private int myLayerMask;
-    public static LayerMask GetPhysicsLayerMask(int currentLayer) {
+
+
+    public static LayerMask GetPhysicsLayerMask(int currentLayer)
+    {
         int finalMask = 0;
-        for (int i=0; i<32; i++) {
+        for (int i = 0; i < 32; i++)
+        {
             if (!Physics.GetIgnoreLayerCollision(currentLayer, i)) finalMask = finalMask | (1 << i);
         }
+
         return finalMask;
     }
+
     private void LateUpdate()
     {
         if (transform.position.y <= -100)
@@ -286,5 +365,10 @@ public class CharacterMovement : MonoBehaviour
 
         velocity.x = vXY.x;
         velocity.z = vXY.z;
+    }
+
+    public void SetUseGamepadOverKbm(bool newValue)
+    {
+        useGamepadOverKBM = newValue;
     }
 }

@@ -14,20 +14,22 @@ public class PowerGun : MonoBehaviour
     private GameState _gameState;
     private GunLCDLogic _lcdLogic;
 
-    [Header("Flechette Gun")] public Transform flechetteProjectileOrigin;
+    [Header("Gamepad Config")] public bool useGamepadOverKBM = true;
+
+    [Header("Shooting: Hookup")] public Transform flechetteProjectileOrigin;
     public GameObject flechetteProjectilePrefab;
     public float flechetteProjectileSpeed = 100f;
 
     [Header("SFX")] public AudioSource pullRobotsButtonSFX;
 
-    public float cycleTime = 0.2f;
+    [Header("Shooting Config")] public float cycleTime = 0.2f;
     private float _cycleTimer;
 
-    public float magnetizeCooldown = 1f;
+    [Header("Magnetize Config")] public float magnetizeCooldown = 1f;
     public float magnetizeDelay = 35f / 60f;
     private float _magnetizeTime;
 
-    public UnityEvent OnShoot;
+    [Header("Callbacks")] public UnityEvent OnShoot;
     public UnityEvent OnMagnetize;
 
     private void Awake()
@@ -46,10 +48,11 @@ public class PowerGun : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update() {
+    void Update()
+    {
         if (Time.timeScale == 0)
             return;
-        
+
         _cycleTimer -= Time.deltaTime;
         if (_cycleTimer < 0)
             _cycleTimer = 0;
@@ -59,12 +62,32 @@ public class PowerGun : MonoBehaviour
         if (_magnetizeTime < 0)
             _magnetizeTime = 0;
 
-        var mouse = Mouse.current;
-        var keyboard = Keyboard.current;
-        if (mouse == null)
-            return;
+        Mouse mouse = Mouse.current;
+        Keyboard keyboard = Keyboard.current;
+        Gamepad gamepad = Gamepad.current;
 
-        if (mouse.leftButton.isPressed)
+        bool shootPressed = false;
+        bool magnetPressed = false;
+
+        if (useGamepadOverKBM)
+        {
+            if (keyboard != null)
+            {
+                shootPressed = gamepad.rightTrigger.isPressed || gamepad.rightShoulder.wasPressedThisFrame;
+                magnetPressed = gamepad.leftTrigger.wasPressedThisFrame || gamepad.leftShoulder.wasPressedThisFrame
+                                                                        || gamepad.buttonWest.wasPressedThisFrame;
+            }
+        }
+        else
+        {
+            if (mouse != null)
+            {
+                shootPressed = mouse.leftButton.isPressed;
+                magnetPressed = mouse.rightButton.wasPressedThisFrame;
+            }
+        }
+
+        if (shootPressed)
         {
             if (_gameState.restartEnabled)
             {
@@ -78,7 +101,7 @@ public class PowerGun : MonoBehaviour
 
         if (_gameState.playerState == GameState.PlayerState.PLAYING)
         {
-            if (mouse.rightButton.wasPressedThisFrame)
+            if (magnetPressed)
             {
                 if (_gameState.allFlechettes.Count > 0)
                 {
@@ -89,11 +112,6 @@ public class PowerGun : MonoBehaviour
                     _lcdLogic.ShowError();
                 }
             }
-
-            // if (keyboard.rKey.wasPressedThisFrame)
-            // {
-            //     ResetMarkers();
-            // }
         }
 
         // cleanup flechettes
@@ -298,5 +316,10 @@ public class PowerGun : MonoBehaviour
         {
             marks.Add(markable);
         }
+    }
+
+    public void SetUseGamepadOverKbm(bool newValue)
+    {
+        useGamepadOverKBM = newValue;
     }
 }

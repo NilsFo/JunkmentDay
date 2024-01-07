@@ -7,20 +7,21 @@ public class MouseLook : MonoBehaviour
     private Vector2 _mouseAbsolute;
     private Vector2 _smoothMouse;
 
-    [Header("Player Settings")] [Range(0, 1)]public float sensitivitySettings = 0.5f;
-    public float sensitivityScaling = 3;
+    [Header("Player Settings")] [Range(0, 1)]
+    public float sensitivitySettings = 0.5f;
+    public float sensitivityScaling = 3f;
     private float _sensitivitySettings;
-    
-    [Header("Editor Config")]
-    public bool mouseLookEnabled = true;
 
-    public Vector2 clampInDegrees = new Vector2(360, 180);
+    [Header("Gamepad Config")] public bool useGamepadOverKBM = true;
+    public Vector2 gamepadScaling = new Vector2(13f, 10f);
+
+    [Header("Control Config")] public bool mouseLookEnabled = true;
+    public Vector2 clampInDegrees = new Vector2(360f, 180f);
     public bool lockCursor;
-    public Vector2 sensitivity = new Vector2(4, 4);
-    public Vector2 smoothing = new Vector2(3, 3);
-    
-    [Header("Look Direction")]
-    public Vector2 targetDirection;
+    public Vector2 sensitivity = new Vector2(4f, 4f);
+    public Vector2 smoothing = new Vector2(3f, 3f);
+
+    [Header("Look Direction")] public Vector2 targetDirection;
     public Vector2 targetCharacterDirection;
 
     // Assign this if there's a parent object controlling motion, such as a Character Controller.
@@ -51,20 +52,38 @@ public class MouseLook : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
-        
+
         // Updating sensitivity
         _sensitivitySettings = sensitivitySettings * Mathf.Pow(sensitivityScaling, sensitivitySettings);
         _sensitivitySettings = Mathf.Clamp(_sensitivitySettings, 0.01f, sensitivityScaling);
 
         // Allow the script to clamp based on a desired target value.
-        var targetOrientation = Quaternion.Euler(targetDirection);
-        var targetCharacterOrientation = Quaternion.Euler(targetCharacterDirection);
+        Quaternion targetOrientation = Quaternion.Euler(targetDirection);
+        Quaternion targetCharacterOrientation = Quaternion.Euler(targetCharacterDirection);
 
         // Get raw mouse input for a cleaner reading on more sensitive mice.
-        var mouseDelta = Mouse.current.delta.ReadValue();
+        Vector2 mouseDelta = new Vector2(0f, 0f);
+        if (useGamepadOverKBM)
+        {
+            Gamepad gamepad = Gamepad.current;
+            if (gamepad != null)
+            {
+                mouseDelta = gamepad.rightStick.ReadValue()*gamepadScaling;
+            }
+        }
+        else
+        {
+            Mouse mouse = Mouse.current;
+            if (mouse != null)
+            {
+                mouseDelta = mouse.delta.ReadValue();
+            }
+        }
 
         // Scale input against the sensitivity setting and multiply that against the smoothing value.
-        mouseDelta = Vector2.Scale(mouseDelta, new Vector2(sensitivity.x * smoothing.x * _sensitivitySettings, sensitivity.y * smoothing.y * _sensitivitySettings));
+        mouseDelta = Vector2.Scale(mouseDelta,
+            new Vector2(sensitivity.x * smoothing.x * _sensitivitySettings,
+                sensitivity.y * smoothing.y * _sensitivitySettings));
 
         // Interpolate mouse movement over time to apply smoothing delta.
         _smoothMouse.x = Mathf.Lerp(_smoothMouse.x, mouseDelta.x, 1f / smoothing.x);
@@ -96,4 +115,10 @@ public class MouseLook : MonoBehaviour
             transform.localRotation *= yRotation;
         }
     }
+
+    public void SetUseGamepadOverKbm(bool newValue)
+    {
+        useGamepadOverKBM = newValue;
+    }
+    
 }

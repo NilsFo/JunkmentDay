@@ -12,6 +12,8 @@ public class EventListener : MonoBehaviour
     public UnityEvent onTriggerEnter, onTriggerExit, onTriggerStay;
     public UnityEvent onEnabled, onDisabled;
 
+    public UnityEvent onUnityEditor, onWebBuild, onDesktopBuild;
+
     void Start()
     {
         onCollisionEnter ??= new UnityEvent();
@@ -22,6 +24,28 @@ public class EventListener : MonoBehaviour
         onTriggerStay ??= new UnityEvent();
         onEnabled ??= new UnityEvent();
         onDisabled ??= new UnityEvent();
+        onUnityEditor ??= new UnityEvent();
+        onWebBuild ??= new UnityEvent();
+        onDesktopBuild ??= new UnityEvent();
+
+        if (Application.platform == RuntimePlatform.WebGLPlayer)
+        {
+            onWebBuild.Invoke();
+        }
+
+        if (Application.platform == RuntimePlatform.WindowsEditor ||
+            Application.platform == RuntimePlatform.LinuxEditor ||
+            Application.platform == RuntimePlatform.OSXEditor)
+        {
+            onUnityEditor.Invoke();
+        }
+
+        if (Application.platform == RuntimePlatform.WindowsPlayer ||
+            Application.platform == RuntimePlatform.LinuxPlayer ||
+            Application.platform == RuntimePlatform.OSXPlayer)
+        {
+            onUnityEditor.Invoke();
+        }
     }
 
     private void OnCollisionEnter(Collision collision)

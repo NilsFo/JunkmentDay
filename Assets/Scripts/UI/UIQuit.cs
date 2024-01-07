@@ -7,8 +7,14 @@ using UnityEngine.InputSystem.Utilities;
 
 public class UIQuit : MonoBehaviour
 {
+    private GameState _gameState;
     public GameObject quitConfirmUI;
     public bool paused = false;
+
+    private void Awake()
+    {
+        _gameState = FindObjectOfType<GameState>();
+    }
 
     private void Start()
     {
@@ -20,7 +26,29 @@ public class UIQuit : MonoBehaviour
     void Update()
     {
 #if !UNITY_WEBGL
-        if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        bool pauseInput = false;
+        bool quitInput = false;
+        Keyboard keyboard = Keyboard.current;
+        Gamepad gamepad = Gamepad.current;
+
+        if (_gameState.PowerGun.useGamepadOverKBM)
+        {
+            if (keyboard != null)
+            {
+                pauseInput = gamepad.startButton.wasPressedThisFrame;
+                quitInput = gamepad.buttonSouth.wasPressedThisFrame;
+            }
+        }
+        else
+        {
+            if (keyboard != null)
+            {
+                pauseInput = keyboard.escapeKey.wasPressedThisFrame;
+                quitInput = keyboard.enterKey.wasPressedThisFrame;
+            }
+        }
+
+        if (pauseInput)
         {
             if (!paused)
             {
@@ -36,7 +64,7 @@ public class UIQuit : MonoBehaviour
             }
         }
 
-        if (Keyboard.current.enterKey.wasPressedThisFrame && paused)
+        if (quitInput && paused)
         {
             Application.Quit();
         }

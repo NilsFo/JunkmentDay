@@ -1119,6 +1119,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sensitivitySettings: 0.5
   sensitivityScaling: 3
+  useGamepadOverKBM: 1
+  gamepadScaling: {x: 13, y: 10}
   mouseLookEnabled: 1
   clampInDegrees: {x: 360, y: 180}
   lockCursor: 1
@@ -1423,7 +1425,10 @@ MonoBehaviour:
   gravity: 10
   jumpSpeed: 4
   coyoteTime: 0.1
+  useGamepadOverKBM: 0
   sprintEnabled: 0
+  crouchEnabled: 0
+  jumpEnabled: 1
   inputDisabled: 0
   velocity: {x: 0, y: 0, z: 0}
   playerHeightStanding: 1.8

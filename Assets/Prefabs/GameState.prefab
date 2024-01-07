@@ -290,6 +290,7 @@ Transform:
   m_Children:
   - {fileID: 6420264876643097448}
   - {fileID: 8261871342566976274}
+  - {fileID: 9015011030429324771}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8827270602849210091
@@ -328,6 +329,7 @@ MonoBehaviour:
   sliderVolume: {fileID: 0}
   blockadesCount: 0
   blockadesDestroyed: 0
+  kbmInputMode: 1
 --- !u!1 &6405857053366159236
 GameObject:
   m_ObjectHideFlags: 0
@@ -521,6 +523,57 @@ MonoBehaviour:
   - {fileID: 4986843602984350807}
   - {fileID: 9051145935874287446}
   - {fileID: 3480402531203970085}
+--- !u!1 &7725506926854830651
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9015011030429324771}
+  - component: {fileID: 7437557480578816619}
+  m_Layer: 0
+  m_Name: GamepadDetector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9015011030429324771
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7725506926854830651}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1067197358450800292}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7437557480578816619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7725506926854830651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 537eb1c15d5641c68edff1a0e12ce665, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGamePad: 0
+  onSwitchToKeyBoard:
+    m_PersistentCalls:
+      m_Calls: []
+  onSwitchToGamePad:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8420202017468933575
 GameObject:
   m_ObjectHideFlags: 0

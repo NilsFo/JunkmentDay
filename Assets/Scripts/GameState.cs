@@ -147,8 +147,20 @@ public class GameState : MonoBehaviour
         _mouseLook.sensitivitySettings = sliderMouseSensitivity.value;
 
         // Restart level
-        var keyboard = Keyboard.current;
-        if (keyboard.backspaceKey.wasPressedThisFrame && Time.timeScale != 0f)
+        Keyboard keyboard = Keyboard.current;
+        Gamepad gamepad = Gamepad.current;
+
+        bool backToMenuClicked = false;
+        if (PowerGun.useGamepadOverKBM)
+        {
+            backToMenuClicked = gamepad.selectButton.wasPressedThisFrame;
+        }
+        else
+        {
+            backToMenuClicked = keyboard.backspaceKey.wasPressedThisFrame;
+        }
+
+        if (backToMenuClicked && Time.timeScale != 0f)
         {
             RestartLevel();
         }
