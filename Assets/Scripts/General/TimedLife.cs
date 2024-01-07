@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 public class TimedLife : MonoBehaviour
 {
@@ -9,17 +10,18 @@ public class TimedLife : MonoBehaviour
     private float _timer = 0;
     public bool timerActive = true;
 
-    public UnityEvent OnEndOfLife;
+    [FormerlySerializedAs("OnEndOfLife")] public UnityEvent onEndOfLife;
 
     // Start is called before the first frame update
     void Start()
     {
-        if (OnEndOfLife == null)
+        if (onEndOfLife == null)
         {
-            OnEndOfLife = new UnityEvent();
+            onEndOfLife = new UnityEvent();
         }
 
         _timer = 0;
+        ResetTimer();
     }
 
     // Update is called once per frame
@@ -35,10 +37,15 @@ public class TimedLife : MonoBehaviour
         }
     }
 
+    public void ResetTimer()
+    {
+        _timer = 0;
+    }
+
     [ContextMenu("Destroy Self")]
     public void DestroySelf()
     {
-        OnEndOfLife.Invoke();
+        onEndOfLife.Invoke();
         Destroy(gameObject);
     }
 }

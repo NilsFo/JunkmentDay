@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3848066024200458067}
   - component: {fileID: 644358482103536634}
   - component: {fileID: -6932669374909099893}
+  - component: {fileID: 7101830735954573211}
   m_Layer: 8
   m_Name: ClutterFlechette
   m_TagString: Untagged
@@ -78,7 +79,7 @@ MonoBehaviour:
   timeJitter: 1.69
   animationSpeed: 1.1337
   timerActive: 1
-  OnEndOfLife:
+  onEndOfLife:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &-6932669374909099893
@@ -93,6 +94,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 258399a4356f2de49a5c818c09be9c75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  falloffYPos: -300
+--- !u!114 &7101830735954573211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3062510579948425428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6175580f275e46d081d9eea5ec36d278, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onCollisionEnter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 644358482103536634}
+        m_TargetAssemblyTypeName: TimedLifeAnimated, Assembly-CSharp
+        m_MethodName: ResetTimer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onCollisionExit:
+    m_PersistentCalls:
+      m_Calls: []
+  onCollisionStay:
+    m_PersistentCalls:
+      m_Calls: []
+  onTriggerEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  onTriggerExit:
+    m_PersistentCalls:
+      m_Calls: []
+  onTriggerStay:
+    m_PersistentCalls:
+      m_Calls: []
+  onEnabled:
+    m_PersistentCalls:
+      m_Calls: []
+  onDisabled:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &3671240977188319891
 PrefabInstance:
   m_ObjectHideFlags: 0

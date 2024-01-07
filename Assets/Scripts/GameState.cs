@@ -55,6 +55,8 @@ public class GameState : MonoBehaviour
     [Header("Encounters")] public int blockadesCount;
     public int blockadesDestroyed;
 
+    [Header("Input mode")] public bool kbmInputMode = true;
+
     public PlayerData player => _player;
     public PowerGun PowerGun => _powerGun;
     public BigMagnet BigMagnet => _bigMagnet;
@@ -90,7 +92,25 @@ public class GameState : MonoBehaviour
         // musicManager.audioMixer.SetFloat(musicManager.masterTrackName, MusicManager.userDesiredMusicVolumeDB);
         playBT.onClick.AddListener(Play);
 
+        // Listen to KBM or Gamepad
+        InputSystem.onActionChange += InputActionChangeCallback;
+
+
+        // Notifying if there are roaming robots. For debug reasons.
         Invoke(nameof(CheckEncounterGroups), 0.69f);
+    }
+
+    private void InputActionChangeCallback(object obj, InputActionChange change)
+    {
+        if (change == InputActionChange.ActionPerformed)
+        {
+            InputAction receivedInputAction = (InputAction)obj;
+            InputDevice lastDevice = receivedInputAction.activeControl.device;
+
+            kbmInputMode = lastDevice.name.Equals("Keyboard") || lastDevice.name.Equals("Mouse");
+            //If needed we could check for "XInputControllerWindows" or "DualShock4GamepadHID"
+            //Maybe if it Contains "controller" could be xbox layout and "gamepad" sony? More investigation needed
+        }
     }
 
     private void Play()
@@ -128,7 +148,7 @@ public class GameState : MonoBehaviour
 
         // Restart level
         var keyboard = Keyboard.current;
-        if (keyboard.backspaceKey.wasPressedThisFrame)
+        if (keyboard.backspaceKey.wasPressedThisFrame && Time.timeScale != 0f)
         {
             RestartLevel();
         }

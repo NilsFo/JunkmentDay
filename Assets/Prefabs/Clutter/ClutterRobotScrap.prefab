@@ -14,10 +14,11 @@ GameObject:
   - component: {fileID: 7442902849349011407}
   - component: {fileID: 1521968459575027406}
   - component: {fileID: -7531723851881821426}
+  - component: {fileID: 213640026262197294}
   m_Layer: 8
   m_Name: ClutterRobotScrap
   m_TagString: Untagged
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -59,7 +60,7 @@ MonoBehaviour:
   timeJitter: 4
   animationSpeed: 1.1337
   timerActive: 1
-  OnEndOfLife:
+  onEndOfLife:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &2972359310038758826
@@ -82,14 +83,6 @@ MonoBehaviour:
   - {fileID: 7752283177449689962}
   - {fileID: 523890948957304450}
   - {fileID: 2782420011711776291}
-  bumpSounds:
-  - {fileID: 8300000, guid: 7bd51c440b2c4da44a48e46c76ecbb08, type: 3}
-  - {fileID: 8300000, guid: eec943909c8a0cb4793473c5838ed896, type: 3}
-  - {fileID: 8300000, guid: 36ac2e561d183af4ebf73cf52e0e027f, type: 3}
-  bumpLayerMask:
-    serializedVersion: 2
-    m_Bits: 128
-  bumpAudioVolume: 0.5
 --- !u!54 &7442902849349011407
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -145,6 +138,54 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   falloffYPos: -300
+--- !u!114 &213640026262197294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3062510579948425428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6175580f275e46d081d9eea5ec36d278, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onCollisionEnter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 644358482103536634}
+        m_TargetAssemblyTypeName: TimedLifeAnimated, Assembly-CSharp
+        m_MethodName: ResetTimer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onCollisionExit:
+    m_PersistentCalls:
+      m_Calls: []
+  onCollisionStay:
+    m_PersistentCalls:
+      m_Calls: []
+  onTriggerEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  onTriggerExit:
+    m_PersistentCalls:
+      m_Calls: []
+  onTriggerStay:
+    m_PersistentCalls:
+      m_Calls: []
+  onEnabled:
+    m_PersistentCalls:
+      m_Calls: []
+  onDisabled:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &483605959157513106
 PrefabInstance:
   m_ObjectHideFlags: 0

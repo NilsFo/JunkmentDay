@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 public class TimedLifeAnimated : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class TimedLifeAnimated : MonoBehaviour
     private float _timer = 0;
     private bool _animating = false;
 
-    public UnityEvent OnEndOfLife;
+    [FormerlySerializedAs("OnEndOfLife")] public UnityEvent onEndOfLife;
 
     // Start is called before the first frame update
     void Start()
@@ -24,10 +25,10 @@ public class TimedLifeAnimated : MonoBehaviour
         {
             aliveTime += Random.Range(-timeJitter, timeJitter);
         }
-        
-        if (OnEndOfLife == null)
+
+        if (onEndOfLife == null)
         {
-            OnEndOfLife = new UnityEvent();
+            onEndOfLife = new UnityEvent();
         }
     }
 
@@ -63,10 +64,15 @@ public class TimedLifeAnimated : MonoBehaviour
         }
     }
 
+    public void ResetTimer()
+    {
+        _timer = 0;
+    }
+
     [ContextMenu("Destroy Self")]
     public void DestroySelf()
     {
-        OnEndOfLife.Invoke();
+        onEndOfLife.Invoke();
         Destroy(gameObject);
     }
 }

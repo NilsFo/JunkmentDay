@@ -11,9 +11,6 @@ public class ClutterScrapCollapser : MonoBehaviour
     private int _collapsedState = 0;
     private GameState _gameState;
 
-    public List<AudioClip> bumpSounds;
-    public LayerMask bumpLayerMask;
-    public float bumpAudioVolume = 0.5f;
 
     private void Awake()
     {
@@ -35,9 +32,9 @@ public class ClutterScrapCollapser : MonoBehaviour
 
         _collapsedState = Random.Range(0, scrapStates.Count);
         scrapStates[_collapsedState].SetActive(true);
-        Debug.Log("Creating scrap: " + scrapStates[_collapsedState].name + " from " + name, gameObject);
-
         transform.rotation = Random.rotation;
+
+        Invoke(nameof(StartOptimizedCleanup), Random.Range(1f, 5f));
     }
 
     private void OnEnable()
@@ -45,21 +42,28 @@ public class ClutterScrapCollapser : MonoBehaviour
         scrapStates[_collapsedState].SetActive(true);
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        // if ((bumpLayerMask.value & (1 << collision.transform.gameObject.layer)) > 0) {
-        //     _gameState.musicManager.CreateAudioClip(
-        //         bumpSounds[Random.Range(0, bumpSounds.Count)],
-        //         transform.position,
-        //         pitchRange: 0.1f,
-        //         soundInstanceVolumeMult: bumpAudioVolume,
-        //         respectBinning: true
-        //     );
-        // }
-    }
-
     // Update is called once per frame
     void Update()
     {
+    }
+
+    private void StartOptimizedCleanup()
+    {
+        StartCoroutine(OptimizedCleanup());
+    }
+
+    IEnumerator OptimizedCleanup()
+    {
+        for (var i = scrapStates.Count - 1; i >= 0; i--)
+        {
+            GameObject scrap = scrapStates[i];
+            if (i!=_collapsedState)
+            {
+                scrapStates.RemoveAt(i);
+                Destroy(scrap);
+            }
+
+            yield return new WaitForSeconds(.1f);
+        }
     }
 }
