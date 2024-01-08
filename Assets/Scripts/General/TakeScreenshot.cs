@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Mime;
@@ -6,11 +7,15 @@ using UnityEngine;
 public class TakeScreenshot : MonoBehaviour
 {
     [Header("Config")] public bool editorOnly = true;
+    public bool autoScreenshotSize = false;
+    private bool _autoScreenshotSize;
 
-    [Header("Parameters")] public int width = 1920; // Width of the screenshot
-    public int height = 1080; // Height of the screenshot
+    [Header("Parameters")] public int width = 1920;
+    public int height = 1080;
+    private int _width = 0;
+    private int _height = 0;
     public KeyCode captureKey = KeyCode.Return;
-    public TextureFormat textureFormat=TextureFormat.RGB24;
+    public TextureFormat textureFormat = TextureFormat.RGB24;
 
     private string _outPath;
 
@@ -18,6 +23,9 @@ public class TakeScreenshot : MonoBehaviour
     void Start()
     {
         _outPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop);
+        _width = width;
+        _height = height;
+        _autoScreenshotSize = autoScreenshotSize;
 
         if (editorOnly && !Application.isEditor)
         {
@@ -27,6 +35,20 @@ public class TakeScreenshot : MonoBehaviour
 
     void Update()
     {
+        if (autoScreenshotSize != _autoScreenshotSize)
+        {
+            autoScreenshotSize = _autoScreenshotSize;
+            width = _width;
+            height = _height;
+        }
+
+        if (autoScreenshotSize)
+        {
+            Camera c = Camera.current;
+            width = c.pixelWidth;
+            height = c.pixelHeight;
+        }
+
         if (Input.GetKeyDown(captureKey))
         {
             RequestScreenshot();

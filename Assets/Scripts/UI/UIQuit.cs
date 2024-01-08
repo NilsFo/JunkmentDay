@@ -31,9 +31,9 @@ public class UIQuit : MonoBehaviour
         Keyboard keyboard = Keyboard.current;
         Gamepad gamepad = Gamepad.current;
 
-        if (_gameState.PowerGun.useGamepadOverKBM)
+        if (_gameState.IsGamePad)
         {
-            if (keyboard != null)
+            if (gamepad != null)
             {
                 pauseInput = gamepad.startButton.wasPressedThisFrame;
                 quitInput = gamepad.buttonSouth.wasPressedThisFrame;

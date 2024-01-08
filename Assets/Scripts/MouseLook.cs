@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 [AddComponentMenu("Camera/Simple Smooth Mouse Look ")]
@@ -9,6 +10,7 @@ public class MouseLook : MonoBehaviour
 
     [Header("Player Settings")] [Range(0, 1)]
     public float sensitivitySettings = 0.5f;
+
     public float sensitivityScaling = 3f;
     private float _sensitivitySettings;
 
@@ -42,12 +44,21 @@ public class MouseLook : MonoBehaviour
     {
         if (!mouseLookEnabled || Time.timeScale == 0)
         {
-            Cursor.lockState = CursorLockMode.None;
+            if (useGamepadOverKBM)
+            {
+                Cursor.lockState = CursorLockMode.Confined;
+                Cursor.visible = false;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.None;
+            }
+
             return;
         }
 
         // Ensure the cursor is always locked when set
-        if (lockCursor)
+        if (lockCursor || useGamepadOverKBM)
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
@@ -68,7 +79,7 @@ public class MouseLook : MonoBehaviour
             Gamepad gamepad = Gamepad.current;
             if (gamepad != null)
             {
-                mouseDelta = gamepad.rightStick.ReadValue()*gamepadScaling;
+                mouseDelta = gamepad.rightStick.ReadValue() * gamepadScaling;
             }
         }
         else
@@ -116,9 +127,13 @@ public class MouseLook : MonoBehaviour
         }
     }
 
+    private void LateUpdate()
+    {
+        sensitivitySettings = Mathf.Clamp(sensitivitySettings, 0f, 1f);
+    }
+
     public void SetUseGamepadOverKbm(bool newValue)
     {
         useGamepadOverKBM = newValue;
     }
-    
 }

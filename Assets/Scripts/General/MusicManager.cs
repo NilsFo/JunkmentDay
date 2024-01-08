@@ -22,20 +22,20 @@ public class MusicManager : MonoBehaviour
     [Range(0, 1)] public float baselineMasterVolume = 1.0f;
 
     public float userDesiredMusicVolumeDB =>
-        Mathf.Log10(Mathf.Clamp(userDesiredMusicVolume*baselineMusicVolume, 0.0001f, 1.0f)) * 20;
+        Mathf.Log10(Mathf.Clamp(userDesiredMusicVolume * baselineMusicVolume, 0.0001f, 1.0f)) * 20;
 
     public float userDesiredSoundVolumeDB =>
-        Mathf.Log10(Mathf.Clamp(userDesiredSoundVolume*baselineSoundVolume, 0.0001f, 1.0f)) * 20;
+        Mathf.Log10(Mathf.Clamp(userDesiredSoundVolume * baselineSoundVolume, 0.0001f, 1.0f)) * 20;
 
     public float userDesiredMasterVolumeDB =>
-        Mathf.Log10(Mathf.Clamp(userDesiredMasterVolume*baselineMasterVolume, 0.0001f, 1.0f)) * 20;
+        Mathf.Log10(Mathf.Clamp(userDesiredMasterVolume * baselineMasterVolume, 0.0001f, 1.0f)) * 20;
 
     [Header("Mixer")] public AudioMixer audioMixer;
     public string masterTrackName = "master";
     public string musicTrackName = "music";
     public string soundEffectsTrackName = "sfx";
 
-    [Header("Config")] public float binningVolumeMult = 0.25f;
+    [Header("Config")] public float binningVolumeMult = 0.15f;
     public float musicFadeSpeed = 1;
 
     [Header("Playlist")] public List<AudioSource> initiallyKnownSongs;
@@ -107,7 +107,7 @@ public class MusicManager : MonoBehaviour
         audioMixer.SetFloat(musicTrackName, userDesiredMusicVolumeDB);
         audioMixer.SetFloat(soundEffectsTrackName, userDesiredSoundVolumeDB);
         audioMixer.SetFloat(masterTrackName, userDesiredMasterVolumeDB);
-        
+
         if (_audioJail == null) return;
 
         transform.position = _listener.transform.position;
@@ -158,6 +158,16 @@ public class MusicManager : MonoBehaviour
         {
             pg += " - " + audioSource.time;
         }
+    }
+
+    private void LateUpdate()
+    {
+        userDesiredMusicVolume = Mathf.Clamp(userDesiredMusicVolume, 0f, 1f);
+        userDesiredSoundVolume = Mathf.Clamp(userDesiredSoundVolume, 0f, 1f);
+        userDesiredMasterVolume = Mathf.Clamp(userDesiredMasterVolume, 0f, 1f);
+        baselineMusicVolume = Mathf.Clamp(baselineMusicVolume, 0f, 1f);
+        baselineSoundVolume = Mathf.Clamp(baselineSoundVolume, 0f, 1f);
+        baselineMasterVolume = Mathf.Clamp(baselineMasterVolume, 0f, 1f);
     }
 
     public float GetVolumeMusic()

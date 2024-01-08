@@ -305,7 +305,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5439a0447615d14b9e2bfe6fccdb62c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainMenuCamera: {fileID: 0}
   stickyFlechettePrefab: {fileID: 116351555861443376, guid: 2ec6f661afe44f94491f71aed928d4e2,
     type: 3}
   magnetDPS: 35
@@ -327,9 +326,11 @@ MonoBehaviour:
   playBT: {fileID: 0}
   sliderMouseSensitivity: {fileID: 0}
   sliderVolume: {fileID: 0}
+  mainMenuCamera: {fileID: 0}
   blockadesCount: 0
   blockadesDestroyed: 0
-  kbmInputMode: 1
+  volumeBumpMagnitude: 0.1
+  sensitivityBumpMagnitude: 0.1
 --- !u!1 &6405857053366159236
 GameObject:
   m_ObjectHideFlags: 0
@@ -711,6 +712,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1067197358450800292}
     m_Modifications:
+    - target: {fileID: 3158928895478780116, guid: 883d5be409328544fa9a7a9cf9c142dc,
+        type: 3}
+      propertyPath: width
+      value: 7680
+      objectReference: {fileID: 0}
+    - target: {fileID: 3158928895478780116, guid: 883d5be409328544fa9a7a9cf9c142dc,
+        type: 3}
+      propertyPath: height
+      value: 4320
+      objectReference: {fileID: 0}
+    - target: {fileID: 3158928895478780116, guid: 883d5be409328544fa9a7a9cf9c142dc,
+        type: 3}
+      propertyPath: textureFormat
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3734035860558382907, guid: 883d5be409328544fa9a7a9cf9c142dc,
         type: 3}
       propertyPath: m_LocalPosition.x

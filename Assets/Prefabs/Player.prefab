@@ -1119,7 +1119,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sensitivitySettings: 0.5
   sensitivityScaling: 3
-  useGamepadOverKBM: 1
+  useGamepadOverKBM: 0
   gamepadScaling: {x: 13, y: 10}
   mouseLookEnabled: 1
   clampInDegrees: {x: 360, y: 180}
@@ -1141,6 +1141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3d9d8104e66cd14a93809c66a973a79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useGamepadOverKBM: 0
   flechetteProjectileOrigin: {fileID: 4177431804129768534}
   flechetteProjectilePrefab: {fileID: 5728496482213902233, guid: 1909cafd639494e4e9ccb05963bcc7f2,
     type: 3}

@@ -15,8 +15,7 @@ public class GameState : MonoBehaviour
     private CharacterMovement _movement;
     private MusicManager _musicManager;
     private MouseLook _mouseLook;
-
-    public Camera mainMenuCamera;
+    private GamepadInputDetector _gamepadInputDetector;
 
     public enum PlayerState
     {
@@ -51,17 +50,23 @@ public class GameState : MonoBehaviour
     public Button playBT;
     public Slider sliderMouseSensitivity;
     public Slider sliderVolume;
+    public Camera mainMenuCamera;
 
     [Header("Encounters")] public int blockadesCount;
     public int blockadesDestroyed;
 
-    [Header("Input mode")] public bool kbmInputMode = true;
+    [Header("Settings adjustments")] [Range(0f, 1f)]
+    public float volumeBumpMagnitude = 0.1f;
+
+    [Range(0f, 1f)] public float sensitivityBumpMagnitude = 0.1f;
 
     public PlayerData player => _player;
     public PowerGun PowerGun => _powerGun;
     public BigMagnet BigMagnet => _bigMagnet;
     public MouseLook MouseLook => _mouseLook;
     public CharacterMovement CharacterMovement => _movement;
+    public GamepadInputDetector GamepadInputDetector => _gamepadInputDetector;
+    public bool IsGamePad => GamepadInputDetector.isGamePad;
 
     private void Awake()
     {
@@ -70,6 +75,7 @@ public class GameState : MonoBehaviour
         _movement = FindObjectOfType<CharacterMovement>();
         _bigMagnet = FindObjectOfType<BigMagnet>();
         _mouseLook = FindObjectOfType<MouseLook>();
+        _gamepadInputDetector = FindObjectOfType<GamepadInputDetector>();
 
         allSpawners = new List<RobotSpawner>();
         allRobots = new List<RobotBase>();
@@ -92,25 +98,8 @@ public class GameState : MonoBehaviour
         // musicManager.audioMixer.SetFloat(musicManager.masterTrackName, MusicManager.userDesiredMusicVolumeDB);
         playBT.onClick.AddListener(Play);
 
-        // Listen to KBM or Gamepad
-        InputSystem.onActionChange += InputActionChangeCallback;
-
-
         // Notifying if there are roaming robots. For debug reasons.
         Invoke(nameof(CheckEncounterGroups), 0.69f);
-    }
-
-    private void InputActionChangeCallback(object obj, InputActionChange change)
-    {
-        if (change == InputActionChange.ActionPerformed)
-        {
-            InputAction receivedInputAction = (InputAction)obj;
-            InputDevice lastDevice = receivedInputAction.activeControl.device;
-
-            kbmInputMode = lastDevice.name.Equals("Keyboard") || lastDevice.name.Equals("Mouse");
-            //If needed we could check for "XInputControllerWindows" or "DualShock4GamepadHID"
-            //Maybe if it Contains "controller" could be xbox layout and "gamepad" sony? More investigation needed
-        }
     }
 
     private void Play()
@@ -134,35 +123,87 @@ public class GameState : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+
+            if (_gamepadInputDetector.isGamePad)
+            {
+                Cursor.lockState = CursorLockMode.Confined;
+                Cursor.visible = false;
+            }
+
             musicManager.SkipFade();
         }
 
         if (playerState == PlayerState.PLAYING)
         {
             playTime += Time.deltaTime;
+            HandleInput();
         }
 
         // Applying settings
         MusicManager.userDesiredMasterVolume = sliderVolume.value;
         _mouseLook.sensitivitySettings = sliderMouseSensitivity.value;
+    }
 
-        // Restart level
+    public void HandleInput()
+    {
         Keyboard keyboard = Keyboard.current;
         Gamepad gamepad = Gamepad.current;
 
         bool backToMenuClicked = false;
-        if (PowerGun.useGamepadOverKBM)
+        bool increaseVolumeClicked = false;
+        bool decreaseVolumeClicked = false;
+        bool increaseSensitivityClicked = false;
+        bool decreaseSensitivityClicked = false;
+
+        // Restart level
+        if (IsGamePad)
         {
-            backToMenuClicked = gamepad.selectButton.wasPressedThisFrame;
+            if (gamepad != null)
+            {
+                backToMenuClicked = gamepad.selectButton.wasPressedThisFrame;
+                Vector2 dpad = gamepad.dpad.ReadValue();
+
+                increaseVolumeClicked = dpad.y > 0f && GamepadInputDetector.WasDpadPressedThisFrame();
+                decreaseVolumeClicked = dpad.y < 0f && GamepadInputDetector.WasDpadPressedThisFrame();
+                increaseSensitivityClicked = dpad.x > 0f && GamepadInputDetector.WasDpadPressedThisFrame();
+                decreaseSensitivityClicked = dpad.x < 0f && GamepadInputDetector.WasDpadPressedThisFrame();
+            }
         }
         else
         {
-            backToMenuClicked = keyboard.backspaceKey.wasPressedThisFrame;
+            if (keyboard != null)
+            {
+                backToMenuClicked = keyboard.backspaceKey.wasPressedThisFrame;
+                increaseVolumeClicked = keyboard.upArrowKey.wasPressedThisFrame;
+                decreaseVolumeClicked = keyboard.downArrowKey.wasPressedThisFrame;
+                increaseSensitivityClicked = keyboard.rightArrowKey.wasPressedThisFrame;
+                decreaseSensitivityClicked = keyboard.leftArrowKey.wasPressedThisFrame;
+            }
         }
 
         if (backToMenuClicked && Time.timeScale != 0f)
         {
             RestartLevel();
+        }
+
+        if (increaseVolumeClicked)
+        {
+            sliderVolume.value += volumeBumpMagnitude;
+        }
+
+        if (decreaseVolumeClicked)
+        {
+            sliderVolume.value -= volumeBumpMagnitude;
+        }
+
+        if (increaseSensitivityClicked)
+        {
+            sliderMouseSensitivity.value += volumeBumpMagnitude;
+        }
+
+        if (decreaseSensitivityClicked)
+        {
+            sliderMouseSensitivity.value -= volumeBumpMagnitude;
         }
     }
 

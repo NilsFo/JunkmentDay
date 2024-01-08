@@ -10,6 +10,9 @@ public class GamepadInputDetector : MonoBehaviour
     [Header("Is GamePad Mode?")] public bool isGamePad;
     private bool _isGamePad;
 
+    private Vector2 _dpadThisFrame = new Vector2();
+    private Vector2 _dpadLastFrame = new Vector2();
+
     [Header("Listener")] public UnityEvent onSwitchToKeyBoard, onSwitchToGamePad;
 
     void Start()
@@ -25,6 +28,7 @@ public class GamepadInputDetector : MonoBehaviour
         }
 
         _isGamePad = isGamePad;
+        NotifyListeners();
     }
 
     void Update()
@@ -79,7 +83,14 @@ public class GamepadInputDetector : MonoBehaviour
             }
         }
 
-        print(isGamePad);
+        // ##################################
+        //  Updating D-Pad
+        // ##################################
+        _dpadLastFrame = _dpadThisFrame;
+        if (isGamePad)
+        {
+            _dpadThisFrame = Gamepad.current.dpad.ReadValue();
+        }
 
         // ##################################
         //  Notifying observers
@@ -87,14 +98,46 @@ public class GamepadInputDetector : MonoBehaviour
         if (_isGamePad != isGamePad)
         {
             _isGamePad = isGamePad;
-            if (isGamePad)
-            {
-                onSwitchToGamePad.Invoke();
-            }
-            else
-            {
-                onSwitchToKeyBoard.Invoke();
-            }
+            NotifyListeners();
+        }
+    }
+
+    public bool IsDpadPressed()
+    {
+        if (!isGamePad)
+        {
+            return false;
+        }
+
+        return CollapseVector2(_dpadThisFrame) > 0;
+    }
+
+    public bool WasDpadPressedThisFrame()
+    {
+        if (!isGamePad)
+        {
+            return false;
+        }
+
+        return IsDpadPressed() &&
+               (_dpadThisFrame.x != _dpadLastFrame.x || _dpadThisFrame.y != _dpadLastFrame.y)
+               && _dpadLastFrame.x == 0 && _dpadLastFrame.y == 0;
+    }
+
+    private float CollapseVector2(Vector2 v)
+    {
+        return Mathf.Abs(v.x) + Mathf.Abs(v.y);
+    }
+
+    private void NotifyListeners()
+    {
+        if (isGamePad)
+        {
+            onSwitchToGamePad.Invoke();
+        }
+        else
+        {
+            onSwitchToKeyBoard.Invoke();
         }
     }
 }
