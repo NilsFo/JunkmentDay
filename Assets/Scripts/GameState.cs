@@ -234,7 +234,7 @@ public class GameState : MonoBehaviour
 
     public void RestartLevel()
     {
-        SceneManager.LoadScene("GameplayScene");
+        SceneManager.LoadScene("LoadingScreen");
     }
 
     public void UpdateMusic()

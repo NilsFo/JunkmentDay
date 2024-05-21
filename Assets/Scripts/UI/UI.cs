@@ -53,7 +53,7 @@ public class UI : MonoBehaviour
         _batteryOverlayIntensityProgress += Time.deltaTime;
         float a = hurtOverlayIntensityCurve.Evaluate(_hurtOverlayIntensityProgress);
 
-        if (_gameState.playerState == GameState.PlayerState.DEAD)
+        if (_gameState != null && _gameState.playerState == GameState.PlayerState.DEAD)
         {
             a = 1.1337f;
         }
